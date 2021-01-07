@@ -1,0 +1,32 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/spell": {
+      "get": {
+        "tags": [
+          "spell"
+        ],
+        "operationId": "ApiSpellGet",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpellItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>SupportIELTS</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200X200.png" tyle="image/x-icon">
+
+    <style>
+        .nav__cont {
+            position: absolute;
+            width: 150px;
+            top: auto;
+            height: 100vh;
+            z-index: 100;
+            background-color: #40f1e9d8;
+            overflow: hidden;
+            transition: width .3s ease;
+            cursor: pointer;
+            box-shadow: 4px 7px 10px rgba(0, 0, 0, .4);
+
+            @media screen and (min-width: 600px) {
+                width: 80px;
+            }
+        }
+        .nav__cont:hover{
+            width: 200px;;
+        }
+        .nav_main{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-color: white;
+            right:0px;
+        }
+
+        .nav {
+            list-style-type: none;
+            color: white;
+        }
+
+        .nav:first-child{
+            padding-top:1.5rem;
+        }
+
+        .nav__items {
+            padding-bottom: 4rem;
+            font-family: 'roboto';
+        }
+        .nav__items svg {
+                width: 26px;
+                height: 26px;
+                position: relative;
+                left: -25px;
+                cursor: pointer;
+
+                @media screen and(min-width:600px) {
+                    width: 32px;
+                    height: 32px;
+                    left: -15px;
+                }
+            }
+
+        .nav__items:hover a:after{
+            opacity: 1;
+        }
+
+        .nav__items a {
+                position: relative;
+                display: block;
+                top: -35px;
+                padding-left: 25px;
+                padding-right: 15px;
+                transition: all .3s ease;
+                margin-left: 25px;
+                margin-right: 10px;
+                text-decoration: none;
+                color: white;
+                font-family: 'roboto';
+                font-weight: 100;
+                font-size: 1.35em;
+            }
+            .nav__items a:after{
+                content: '';
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    border-radius: 2px;
+                    background: radial-gradient(circle at 94.02% 88.03%, #54a4ff, transparent 100%);
+                    opacity: 0;
+                    transition: all .5s ease;
+                    z-index: -10;
+            }
+        
+
+        h1 {
+            margin-top: 6rem;
+            margin-left: 80px;
+            text-align: center;
+            font-family: 'Roboto';
+            font-weight: 100;
+            font-size: 4rem;
+            text-transform: uppercase;
+            color: white;
+            letter-spacing: 6px;
+            text-shadow: 10px 10px 10px rgba(0, 0, 0, .3);
+        }
+    </style>
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body onload="load()" style="height: 100%">
+
+    <head style="" style="display:flex;border-style: outset;border: 2px;">
+        <nav class="navheader">
+            <div class="left">
+                <div class="navelement">
+                    <a href="/index.html"
+                        style="color: black;font-size:1.5rem;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;width: 50px;">
+                        <div style="width: 50px;">
+                            <b style="color:red">IELTS<span style="background-color: red;color:white">Support</span></b>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div style="display:flex;justify-content: center;">
+                <div class="navelement">
+                    <a href="/index.html" style="color: black;font-size:1.5rem">Home</a>
+                </div>
+                <div class="navelement">
+                    <a href="#" style="color: black;font-size:1.5rem" data-toggle="dropdown">Features</a>
+                    <ul class="dropdown-menu">
+                        <div style="margin:5px">
+                            <a href="/translate.html">Translate</a>
+                            <hr>
+                            <a href="/index.html">Writing IELTS</a>
+                        </div>
+                    </ul>
+                </div>
+                <div class="navelement">
+                    <a href="/docs.html" style="color: black;font-size:1.5rem">Docs</a>
+                </div>
+                <div class="navelement">
+                    <a href="/about.html" style="color: black;font-size:1.5rem">About</a>
+                </div>
+            </div>
+
+            <div class="right" style="text-align: right;">
+                <div class="navelement">
+                    <a href="/index.html" style="color: black;font-size:1.5rem; margin:10px">
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </head>
+    <main style="width:100%;height: 100%;background-color:white;display: flex;">
+        <nav style="width: 150px;height: 100vh; background-color:#40f1e9d8;">
+            <ul class="nav">
+                <li class="nav-item" style="display:flex; justify-content: center;align-items: center; width: 100%;height: 80px;">
+                    <a style="text-decoration: none;width:80%;font-size: 1.5rem;color: white;border-style:double;border-radius: 10px;" href="/usermanager.html">
+                        <span style="font-weight: 700;">User Info</span>
+                    </a>
+                </li>
+                <li class="nav-item" style="display:flex; justify-content: center;align-items: center; width: 100%;height: 80px;">
+                    <a style="text-decoration: none;width:90%;font-size: 1.5rem;color: rgb(231, 82, 82);border-style:double;border-radius: 10px;border-color: red;" href="/essays.html">
+                        <span style="font-weight: 700;">Essays</span>
+                    </a>
+                </li>
+                <li class="nav-item" style="display:flex; justify-content: center;align-items: center; width: 100%;height: 80px;">
+                    <a style="text-decoration: none;width:80%;font-size: 1.5rem;color: white;border-style:double;border-radius: 10px;" href="/index.html">
+                        <span style="font-weight: 700;">Features</span>
+                    </a>
+                </li>
+                <li class="nav-item" style="display:flex; justify-content: center;align-items: center; width: 100%;height: 80px;">
+                    <a style="text-decoration: none;width:80%;font-size: 1.5rem;color: white;border-style:double;border-radius: 10px;" href="/docs.html">
+                        <span style="font-weight: 700;">Docs</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div style="display:flex; justify-content: center;width: 100%;height: 100%;border-style: outset">
+            <div id="essaylist" style="width: 55%;height: 100%;margin:30px">
+                <div>
+                    <a style="width: 100px;margin:20px" class="btn btn-light"
+                               href="/index.html">New Essay</a>    
+                </div>
+                <div style="margin:20px">
+                    <div id="essay1" onclick="getEssay(this)" style="width: 100%;display: flex;justify-content: center;border-style: outset;border-radius: 10px;background-color:rgb(100, 200, 200)">
+                    <div style="width: 100%;height: 100%;margin:10px">
+                        <div contenteditable="true" id="content" style="background-color:white;height: 100%;width: 100%;margin-top:10px;border-style: outset;padding: 12px;font-size: 1.2rem;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, serif;">
+                            Hello
+                        </div>
+                        <div style="width: 100%;display: flex;justify-content: center;">
+                            <button style="width: 100px;margin:20px" class="btn btn-light"
+                                data-toggle="modal" data-target="#editEssayModal" id="edit">Edit</button>    
+                            <button style="width: 100px;margin:20px" class="btn btn-light" 
+                                data-toggle="modal" data-target="#showEssayModal" id="show">Show</button>
+                            <button style="width: 100px;margin:20px" class="btn btn-light"
+                                data-toggle="modal" data-target="#deleteEssayModal" id="delete">Delete</button>
+                            <button style="width: 100px;margin:20px;" class="btn btn-light"
+                                data-toggle="modal" data-target="#showHistoryModal" id="getHistory">EditHistory</button>
+                        </div>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+
+            <!-- Modal Edit -->
+            <div id="editEssayModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 100%;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="my-modal-title">EDIT ESSAY</h5>
+                            <button class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" >
+                            <div class="" style="display:flex;margin-bottom: 20px;" >
+                                <div class="left " style="width: 50%;">
+                                  <div style="width: 100%;">
+                                    <div style="width: 100%;display: flex;justify-content: center;">
+                                      <label style="font-size:1.5rem;margin-top:10px;color:rgb(0, 0, 0)">Your input writing</label>
+                                    </div>
+                                    <div style="width: 100%;display: flex;justify-content: center;">
+                                      <div style="width: 80%;height: 600px;resize:none;background-color: white;font-size:1.5rem;font-family: 'Times New Roman', Times, serif;
+                                      border-style:double;overflow: hidden; padding:20px;" id="editor_area" spellcheck="true" contenteditable="true">
+                                      </div>
+                                      <input style="display:none" id="inputText">
+                                    </div>
+                                  </div>
+                                </div>
+                                
+                                <div class="right" style="width: 50%;">
+                                  <div style="width: 100%;display:flex;">
+                                    <div style="width: 30%">
+                                      <div style="width: 100%;display: flex;justify-content: center;">
+                                        <label style="font-size:1.5rem;margin-top:10px;color:rgb(0, 0, 0)">SupportWords</label>
+                                      </div>
+                                      <div style="width: 100%;height: 600px;border-radius: 20px;border-style: dashed;background-color: white;" >
+                                        <ul style="margin-top: 10px;font-size: 1.5rem;" id="spwordlist">
+                                        </ul>
+                                      </div>
+                                    </div>
+                                    <div style="width: 70%;">
+                                      <div style="width:100%;display: flex;justify-content: center;">
+                                        <label style="font-size:1.5rem;margin-top:10px;color:rgb(0, 0, 0)">Word meaning </label>
+                                      </div>
+                                      <div style="width:100%;display: flex;justify-content: center;">
+                                        <div style="width: 80%;height: 600px;resize:none;background-color: white;border-style: outset;overflow-x: scroll;
+                                        overflow-y: scroll; padding:20px;" id="meaning">
+                                          <div>
+                                            <h2 id="word">Word</h2>
+                                            <div id="audiolist">
+                                            </div>
+                                          </div>
+                                          <div id="wordmeaning">
+                                            <div>
+                                              <h6 id="partOfSpeech"></h6>
+                                              <div></div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div>
+                                <button id="close" data-dismiss="modal" class="btn btn-danger" style="width: 100px; border-style: outset;" aria-label="close">Close</button>
+                            </div>
+                            <div>
+                                <button id="save" data-dismiss="modal" class="btn btn-danger" style="width: 100px; border-style: outset;" aria-label="close">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal Show Essay-->
+            <div id="showEssayModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="my-modal-title">Topic</h5>
+                            <button class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Content</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" data-dismiss="modal" aria-label="close">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal Show Delete Notification -->
+            <div id="deleteEssayModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="my-modal-title" style="color:red">DELETE</h5>
+                            <button class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Would you like to delete this post? It will no be showed later</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" data-dismiss="modal" aria-label="close" id="yes">Yes</button>
+                            <button class="btn btn-primary" data-dismiss="modal" aria-label="close" id="no">No</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- History Modal -->
+            <div id="showHistoryModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="my-modal-title">Edit History</h5>
+                            <button class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="historylist" style="overflow: hidden;">
+                                <div id="history1">
+                                    <p  data-toggle="modal" data-target="#historyDetails" style="text-decoration: underline;">20/2/2010</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" data-dismiss="modal" aria-label="close" >Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="historyDetails"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" style="max-width:1000px;" role="document">
+                    <div class="modal-content" style="width:100%;height: 800px;">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="my-modal-title">History Details</h5>
+                            <button class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div style="display: flex;width: 100%;">
+                                <div style="width: 45%;">
+                                    <div style="margin:10px;width: 100%;display: flex;justify-content: center;font-weight: 700;" id="oldtopic">Old TOPIC</div>
+                                    <div style="width: 100%;height: 550px;border-style: dashed;padding:10px;margin:10px" id="oldcontent">OLD CONTENT</div>
+                                </div>
+                                <div style="width: 10%;">
+
+                                </div>
+                                <div style="width: 45%;">
+                                    <div style="margin:10px;width: 100%;display: flex;justify-content: center;font-weight: 700" id="newtopic">NEW TOPIC</div>
+                                    <div style="width: 100%;height: 550px;border-style: dashed;padding:10px;margin:10px" id="newcontent">NEW CONTENT</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" data-dismiss="modal" aria-label="close">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script type="text/javascript">
+
+
+        var essayList = document.getElementById("essaylist");
+        var myHeader = new Headers();
+        myHeader.append("Content-Type", "application/json");
+        myHeader.append("Authorization", "Bearer " + localStorage.getItem("accessToken"));
+
+        // get all essay
+        var requestOptions = {
+            method:"GET",
+            headers:myHeader,
+            redirect:"follow"
+        };
+        
+        fetch("https://localhost:44391/api/essay", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            var getList = document.getElementById("essaylist");
+            for(let i = 0; i < result.length; i++){
+                var newdiv = document.createElement("div");
+                newdiv.style.cssText = "margin:20px"
+                newdiv.innerHTML = "<div id=\""+result[i].id+"\" onclick=\"getEssay(this)\" style=\"width: 100%;display: flex;justify-content: center;border-style: outset;border-radius: 10px;background-color:rgb(100, 200, 200)\">"+
+                "<div style=\"width: 100%;height: 100%;margin:10px\">"+
+                        "<div contenteditable=\"true\" id=\"content\""+
+                        "style=\"background-color:white;height: 100%;width: 100%;margin-top:10px;border-style: outset;padding: 12px;font-size: 1.2rem;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, serif;\">"+
+                            result[i].topic+
+                        "</div>"+
+                        "<div style=\"width: 100%;display: flex;justify-content: center;\">"+
+                            "<button style=\"width: 100px;margin:20px\" class=\"btn btn-light\""+
+                                "data-toggle=\"modal\" data-target=\"#editEssayModal\" id=\"edit\">Edit</button> "+   
+                            "<button style=\"width: 100px;margin:20px\" class=\"btn btn-light\" "+
+                                "data-toggle=\"modal\" data-target=\"#showEssayModal\" id=\"show\">Show</button>"+
+                            "<button style=\"width: 100px;margin:20px\" class=\"btn btn-light\""+
+                                "data-toggle=\"modal\" data-target=\"#deleteEssayModal\" id=\"delete\">Delete</button>"+
+                            "<button style=\"width: 100px;margin:20px;\" class=\"btn btn-light\""+
+                                "data-toggle=\"modal\" data-target=\"#showHistoryModal\" id=\"getHistory\">EditHistory</button>"+
+                        "</div>"+
+                    "</div>";
+                getList.appendChild(newdiv);
+            }
+        })
+        .catch(error => console.log(error));
+
+    
+
+    // transfer data from selected essay to show modal
+    function getEssay(essay){   
+        // get event edit click 
+        essay.querySelector("#edit").onclick = function(){
+            
+            // clear editEssay first
+            var getModalEdit = document.getElementById("editEssayModal");
+            getModalEdit.querySelector("#editor_area").innerHTML = "";
+            getModalEdit.querySelector("#spwordlist").innerHTML = "";
+            // pre process
+            document.getElementById("word").innerHTML = "";
+            //x.querySelector("#partOfSpeech").innerHTML = "";
+            document.getElementById("audiolist").innerHTML = "";
+            document.getElementById("wordmeaning").innerHTML = "";
+            
+            
+            // 
+            var myHeader = new Headers();   
+            myHeader.append("Content-Type", "application/json");
+            myHeader.append("Authorization", "Bearer " + localStorage.getItem("accessToken"));
+
+            
+
+            var requestOptions = {
+                method:"GET",
+                headers:myHeader,
+                redirect:"follow"
+            };
+
+            fetch("https://localhost:44391/api/essay/" + essay.id, requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                getModalEdit.querySelector("#editor_area").innerHTML = result.text;
+            })
+            .catch(error => console.log(error))
+
+            // get event save in modal
+
+            getModalEdit.querySelector("#save").addEventListener("click", function(){
+
+                var updateContent = getModalEdit.querySelector("#editor_area").innerHTML;
+                var updateTopic = essay.querySelector("#content").innerHTML;
+                var datetime = Date.now;
+                var _body = JSON.stringify({
+                    "Text":updateContent.trim(),
+                    "Topic":updateTopic.trim()
+                });
+
+                var requestOptions = {
+                    method:"PUT",
+                    headers:myHeader,
+                    body:_body,
+                    redirect:"follow"   
+                };
+
+                fetch("https://localhost:44391/api/essay/"+essay.id, requestOptions)
+                .then(response => response.json())
+                .then(result => console.log(result))
+                .catch(error => console.log(error));
+            })
+        }
+        // end event edit
+
+        // event show
+        essay.querySelector("#show").onclick = async function(){
+            var getModalEdit = document.getElementById("showEssayModal");
+            
+            getModalEdit.querySelector(".modal-body").innerHTML = essay.querySelector("#content").innerHTML;
+        }
+        // end event show
+
+        // delete 
+        essay.querySelector("#delete").onclick = async function(){
+            var getModalEdit = document.getElementById("deleteModalEssay");
+            getModalEdit.querySelector("#yes").onclick = function(){
+                var myHeader = new Headers();   
+                myHeader.append("Content-Type", "application/json");
+                myHeader.append("Authorization", "Bearer " + localStorage.getItem("accessToken")); 
+
+                var requestOptions = {
+                    method:"DELETE",
+                    headers:myHeader,
+                    redirect:"follow"
+                };
+
+                fetch("https://localhost:44391/api/essay/" + essay.id, requestOptions)
+                .then(response => response.json())
+                .then(result => console.log(result))
+                .catch(error => console.log(error));
+            }
+        }
+        // end event delete
+
+        // event history
+        essay.querySelector("#getHistory").onclick = async function(){
+            var showHistoryModal = document.getElementById("showHistoryModal");
+            // get data
+            var getHistoryList = showHistoryModal.querySelector("#historylist");
+            getHistoryList.innerHTML = "";
+
+            // get data history
+            var myHeader = new Headers();
+            myHeader.append("Content-Type", "application/json");
+            myHeader.append("Authorization", "Bearer " + localStorage.getItem("accessToken"));
+
+            var requestOptions = {
+                method:"GET",
+                headers:myHeader,
+                redirect:"follow"
+            };
+
+            fetch("https://localhost:44391/api/essay/history/"+essay.id, requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                for(let i = 0; i < result.length; i++){
+                    var newdiv = document.createElement("div");
+                    newdiv.id = result[i].id;
+                    newdiv.innerHTML = "<p  data-toggle=\"modal\" data-target=\"#historyDetails\" style=\"text-decoration: underline;\">"+result[i].dateTime+"</p>"
+                    getHistoryList.appendChild(newdiv);
+                }
+            })
+            .catch(error => console.log(error))
+
+        }
+        // end event history
+    }
+
+
+
+    // transfer data from selected essay to edit modal
+    </script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/js/process.js" type="text/JavaScript"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

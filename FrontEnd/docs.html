@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>SupportIELTS</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200X200.png" tyle="image/x-icon">
+
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body onload="load()" style="height: 100%">
+
+    <head style="" style="display:flex;border-style: outset;border: 2px;">
+        <nav class="navheader">
+            <div class="left">
+                <div class="navelement">
+                    <a href="/index.html"
+                        style="color: black;font-size:1.5rem;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;width: 50px;">
+                        <div style="width: 50px;">
+                            <b style="color:red">IELTS<span style="background-color: red;color:white">Support</span></b>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div style="display:flex;justify-content: center;">
+                <div class="navelement">
+                    <a href="/index.html" style="color: black;font-size:1.5rem">Home</a>
+                </div>
+                <div class="navelement">
+                    <a href="#" style="color: black;font-size:1.5rem" data-toggle="dropdown">Features</a>
+                    <ul class="dropdown-menu">
+                        <div style="margin:5px">
+                            <a href="/translate.html">Translate</a>
+                            <hr>
+                            <a href="/index.html">Writing IELTS</a>
+                        </div>
+                    </ul>
+                </div>
+                <div class="navelement">
+                    <a href="/login.html" id="docs" style="color: black;font-size:1.5rem">Docs</a>
+                </div>
+                <div class="navelement">
+                    <a href="/about.html" style="color: black;font-size:1.5rem">About</a>
+                </div>
+            </div>
+
+            <div class="right" style="text-align: right;">
+                <div class="navelement">
+                    <a href="/index.html" style="color: black;font-size:1.5rem; margin:10px">
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </head>
+    <main style="width:100%;height: 100%;background-color:white;display: flex;">
+        
+    </main>
+    <script type="text/javascript">
+    if(localStorage.getItem("token") != null)
+      {
+        var getRightHeading = document.querySelector(".right");
+        getRightHeading.innerHTML = "<div class=\"navelement\">"+
+          "<a href=\"/index.html\" onclick=\"localStorage.clear()\" style=\"color: black;font-size:1.5rem; margin:10px\">Logout</a></div>";
+        document.getElementById("docs").setAttribute("href") = "https://localhost:44391/swagger/index.html";
+      }
+    </script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

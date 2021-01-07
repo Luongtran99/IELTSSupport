@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>SupportIELTS</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200X200.png" tyle="image/x-icon" >
+
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+
+  </head>
+  <body onload="load()" style="height: 100%;">
+    <head style="" style="display:flex;border-style:double;">
+      <nav class="navheader">
+        <div class="left">
+          <div class="navelement">
+            <a href="#" style="color: black;font-size:1.5rem;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;width: 50px;">
+              <div style="width: 50px;">
+                <b style="color:red">IELTS<span style="background-color: red;color:white">Support</span></b>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div style="display:flex;justify-content: center;">
+          <div class="navelement">
+            <a href="/index.html" style="color: black;font-size:1.5rem;">MainPage</a>
+          </div>
+          <div class="navelement">
+            <a href="#" style="color: black;font-size:1.5rem;" data-toggle="dropdown">Features</a>
+              <ul class="dropdown-menu">
+                <div style="margin:5px">
+                  <a href="/translate.html">Translate</a>
+                  <hr>
+                  <a href="/index.html">Writing IELTS</a>
+                </div>
+              </ul>
+          </div>
+          <div class="navelement">
+            <a href="/docs.html" style="color: black;font-size:1.5rem; font-family: 'Trocchi', serif;font-weight: 2000;">Docs</a>
+          </div>
+          <div class="navelement">
+            <a href="/about.html" style="color: black;font-size:1.5rem;">About</a>
+          </div>
+        </div>
+        
+        <div class="right" style="text-align: right;">
+          <div class="navelement">
+              <a href="/login.html" style="color: black;font-size:1.5rem; margin:10px">
+                Login
+              </a>
+              <a href="/register.html" style="color: black;font-size:1.5rem;margin:10px">
+                Register
+              </a>
+          </div>
+        </div>
+      </nav>
+    </head>
+    <main style="height: 100vh;background-image: url(/images/a174_1_cover_image_1_edited.jpg);border-style: outset;">
+      <div class="" style="display:flex;margin-bottom: 20px;" >
+        <div class="left ">
+          <div style="width: 100%;">
+            <div style="width: 100%;display: flex;justify-content: center;">
+              <label style="font-size:1.5rem;margin-top:10px;color:rgb(208, 248, 27)">Your input writing</label>
+            </div>
+            <div style="width: 100%;display: flex;justify-content: center;">
+              <div style="width: 80%;height: 600px;resize:none;background-color: white;font-size:1.5rem;font-family: 'Times New Roman', Times, serif;
+              border-style:double;overflow: hidden; padding:20px;" id="editor_area" spellcheck="true" contenteditable="true">
+              </div>
+              <input style="display:none" id="inputText">
+            </div>
+          </div>
+        </div>
+        <div class="middle" >
+          <div>
+            <button data-toggle="modal" data-target="#newEssayModal"
+            class="btn btn-light" style="width: 90%; border-style: outset;border-width: 2px;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, serif;">Save</button>
+          </div>
+          <div>
+            <button id="changeall" class="btn btn-light" style="width: 90%; border-style: outset;border-width: 2px;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, serif;">Auto Fix</button>
+          </div>
+          <div>
+            <button id="undo" class="btn btn-light" style="width: 90%; border-style: outset;border-width: 2px;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, serif;">Delete All</button>
+          </div>
+        </div>
+        <div class="right">
+          <div style="width: 100%;display:flex;">
+            <div style="width: 30%">
+              <div style="width: 100%;display: flex;justify-content: center;">
+                <label style="font-size:1.5rem;margin-top:10px;color:rgb(208, 248, 27)">SupportWords</label>
+              </div>
+              <div style="width: 100%;height: 600px;border-radius: 20px;border-style: dashed;background-color: white;" >
+                <ul style="margin-top: 10px;font-size: 1.5rem;" id="spwordlist">
+                </ul>
+              </div>
+            </div>
+            <div style="width: 70%;">
+              <div style="width:100%;display: flex;justify-content: center;">
+                <label style="font-size:1.5rem;margin-top:10px;color:rgb(208, 248, 27)">Word meaning </label>
+              </div>
+              <div style="width:100%;display: flex;justify-content: center;">
+                <div style="width: 80%;height: 600px;resize:none;background-color: white;border-style: outset;overflow-x: scroll;
+                overflow-y: scroll; padding:20px;" id="meaning">
+                  <div>
+                    <h2 id="word"></h2>
+                    <div id="audiolist">
+                    </div>
+                  </div>
+                  <div id="wordmeaning">
+                    <div>
+                      <h6 id="partOfSpeech"></h6>
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <div class="bottom">
+        <div style="display: flex;justify-content:center;width: 100%;margin-bottom: 20px;">
+          <div>
+            <button data-toggle="modal" data-target="#newEssayModal"
+             class="btn btn-light" style="width: 100px; border-style: outset;">Save</button>
+          </div>
+          <div style="width: 50px;"></div>
+          <div>
+            <button id="changeall" class="btn btn-light" style="width: 100px; border-style: outset;">Auto Fix</button>
+          </div>
+          <div style="width: 50px;"></div>
+          <div>
+            <button id="undo" class="btn btn-light" style="width: 100px; border-style: outset;">Delete All</button>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- New Essay -->
+      <div id="newEssayModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="my-modal-title">Topic</h5>
+              <button class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div style="width: 100%;height: 300px;border-style: dashed;padding:20px" contenteditable="true" id="topic">
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-danger" data-dismiss="modal" aria-label="close">Close</button>
+              <button class="btn btn-primary" data-dismiss="modal" aria-label="close" id="save">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div style="height: 50px;margin-top: 20px;width: 100%;vertical-align: bottom;background-color: white;">
+      <div style="display: flex">
+        <div style="width: 33.33%;">Contact</div>
+        <div style="width: 33.33%;">Fearture</div>
+        <div style="width: 33.33%;">Address</div>
+      </div>
+      <div>
+
+      </div>
+    </div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script type="text/javascript">
+      if(localStorage.getItem("accessToken") != null)
+      {
+        var getRightHeading = document.querySelector(".right");
+        getRightHeading.innerHTML = "<div class=\"navelement\">"+
+          "<a href=\"/username.html\" style=\"color: black;font-size:1.5rem; margin:10px\">UserInfo</a>"+
+          "<a href=\"/index.html\" onclick=\"localStorage.clear()\" style=\"color: black;font-size:1.5rem; margin:10px\">Logout</a></div>";
+      }
+      else{
+
+      }
+
+    </script>
+    <script src="/js/process.js" type="text/JavaScript"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
