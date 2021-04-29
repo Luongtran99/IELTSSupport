@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace SupportingIELTSWriting.Infrastructure.Mapper
 {
+     
     public class AutoMapper
     {
+        
     }
 }

@@ -11,5 +11,6 @@ namespace SupportingIELTSWriting.Area.Admin.Controllers
     [ApiController]
     public class AdminAPIController : ControllerBase
     {
+
     }
 }

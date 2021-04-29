@@ -6,7 +6,9 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SupportingIELTSWriting.Models;
 using SupportingIELTSWriting.Models.Entities;
@@ -19,13 +21,17 @@ namespace SupportingIELTSWriting.Services
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly JwtOptions _jwtOptions;
-        public IdentityServices(UserManager<User> userManager,SignInManager<User> signInManager, JwtOptions jwtOptions)
+        private readonly IConfiguration _configuration;
+        
+        public IdentityServices(UserManager<User> userManager,SignInManager<User> signInManager, JwtOptions jwtOptions, IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _jwtOptions = jwtOptions;
+            _configuration = configuration;
         }
 
+        // generate token for user
         private AuthResult GeneratingAuthResultForUser(User user)
         {
             JwtSecurityTokenHandler TokenHandler = new JwtSecurityTokenHandler();
@@ -56,9 +62,9 @@ namespace SupportingIELTSWriting.Services
             };
         }
 
-        public async Task<AuthResult> LoginAsync(string username, string password)
+        public async Task<AuthResult> LoginAsync(string email, string password, bool rememberMe)
         {
-            var user = await _userManager.FindByEmailAsync(username);
+            var user = await _userManager.FindByEmailAsync(email);
 
             if(user == null)
             {
@@ -72,8 +78,28 @@ namespace SupportingIELTSWriting.Services
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, password, lockoutOnFailure: false);
 
+
             if (result.Succeeded)
             {
+                // set time duration
+                var tokenLifeTime = _configuration.GetValue("TokenLifeTimeMinutes", 120);
+                var props = new AuthenticationProperties
+                {
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(tokenLifeTime),
+                    AllowRefresh = true,
+                    RedirectUri = "/login"
+                };
+
+                // check if it is remember me
+                if (rememberMe)
+                {
+                    var permanentTokenLifeTime = _configuration.GetValue("PermanentTokenLifeTime", 365);
+                    props.ExpiresUtc = DateTimeOffset.UtcNow.AddDays(permanentTokenLifeTime);
+                    props.IsPersistent = true;
+                }
+
+                await _signInManager.SignInAsync(user, props);
+
                 return GeneratingAuthResultForUser(user);
             }
 

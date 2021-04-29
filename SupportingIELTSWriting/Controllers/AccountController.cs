@@ -22,42 +22,17 @@ namespace SupportingIELTSWriting.Controllers
         {
             _services = services;
         }
+        [HttpGet]
+        public async Task<IActionResult> Login(string returnurl)
+        {
 
-
-       [HttpPost("register")]
-       public async Task<IActionResult> Register([FromBody]UserRegistrationRequestModel request)
-       {
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(new AuthResult
-                {
-                    Message = ModelState.Values.SelectMany(p => p.Errors.Select(x => x.ErrorMessage))
-                });
-            }
-
-            var authResponse = await _services.RegisterAsync(request.Email, request.Password);
-
-            if (!authResponse.isSuccess)
-            {
-                return BadRequest(new AuthResult
-                {
-                    Message = authResponse.Message
-                });
-
-            }
-
-            return Ok(new AuthResult
-            {
-                Token = authResponse.Token,
-                isSuccess = true,
-                Message = new string[] { "Got token completely!" }
-            });
-       }
+            return null;
+        }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]UserLoginRequestModel request)
         {
+
             var authResponse = await _services.LoginAsync(request.Username, request.Password);
 
             if (!authResponse.isSuccess)
@@ -72,11 +47,49 @@ namespace SupportingIELTSWriting.Controllers
             return Ok(new AuthResult
             {
                 Token = authResponse.Token,
-
                 isSuccess = true,
                 Message = new string[] { "Login completely" }
             });
         }
+
+
+        [HttpPost("register")]
+       public async Task<IActionResult> Register([FromBody]UserRegistrationRequestModel request)
+       {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(new AuthResult
+                    {
+                        Message = ModelState.Values.SelectMany(p => p.Errors.Select(x => x.ErrorMessage))
+                    });
+                }
+
+                var authResponse = await _services.RegisterAsync(request.Email, request.Password);
+
+                if (!authResponse.isSuccess)
+                {
+                    return BadRequest(new AuthResult
+                    {
+                        Message = authResponse.Message
+                    });
+
+                }
+
+                return Ok(new AuthResult
+                {
+                    Token = authResponse.Token,
+                    isSuccess = true,
+                    Message = new string[] { "Got token completely!" }
+                });
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            
+       }
 
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
@@ -84,6 +97,7 @@ namespace SupportingIELTSWriting.Controllers
             var x = await _services.LogoutAsync();
             return Ok(new AuthResult
             {
+                Token = null,
                 Message = new string[] { "Logout completely" }
             });
         }

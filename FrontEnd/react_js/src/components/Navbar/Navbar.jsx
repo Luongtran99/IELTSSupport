@@ -55,8 +55,15 @@ function Navbar() {
             <nav className="navbar">
                 <div className="navbar-container">
                     <Link to='/' className="navbar-logo" >
-                        <span>IELTS</span>Support
-                        <i class="fab fa-github" aria-hidden="true"></i>
+                        {/* <h3>
+                            <p className="prefix">IE</p>
+                            <div className="suffix">
+                                <p style={{color:"red"},{marginTop:"-4px"}} >LTS</p>
+                                <p style={{fontSize:"2rem"},{color:"white"}}>Support</p>
+                            </div>
+                            
+                        </h3>        */}
+                        <img src={"../../assets/images/logo.png"}></img>
                     </Link>
                     <ul className="menu-icon">
                         <li className="menu-icon-item">

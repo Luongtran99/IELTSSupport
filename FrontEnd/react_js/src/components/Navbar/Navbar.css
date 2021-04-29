@@ -21,12 +21,41 @@
   .navbar-logo {
     color: #fff;
     justify-self: start;
-    margin-left: 20px;
+    margin-left: 30px;
     cursor: pointer;
     text-decoration: none;
     font-size: 2rem;
-    display: flex;
     align-items: center;
+    margin-top:-10px
+  }
+
+  .navbar-logo > h3{
+    font-size:3rem;
+    margin: 0px;
+    display: flex;
+  }
+
+  .navbar-logo > h3 > .prefix{
+    color:red;
+    font-size:5rem;
+  }
+
+  .navbar-logo > h3 > .suffix{
+    color:red;
+    font-size: 2rem;
+    line-height: 1;
+    padding-top: 15px;
+  }
+
+  .navbar-logo > h3 > .suffix > p{
+    font-size:2rem;
+    color:red;
+  }
+
+  .navbar-logo  p{
+    font-size:1rem;
+    margin:0px;
+
   }
 
   .navbar-logo > span{

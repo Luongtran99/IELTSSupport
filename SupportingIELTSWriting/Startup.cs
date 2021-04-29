@@ -25,6 +25,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using SupportingIELTSWriting.Models.Entities;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace SupportingIELTSWriting
 {
@@ -63,6 +64,19 @@ namespace SupportingIELTSWriting
             services.AddDefaultIdentity<User>()
                 .AddEntityFrameworkStores<DictionaryDbContext>();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                    .SetIsOriginAllowed((host) => true)
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+
+            
+
             var jwtOptions = new JwtOptions();
 
             Configuration.Bind(key: nameof(jwtOptions), jwtOptions);
@@ -87,10 +101,11 @@ namespace SupportingIELTSWriting
                         ValidateIssuer = false,
                         ValidateAudience = false,
                         RequireExpirationTime = false,
-                        ValidateLifetime = true
+                        ValidateLifetime = true 
 
                     };
-                });
+                })
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, x => Configuration.Bind("CookieSettings",x));
 
 
             //services.AddAuthentication(options =>
@@ -98,7 +113,7 @@ namespace SupportingIELTSWriting
             //    options.DefaultAuthenticateScheme = "JwtBearer";
             //    options.DefaultChallengeScheme = "JwtBearer";
             //});
-
+            
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddMvcOptions(options => 
             {
@@ -107,6 +122,8 @@ namespace SupportingIELTSWriting
 
             services.AddSwaggerGen(setup =>
             {
+                setup.DescribeAllEnumsAsStrings();
+
                 setup.SwaggerDoc(
                     "v1",
                     new OpenApiInfo
@@ -160,12 +177,13 @@ namespace SupportingIELTSWriting
             {
                 app.UseHsts();
             }
-
+            
+            app.UseStaticFiles();
             
 
             app.UseHttpsRedirection();
-
-            app.UseAuthentication();
+            
+            
 
             var swaggerOptions = new SwaggerOptions();
             Configuration.GetSection(nameof(swaggerOptions)).Bind(swaggerOptions);
@@ -177,10 +195,15 @@ namespace SupportingIELTSWriting
                 x.SwaggerEndpoint(swaggerOptions.UIEndpoint, swaggerOptions.Description);
 
             });
+            app.UseCors("CorsPolicy");
+            app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc();
 
-            // seed data
+            
+
+            // seed data at first run
             // SeedData.EnsurePopulatedAsync(app);
         }
     }

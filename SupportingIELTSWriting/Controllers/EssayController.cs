@@ -30,7 +30,6 @@ namespace SupportingIELTSWriting.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-
             return Ok(await _essayServices.GetEssaysAsync(HttpContext.GetUserId()));
         }
 
