@@ -4,7 +4,9 @@ import React from 'react';
 import './App.css';
 import Footer from './components/pages/Footer/Footer'
 import Home from './components/pages/Home/Home'
-import Translate from './components/pages/Translate/Translate'
+import Dictionary from './components/pages/Translate/Dictionary'
+import Writing from './components/pages/WritingTask2/Writing'
+
 
 function App() {
   return (
@@ -13,7 +15,8 @@ function App() {
         <Navbar></Navbar>
         <Switch>
           <Route path="/" exact component={Home}></Route>
-          <Route path="/translate" component={Translate}></Route>
+          <Route path="/dictionary" component={Dictionary}></Route>
+          <Route path="/writing_task2" component={Writing}></Route>
         </Switch>
         <Footer></Footer>
       </BrowserRouter>

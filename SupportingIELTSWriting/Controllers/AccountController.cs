@@ -53,9 +53,20 @@ namespace SupportingIELTSWriting.Controllers
         }
 
 
+        // Show Register Page
+        [HttpGet]
+        public async Task<IActionResult> Register(string returnurl)
+        {
+            // 
+
+
+            return null;
+        }
+
+        // Handle postback from username/password register
         [HttpPost("register")]
-       public async Task<IActionResult> Register([FromBody]UserRegistrationRequestModel request)
-       {
+        public async Task<IActionResult> Register([FromBody]UserRegistrationRequestModel request)
+        {
             try
             {
                 if (!ModelState.IsValid)
@@ -89,7 +100,15 @@ namespace SupportingIELTSWriting.Controllers
                 throw new Exception(ex.Message);
             }
             
-       }
+        }
+
+
+        // show logout page
+        [HttpGet]
+        public async Task<IActionResult> Logout(string logoutid)
+        {
+            return null;
+        }
 
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()

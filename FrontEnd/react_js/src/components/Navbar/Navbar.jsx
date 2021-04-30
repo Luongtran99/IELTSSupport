@@ -5,7 +5,7 @@ import './Navbar.css'
 import Menu from './Menu/Menu'
 import Search from './Search/Search'
 import { rgbToHex } from '@material-ui/core'
-
+import logo from '../../assets/images/logo.png'
 
 function Navbar() {
     
@@ -55,15 +55,19 @@ function Navbar() {
             <nav className="navbar">
                 <div className="navbar-container">
                     <Link to='/' className="navbar-logo" >
-                        {/* <h3>
-                            <p className="prefix">IE</p>
+                        <h3>
+                            <p className="prefix"></p>
                             <div className="suffix">
-                                <p style={{color:"red"},{marginTop:"-4px"}} >LTS</p>
-                                <p style={{fontSize:"2rem"},{color:"white"}}>Support</p>
+                                <p style={{color:"red"},{marginTop:"-7px"}} >IELTS</p>
+                                <p style={{color:"white",marginTop:"-5px",marginLeft:"20px"}}>Support</p>
                             </div>
                             
-                        </h3>        */}
-                        <img src={"../../assets/images/logo.png"}></img>
+                        </h3>    
+                        {/* <ruby style={{marginTop:"-4px"}}>
+                            Support <rp>(</rp><rt style={{fontSize:"2rem"}}>IELTS</rt><rp>)</rp>
+                        </ruby>    */}
+                        {/* <img src={logo} className="image"></img>
+                        <span style={{display:"none"}}>IELTS Support</span> */}
                     </Link>
                     <ul className="menu-icon">
                         <li className="menu-icon-item">

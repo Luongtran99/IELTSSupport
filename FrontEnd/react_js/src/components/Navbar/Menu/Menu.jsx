@@ -7,10 +7,10 @@ const Menu = ({isVisible}) => {
         <div style={isVisible? {display:"block"}:{display:"none"}}>
             <ul className="nav_sub_menu">
                 <li className="nav_sub_menu_item">
-                    <Link to="/translate" className="nav-links">
+                    <Link to="/dictionary" className="nav-links">
                         Dictionary
                     </Link>
-                </li>
+                </li> 
                 <li className="nav_sub_menu_item">
                     <Link to="/writing" className="nav-links">
                         Writing Task 2
