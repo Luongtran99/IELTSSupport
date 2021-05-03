@@ -5,16 +5,20 @@ import './Dictionary.css'
 function Dictionary(props) {
     return (
         <>
-        <h1>Search Words</h1>
-            <div>
-                <object>
-                    <form>
-                        <label>Hello</label>
-                        <input></input>
-                    </form>
-                </object>
-                
+            <div className="container top-container" >
+                <h1>Search Words</h1>
+                <div className="main-wrap">
+                    <main>
+                        <form method={postMessage} className="form" style={{display:"flex", justifyContent:"center",height:"10vh",width:"120vh"}}>
+                            <input type={'search'} className="" placeholder={"Search Words"}></input>
+                            <button type={'submit'} className="btn btn--primary" style={{marginTop:"0px"}}>Search</button>
+                        </form>
+                    </main>
+                </div>
             </div>
+            <React.Fragment>
+                
+            </React.Fragment>
         </>
     )
 }

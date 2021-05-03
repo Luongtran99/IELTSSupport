@@ -1,0 +1,22 @@
+.top-container{
+    background:#1d2a57  ;
+    max-width: 1500px;
+    height: 25vh;
+    justify-content: center;
+    text-align: center;
+    justify-items: center;
+}
+
+    .top-container > h1{
+        color:white;
+    }
+
+.main-wrap{
+    justify-content: center;
+    transition: none;
+    
+}
+
+.main-wrap main{
+
+}

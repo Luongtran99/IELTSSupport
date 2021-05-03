@@ -33,7 +33,7 @@ function HeroSection() {
         <div className="hero-container">
             <video src=""></video>
             <h1>IMPROVE IELTS EVERY DAY</h1>
-            <p>Let get started!</p>
+            <p>Make your words meaningful</p>
             <div className='hero-btns'>
                 <Button
                     className='btns'
