@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import './Dictionary.css'
+import Words from './Words/Words'
 
 function Dictionary(props) {
     return (
@@ -17,7 +18,7 @@ function Dictionary(props) {
                 </div>
             </div>
             <React.Fragment>
-                
+                <Words></Words>
             </React.Fragment>
         </>
     )
