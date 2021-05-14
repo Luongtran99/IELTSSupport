@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupportingIELTSWriting", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoTernarySearchTree", "DemoTernarySearchTree\DemoTernarySearchTree.csproj", "{689354B8-F143-48CC-ADA2-49B3AFFF2774}"
 EndProject
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "grammar-checker-master (1)", "..\AI\grammar-checker-master (1)\grammar-checker-master (1).pyproj", "{B91136CE-9750-4ED8-88BF-95CA25A55768}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,8 +21,6 @@ Global
 		{689354B8-F143-48CC-ADA2-49B3AFFF2774}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{689354B8-F143-48CC-ADA2-49B3AFFF2774}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{689354B8-F143-48CC-ADA2-49B3AFFF2774}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B91136CE-9750-4ED8-88BF-95CA25A55768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B91136CE-9750-4ED8-88BF-95CA25A55768}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,7 +10,7 @@
     <Folder Include="Components\" />
     <Folder Include="Helpers\" />
     <Folder Include="Infrastructure\Advanced\" />
-    <Folder Include="Infrastructure\Parser\" />
+    <Folder Include="Infrastructure\Recommend\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="wwwroot\images\" />
