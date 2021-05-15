@@ -703,7 +703,6 @@ namespace DemoTernarySearchTree
             {
                 if(eachWrd == "halh")
                 {
-
                     break;
                 }
             }
