@@ -16,6 +16,7 @@ namespace SupportingIELTSWriting.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class EssayController : ControllerBase
     {
@@ -74,6 +75,7 @@ namespace SupportingIELTSWriting.Controllers
             await _essayServices.CreateEssayAsync(essay);
 
             string baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
+
             string location = baseUrl + $"/api/essay/{essay.Id}";
 
 
@@ -109,7 +111,10 @@ namespace SupportingIELTSWriting.Controllers
             {
                 if(await _historyServices.Create(new History
                 {
-                    essayId = essayId, userId = HttpContext.GetUserId(), oldEssay = updateEssay.oldText, newEssay = updateEssay.Text
+                    essayId = essayId,
+                    userId = HttpContext.GetUserId(),
+                    oldEssay = updateEssay.oldText,
+                    newEssay = updateEssay.Text
                 }))
                 return Ok(essay);
             }

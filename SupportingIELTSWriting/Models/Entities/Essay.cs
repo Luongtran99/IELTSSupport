@@ -17,6 +17,6 @@ namespace SupportingIELTSWriting.Models.Entities
         public User User { get; set; }
         public string historyId { get; set; }
         public ICollection<History> History { get; set; } = new List<History>();
-        public ICollection<EssayErrors> essayErrors { get; set; } = new List<EssayErrors>();
+        //public ICollection<EssayErrors> essayErrors { get; set; } = new List<EssayErrors>();
     }
 }

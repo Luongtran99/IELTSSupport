@@ -15,5 +15,30 @@ namespace SupportingIELTSWriting.Models.Entities
         public int essayId { get; set; }
         public Essay Essay { get; set; }
 
+        public EssayErrors()
+        {
+            Replacements = new List<string>();
+        }
+
+        public EssayErrors(string result)
+        {
+            Replacements = new List<string>();
+
+            string[] array = result.Split('|');
+
+            From = Convert.ToInt32(array[0]);
+            To = Convert.ToInt32(array[1]);
+
+            Message = array[2];
+
+            Replacements = splitReplacementStr(array[3]);
+        }
+
+        public List<string> splitReplacementStr(string replacementStr)
+        {
+            string splitStr = replacementStr.Replace('\'', ' ').Replace('[', ' ').Replace(']', ' ').Replace('\"', ' ').Replace('\r', ' ');
+
+            return splitStr.Split(',').ToList();
+        }
     }
 }

@@ -33,7 +33,7 @@ namespace SupportingIELTSWriting.Controllers
         public async Task<IActionResult> Login([FromBody]UserLoginRequestModel request)
         {
 
-            var authResponse = await _services.LoginAsync(request.Username, request.Password);
+            var authResponse = await _services.LoginAsync(request.Username, request.Password, request.RememberMe);
 
             if (!authResponse.isSuccess)
             {

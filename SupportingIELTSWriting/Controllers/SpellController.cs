@@ -1,15 +1,24 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using SupportingIELTSWriting.Infrastructure.JsonResult;
+using SupportingIELTSWriting.Infrastructure.Parser;
 using SupportingIELTSWriting.Models;
+using SupportingIELTSWriting.Models.Entities;
 using SupportingIELTSWriting.Services;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace SupportingIELTSWriting.Controllers
 {
+    /*
+     * All user & guest can use this function
+     */
+
+
 
     [Route("api/[controller]")]
     [ApiController]
@@ -17,17 +26,30 @@ namespace SupportingIELTSWriting.Controllers
     {
         // get Tree
         private ITernarySearchTreeRepository repository;
-        public SpellController(ITernarySearchTreeRepository repo)
+
+        private IGrammarChecker grammarChecker;
+
+        private ILogger<SpellController> _logger;
+        
+        public SpellController(ITernarySearchTreeRepository repo, IGrammarChecker checker, ILogger<SpellController> logger)
         {
             repository = repo;
+            grammarChecker = checker;
+            _logger = logger;
         }
 
         // GET api/search/{word}
         [HttpGet("search/{word}")]
-        public ActionResult Search(string word)
+        public async Task<ActionResult<Result>> Search(string word)
         {
+            bool checkWord = false;
             // chekc word existance
-            bool checkWord =  repository.Search(word);
+            await Task.Run(() =>
+            {
+                Task.Delay(1);
+                checkWord = repository.Search(word);
+            });
+            
 
             if(checkWord == true)
             {
@@ -39,7 +61,9 @@ namespace SupportingIELTSWriting.Controllers
             }
 
         }
-        // GET api/spell/checktext
+
+        // GET api/spell
+        // POST api/spell/checktext
         [HttpPost("checktext")]
         public async Task<ActionResult<Result>> CheckAllText([FromBody]JObject value)
         {
@@ -53,7 +77,7 @@ namespace SupportingIELTSWriting.Controllers
 
             for (var i = 0; i < wrdList.Length; i++)
             {
-                if(repository.Search(wrdList[i]) == true)
+                if( repository.Search(wrdList[i]) == true)
                 {
                     continue;
                 }
@@ -67,7 +91,45 @@ namespace SupportingIELTSWriting.Controllers
             return new Result(200, "auto complete word", keyValues);
         }
 
-        
+        // encrypt text
+        [HttpGet("grammar/{sentence}")]
+        public async Task<ActionResult<Result>> CheckGrammarSentence([FromRoute]string sentence)
+        {
+            if (sentence == "")
+            {
+                return BadRequest("Invalid sentence");
+            }
+
+
+            try
+            {
+                List<EssayErrors> result = new List<EssayErrors>();
+
+                await Task.Run(async () =>
+                {
+                    Task.Delay(1);
+                    result = await grammarChecker.CheckSentenceAsync(sentence);
+                });
+                
+
+                if (result != null)
+                {
+                    return new Result(200, "check completeply", result);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation("error {0}", ex.Message);
+            }
+
+            // get list errors
+
+            return new Result(300, "no error", null);
+
+
+        }
+
+
         // POST api/spell
         [HttpPost]
         [Consumes("application/json")]

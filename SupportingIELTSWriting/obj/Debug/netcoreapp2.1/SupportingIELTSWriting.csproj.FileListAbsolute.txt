@@ -25,3 +25,4 @@ E:\Lớp học\Project II\SourceCode\SupportIELTSWriting\SupportingIELTSWriting\
 E:\Lớp học\Project II\SourceCode\SupportIELTSWriting\SupportingIELTSWriting\obj\Debug\netcoreapp2.1\Razor\Area\Admin\Views\_ViewStart.g.cshtml.cs
 E:\Lớp học\Project II\SourceCode\SupportIELTSWriting\SupportingIELTSWriting\obj\Debug\netcoreapp2.1\Razor\Views\_ViewStart.g.cshtml.cs
 E:\Lớp học\Project II\SourceCode\SupportIELTSWriting\SupportingIELTSWriting\obj\Debug\netcoreapp2.1\Razor\Views\_ViewImports.g.cshtml.cs
+E:\Lớp học\Project II\SourceCode\SupportIELTSWriting\SupportingIELTSWriting\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs

@@ -62,7 +62,7 @@ namespace SupportingIELTSWriting.Services
             };
         }
 
-        public async Task<AuthResult> LoginAsync(string email, string password, bool rememberMe)
+        public async Task<AuthResult> LoginAsync(string email, string password, bool rememberMe = false)
         {
             var user = await _userManager.FindByEmailAsync(email);
 
@@ -149,5 +149,10 @@ namespace SupportingIELTSWriting.Services
             await _signInManager.SignOutAsync();
             return true;
         }
+
+        //public Task<AuthResult> LoginAsync(string username, string password)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

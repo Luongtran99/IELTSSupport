@@ -7,5 +7,6 @@ namespace SupportingIELTSWriting.Extensions
 {
     public class SessionExtensions
     {
+
     }
 }

@@ -26,6 +26,8 @@ using System.Text;
 using Microsoft.OpenApi.Models;
 using SupportingIELTSWriting.Models.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using SupportingIELTSWriting.Infrastructure.Parser;
+using Microsoft.AspNetCore.Http;
 
 namespace SupportingIELTSWriting
 {
@@ -43,7 +45,7 @@ namespace SupportingIELTSWriting
         {
 
             // register grammar checker services
-            
+            services.AddScoped<IGrammarChecker, GrammarChecker>();
 
             services.AddScoped<ITernarySearchTreeRepository, TernarySearchTree>(); // Register Ternary Search Tree
 
@@ -64,6 +66,14 @@ namespace SupportingIELTSWriting
                 options.UseSqlServer(Configuration["Data:Dictionary:ConnectionString"]);
             });
 
+
+            // configure password, lockout, user , ....
+            services.Configure<IdentityOptions>(options =>
+            {
+                
+            });
+
+
             services.AddDefaultIdentity<User>()
                 .AddEntityFrameworkStores<DictionaryDbContext>();
 
@@ -78,7 +88,11 @@ namespace SupportingIELTSWriting
                     .AllowCredentials());
             });
 
-            
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/AccountController/SignInAsync";
+
+            });
 
             var jwtOptions = new JwtOptions();
 
