@@ -28,6 +28,7 @@ using SupportingIELTSWriting.Models.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using SupportingIELTSWriting.Infrastructure.Parser;
 using Microsoft.AspNetCore.Http;
+using SupportingIELTSWriting.Middlewares;
 
 namespace SupportingIELTSWriting
 {
@@ -186,6 +187,9 @@ namespace SupportingIELTSWriting
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
+            app.UseMiddleware<GCMiddleware>();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -195,10 +199,10 @@ namespace SupportingIELTSWriting
                 app.UseHsts();
             }
             
-            app.UseStaticFiles();
             
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
             
             
 
@@ -214,6 +218,7 @@ namespace SupportingIELTSWriting
             });
             app.UseCors("CorsPolicy");
             app.UseCookiePolicy();
+
             app.UseAuthentication();
 
             app.UseMvc();

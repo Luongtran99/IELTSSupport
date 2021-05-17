@@ -54,7 +54,7 @@ using SupportingIELTSWriting.Infrastructure;
             WriteLiteral("<!DOCTYPE html>\r\n<html>\r\n");
             EndContext();
             BeginContext(25, 324, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bd61c63f90484ef99102563844ab8dc6", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5f47102b4e9a41bfa57772dea448ae45", async() => {
                 BeginContext(31, 311, true);
                 WriteLiteral(@"
     <meta lang=""en""/>
@@ -83,7 +83,7 @@ using SupportingIELTSWriting.Infrastructure;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(351, 34, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c65507266d874de7815d9b5a7fadc306", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ca27f8ef216b4ae3991a8a2a110fd5d0", async() => {
                 BeginContext(357, 6, true);
                 WriteLiteral("\r\n    ");
                 EndContext();
