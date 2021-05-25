@@ -76,6 +76,7 @@ namespace SupportingIELTSWriting
 
 
             services.AddDefaultIdentity<User>()
+                .AddRoles<Roles>()
                 .AddEntityFrameworkStores<DictionaryDbContext>();
 
             services.AddCors(options =>
@@ -235,6 +236,7 @@ namespace SupportingIELTSWriting
 
             // seed data at first run
             // SeedData.EnsurePopulatedAsync(app);
+
         }
     }
 }

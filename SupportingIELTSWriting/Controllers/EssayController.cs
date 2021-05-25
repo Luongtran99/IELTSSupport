@@ -16,7 +16,7 @@ namespace SupportingIELTSWriting.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize(Roles = "Member")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class EssayController : ControllerBase
     {
@@ -29,7 +29,7 @@ namespace SupportingIELTSWriting.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAllEssays()
         {
             return Ok(await _essayServices.GetEssaysAsync(HttpContext.GetUserId()));
         }
@@ -48,7 +48,7 @@ namespace SupportingIELTSWriting.Controllers
         }
 
         [HttpGet("{essayId}")]
-        public async Task<ActionResult> Get([FromRoute] string essayId)
+        public async Task<ActionResult> GetEssayById([FromRoute] string essayId)
         {
             var essay = await _essayServices.GetEssayByIdAsync(essayId);
 
@@ -62,7 +62,7 @@ namespace SupportingIELTSWriting.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> CreateAsync([FromBody]CreateEssayRequest essayRequest)
+        public async Task<ActionResult> CreateEssayAsync([FromBody]CreateEssayRequest essayRequest)
         {
             var essay = new Essay
             {
@@ -83,7 +83,7 @@ namespace SupportingIELTSWriting.Controllers
         }
 
         [HttpPut("{essayId}")]
-        public async Task<IActionResult> EditAsync([FromRoute]string essayId,[FromBody]UpdateEssayRequest updateEssay)
+        public async Task<IActionResult> EditEssayAsync([FromRoute]string essayId,[FromBody]UpdateEssayRequest updateEssay)
         {
 
             var userOwnEssay = await _essayServices.UserOwnEssayAsync(essayId, HttpContext.GetUserId());
@@ -124,7 +124,7 @@ namespace SupportingIELTSWriting.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute]string id)
+        public async Task<IActionResult> DeleteEssayAsync([FromRoute]string id)
         {
             var deleted = await _essayServices.DeleteEssayByIdAsync(id);
 

@@ -28,7 +28,6 @@ namespace SupportingIELTSWriting.Data
         public DbSet<History> Histories { get; set; }
         //public DbSet<EssayErrors> EssayErrors { get; set; }
         public DbSet<Essay> Essays { get; set; }
-
         // apply configure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
