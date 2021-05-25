@@ -92,7 +92,7 @@ namespace SupportingIELTSWriting
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/AccountController/SignInAsync";
-
+                
             });
 
             var jwtOptions = new JwtOptions();
@@ -182,6 +182,7 @@ namespace SupportingIELTSWriting
                     }
                 });
             });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -221,8 +222,15 @@ namespace SupportingIELTSWriting
 
             app.UseAuthentication();
 
-            app.UseMvc();
+            app.UseMvc( p => {
+                p.MapRoute
+                (
+                    name:null,
+                    template:"{controller}/{action}/{id}"
+                );
+            });
 
+            
             
 
             // seed data at first run

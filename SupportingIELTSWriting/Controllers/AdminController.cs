@@ -7,9 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SupportingIELTSWriting.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AdminController : ControllerBase
+    public class AdminController : Controller
     {
         // GET: api/Admin
         [HttpGet]

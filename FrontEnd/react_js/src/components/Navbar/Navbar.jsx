@@ -6,6 +6,7 @@ import Menu from './Menu/Menu'
 import Search from './Search/Search'
 import { rgbToHex } from '@material-ui/core'
 import logo from '../../assets/images/logo.png'
+import Dictionary from '../../components/pages/Translate/Dictionary'
 
 function Navbar() {
     
@@ -77,7 +78,7 @@ function Navbar() {
                         </li>
                         <li className="menu-icon-item">
                             <div style={{ marginRight: "50px" }, { color: "red" }} onClick={handleClickAcc}>
-                                <i class={clickAcc ? "fas fa-times" : "fa fa-lock"} aria-hidden="true"></i>
+                                <i className={clickAcc ? "fas fa-times" : "fa fa-lock"} aria-hidden="true"></i>
                             </div>
                         </li>
                     </ul>
@@ -90,18 +91,18 @@ function Navbar() {
                             </Link>
                         </li>
                         <li className="nav-item" onMouseLeave={hideMenu} onMouseOver={displayMenu}>
-                            <Link to="/features" className="nav-links" onclick={closeMobileMenu} >
+                            <Link to="/dictionary"  className="nav-links" onClick={closeMobileMenu} >
                                 Features
                             </Link>
                             <Menu isVisible={visible}/>
                         </li>
                         <li className="nav-item">
-                            <Link to="/forum" className="nav-links" onclick={closeMobileMenu}>
+                            <Link to="/forum" className="nav-links" onClick={closeMobileMenu}>
                                 Forum   
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/examples" className="nav-links" onclick={closeMobileMenu}>
+                            <Link to="/examples" className="nav-links" onClick={closeMobileMenu}>
                                 Examples   
                             </Link>
                         </li>
@@ -109,9 +110,9 @@ function Navbar() {
                     </ul>
                     <div className={clickAcc ? "nav-menu active":"nav-menu"}>
                         <div className="Sign">
-                            <Link to="/signup" className="contact signup" onclick={closeMobileMenu}>SignUp</Link>
+                            <Link to="/signup" className="contact signup" onClick={closeMobileMenu}>SignUp</Link>
                             /
-                            <Link to="/signin" className="contact signin" onclick={closeMobileMenu}>SignIn</Link>
+                            <Link to="/signin" className="contact signin" onClick={closeMobileMenu}>SignIn</Link>
                         </div>
                     </div>
                     

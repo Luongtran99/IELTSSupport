@@ -20,7 +20,7 @@
     "SupportingIELTSWriting": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/spell",
+      "launchUrl": "Home",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

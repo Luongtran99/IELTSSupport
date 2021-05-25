@@ -8,12 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Area\Admin\Controllers\" />
     <Folder Include="Components\" />
     <Folder Include="Helpers\" />
     <Folder Include="Infrastructure\Advanced\" />
     <Folder Include="Infrastructure\Authentication\" />
     <Folder Include="Infrastructure\Recommend\" />
-    <Folder Include="Views\Home\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\audios\" />

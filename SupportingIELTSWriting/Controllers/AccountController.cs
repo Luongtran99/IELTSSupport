@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,20 +15,14 @@ namespace SupportingIELTSWriting.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class AccountController : ControllerBase
     {
-
         private IIdentityServices _services;
         
         public AccountController(IIdentityServices services)
         {
             _services = services;
-        }
-        [HttpGet]
-        public async Task<IActionResult> Login(string returnurl)
-        {
-
-            return null;
         }
 
         [HttpPost("login")]
@@ -50,17 +46,6 @@ namespace SupportingIELTSWriting.Controllers
                 isSuccess = true,
                 Message = new string[] { "Login completely" }
             });
-        }
-
-
-        // Show Register Page
-        [HttpGet]
-        public async Task<IActionResult> Register(string returnurl)
-        {
-            // 
-
-
-            return null;
         }
 
         // Handle postback from username/password register
@@ -97,17 +82,13 @@ namespace SupportingIELTSWriting.Controllers
             }
             catch(Exception ex)
             {
-                throw new Exception(ex.Message);
+                return BadRequest(new AuthResult
+                {
+                    isSuccess = false,
+                    Message = new string[] { "Get wrong! we will fix later" }
+                });
             }
             
-        }
-
-
-        // show logout page
-        [HttpGet]
-        public async Task<IActionResult> Logout(string logoutid)
-        {
-            return null;
         }
 
         [HttpPost("logout")]
@@ -122,7 +103,7 @@ namespace SupportingIELTSWriting.Controllers
         }
 
         [HttpPost("changepassword")]
-        public async Task<IActionResult> ChangePassword([FromRoute] string newPassword)
+        public IActionResult ChangePassword([FromRoute] string newPassword)
         {
             return null;
         }

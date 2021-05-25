@@ -21,7 +21,7 @@ namespace SupportingIELTSWriting.Models.Entities
         public ICollection<Essay> Essays { get; set; } = new List<Essay>();
         public ICollection<History> Histories { get; set; } = new List<History>();
 
-
+        public IList<UserRole> Roles { get; set; } = new List<UserRole>();
         
     }
 }
