@@ -22,24 +22,24 @@ namespace SupportingIELTSWriting
         {
             var host = CreateWebHostBuilder(args).Build();
 
-            using(var serviceScope = host.Services.CreateScope())
-            {
-                var services = serviceScope.ServiceProvider;
-                var dbContext = serviceScope.ServiceProvider.GetRequiredService<DictionaryDbContext>();
-                await dbContext.Database.MigrateAsync();
-                try
-                {
-                    var userManager = services.GetRequiredService<UserManager<User>>();
-                    var roleManager = services.GetRequiredService<RoleManager<Roles>>();
-                    await Models.SeedDatas.DefaultRoles.SeedAsync(userManager, roleManager);
-                    await Models.SeedDatas.DefaultUsers.SeedBasicUserAsync(userManager, roleManager);
-                    await Models.SeedDatas.DefaultUsers.SeedAdminAsync(userManager, roleManager);
-                }
-                catch(Exception ex)
-                {
-                    throw new Exception("Error!");
-                }
-            }
+            //using(var serviceScope = host.Services.CreateScope())
+            //{
+            //    var services = serviceScope.ServiceProvider;
+            //    var dbContext = serviceScope.ServiceProvider.GetRequiredService<DictionaryDbContext>();
+            //    await dbContext.Database.MigrateAsync();
+            //    try
+            //    {
+            //        var userManager = services.GetRequiredService<UserManager<User>>();
+            //        var roleManager = services.GetRequiredService<RoleManager<Roles>>();
+            //        await Models.SeedDatas.DefaultRoles.SeedAsync(userManager, roleManager);
+            //        await Models.SeedDatas.DefaultUsers.SeedBasicUserAsync(userManager, roleManager);
+            //        await Models.SeedDatas.DefaultUsers.SeedAdminAsync(userManager, roleManager);
+            //    }
+            //    catch(Exception ex)
+            //    {
+            //        throw new Exception("Error!");
+            //    }
+            //}
             await host.RunAsync();
         }
 

@@ -27,6 +27,9 @@ namespace SupportingIELTSWriting.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("Name")
                         .HasMaxLength(256);
 
@@ -41,6 +44,8 @@ namespace SupportingIELTSWriting.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -109,11 +114,16 @@ namespace SupportingIELTSWriting.Data.Migrations
 
                     b.Property<string>("RoleId");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserRole<string>");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -324,6 +334,35 @@ namespace SupportingIELTSWriting.Data.Migrations
                     b.ToTable("Words");
                 });
 
+            modelBuilder.Entity("SupportingIELTSWriting.Models.Entities.Roles", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
+
+
+                    b.ToTable("Roles");
+
+                    b.HasDiscriminator().HasValue("Roles");
+                });
+
+            modelBuilder.Entity("SupportingIELTSWriting.Models.Entities.UserRole", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserRole<string>");
+
+                    b.Property<string>("RoleId1");
+
+                    b.Property<string>("UserId1");
+
+                    b.Property<int>("UserRoleID");
+
+                    b.HasIndex("RoleId1");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("UserRole");
+
+                    b.HasDiscriminator().HasValue("UserRole");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -406,6 +445,17 @@ namespace SupportingIELTSWriting.Data.Migrations
                     b.HasOne("SupportingIELTSWriting.Models.Word", "Word")
                         .WithMany("phonetics")
                         .HasForeignKey("wordId");
+                });
+
+            modelBuilder.Entity("SupportingIELTSWriting.Models.Entities.UserRole", b =>
+                {
+                    b.HasOne("SupportingIELTSWriting.Models.Entities.Roles", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId1");
+
+                    b.HasOne("SupportingIELTSWriting.Models.Entities.User", "User")
+                        .WithMany("Roles")
+                        .HasForeignKey("UserId1");
                 });
 #pragma warning restore 612, 618
         }

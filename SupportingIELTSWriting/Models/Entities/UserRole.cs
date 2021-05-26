@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace SupportingIELTSWriting.Models.Entities
 {
-    public class UserRole : IdentityUserRole<long>
+    public class UserRole : IdentityUserRole<string>
     {
-        //public string UserRoleID { get; set; }
-        public string RoleId { get; set; }
+        public int UserRoleID { get; set; }
         public Roles Role { get; set; }
-        public string UserId { get; set; }
         public User User { get; set; }
     }
 }

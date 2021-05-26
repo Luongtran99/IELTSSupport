@@ -11,6 +11,15 @@ namespace SupportingIELTSWriting.Infrastructure.Authorization
     {
         private readonly IHttpContextAccessor httpContextAccessor;
 
+        public HttpClientAuthorizationDelegatingHandler(IHttpContextAccessor httpContextAccessor)
+        {
+            this.httpContextAccessor = httpContextAccessor;
+        }
 
+        async Task<string> GetToken()
+        {
+            return null;
+        }
+        
     }
 }

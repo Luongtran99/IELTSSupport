@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SupportingIELTSWriting.Infrastructure;
 using SupportingIELTSWriting.Models;
 using SupportingIELTSWriting.Models.Entities;
@@ -22,10 +23,12 @@ namespace SupportingIELTSWriting.Controllers
     {
         private readonly IEssayServices _essayServices;
         private readonly IHistoryServices _historyServices;
-        public EssayController(IEssayServices es, IHistoryServices historyServices)
+        private readonly ILogger<EssayController> _logger;
+        public EssayController(IEssayServices es, IHistoryServices historyServices, ILogger<EssayController> logger)
         {
             _essayServices = es;
             _historyServices = historyServices;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -35,20 +38,27 @@ namespace SupportingIELTSWriting.Controllers
         }
 
         [HttpGet("history/{essayId}")]
-        public async Task<IActionResult> GetHistory([FromRoute] string essayId)
+        public async Task<IActionResult> GetEssayHistoryAsync([FromRoute] string essayId)
         {
-            var essayHistory = await _essayServices.GetHistoriesByEssayIdAsync(essayId);
-
-            if(essayHistory == null)
+            try
             {
-                return NotFound();
-            }
+                var essayHistory = await _essayServices.GetHistoriesByEssayIdAsync(essayId);
 
-            return Ok(essayHistory);
+                if(essayHistory == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(essayHistory);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         [HttpGet("{essayId}")]
-        public async Task<ActionResult> GetEssayById([FromRoute] string essayId)
+        public async Task<ActionResult> GetEssayByIdAsync([FromRoute] string essayId)
         {
             var essay = await _essayServices.GetEssayByIdAsync(essayId);
 
@@ -71,15 +81,21 @@ namespace SupportingIELTSWriting.Controllers
                 Text = essayRequest.Text,
                 Date = DateTime.Now
             };
+            try
+            {
+                await _essayServices.CreateEssayAsync(essay);
 
-            await _essayServices.CreateEssayAsync(essay);
+                string baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
 
-            string baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
-
-            string location = baseUrl + $"/api/essay/{essay.Id}";
+                string location = baseUrl + $"/api/essay/{essay.Id}";
 
 
-            return Created(location, essay);
+                return Created(location, essay);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         [HttpPut("{essayId}")]

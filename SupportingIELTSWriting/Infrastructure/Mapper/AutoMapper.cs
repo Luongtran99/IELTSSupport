@@ -6,7 +6,7 @@ namespace SupportingIELTSWriting.Infrastructure.Mapper
     {
         public static void Configure()
         {
-            // work later
+            
         }
     }
 }

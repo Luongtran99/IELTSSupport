@@ -29,6 +29,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using SupportingIELTSWriting.Infrastructure.Parser;
 using Microsoft.AspNetCore.Http;
 using SupportingIELTSWriting.Middlewares;
+using SupportingIELTSWriting.Models.SeedDatas;
 
 namespace SupportingIELTSWriting
 {
@@ -76,7 +77,6 @@ namespace SupportingIELTSWriting
 
 
             services.AddDefaultIdentity<User>()
-                
                 .AddRoles<Roles>()
                 .AddEntityFrameworkStores<DictionaryDbContext>();
 
@@ -188,8 +188,9 @@ namespace SupportingIELTSWriting
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddConsole();
 
             app.UseMiddleware<GCMiddleware>();
 
@@ -231,13 +232,9 @@ namespace SupportingIELTSWriting
                     template:"{controller}/{action}/{id}"
                 );
             });
-
-            
-            
-
             // seed data at first run
             // SeedData.EnsurePopulatedAsync(app);
-
+            // SupportingIELTSWriting.Models.SeedDatas.SeedData.EnsurePopulatedAsync(app);
         }
     }
 }
