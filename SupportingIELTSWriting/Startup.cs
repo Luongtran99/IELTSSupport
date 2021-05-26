@@ -76,6 +76,7 @@ namespace SupportingIELTSWriting
 
 
             services.AddDefaultIdentity<User>()
+                
                 .AddRoles<Roles>()
                 .AddEntityFrameworkStores<DictionaryDbContext>();
 
