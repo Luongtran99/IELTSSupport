@@ -97,7 +97,7 @@ namespace SupportingIELTSWriting.Data
 
 
             // add foreign key and value
-           
+            
             base.OnModelCreating(modelBuilder);
         }
 

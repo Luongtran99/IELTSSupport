@@ -15,7 +15,6 @@ namespace SupportingIELTSWriting.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
     public class AccountController : ControllerBase
     {
         private IIdentityServices _services;
@@ -28,24 +27,34 @@ namespace SupportingIELTSWriting.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]UserLoginRequestModel request)
         {
-
-            var authResponse = await _services.LoginAsync(request.Username, request.Password, request.RememberMe);
-
-            if (!authResponse.isSuccess)
+            try
             {
-                return BadRequest(new AuthResult
+                var authResponse = await _services.LoginAsync(request.Username, request.Password, request.RememberMe);
+
+                if (!authResponse.isSuccess)
                 {
-                    Message = authResponse.Message
+                    return BadRequest(new AuthResult
+                    {
+                        Message = authResponse.Message
+                    });
+
+                }
+
+                return Ok(new AuthResult
+                {
+                    Token = authResponse.Token,
+                    isSuccess = true,
+                    Message = new string[] { "Login completely" }
                 });
-
             }
-
-            return Ok(new AuthResult
+            catch(Exception ex)
             {
-                Token = authResponse.Token,
-                isSuccess = true,
-                Message = new string[] { "Login completely" }
-            });
+                return NotFound(new AuthResult
+                {
+                    isSuccess = false,
+                    Message = new string[] { ex.Message }
+                });
+            }
         }
 
         // Handle postback from username/password register
@@ -85,7 +94,7 @@ namespace SupportingIELTSWriting.Controllers
                 return BadRequest(new AuthResult
                 {
                     isSuccess = false,
-                    Message = new string[] { "Get wrong! we will fix later" }
+                    Message = new string[] { ex.Message }
                 });
             }
             
@@ -98,6 +107,7 @@ namespace SupportingIELTSWriting.Controllers
             return Ok(new AuthResult
             {
                 Token = null,
+                isSuccess = true,
                 Message = new string[] { "Logout completely" }
             });
         }
@@ -105,6 +115,8 @@ namespace SupportingIELTSWriting.Controllers
         [HttpPost("changepassword")]
         public IActionResult ChangePassword([FromRoute] string newPassword)
         {
+            // get current user 
+            
             return null;
         }
     }

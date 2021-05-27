@@ -1,4 +1,6 @@
-﻿using SupportingIELTSWriting.Models.Entities;
+﻿using Microsoft.AspNetCore.Http;
+using SupportingIELTSWriting.Models;
+using SupportingIELTSWriting.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +12,7 @@ namespace SupportingIELTSWriting.Services
     {
         Task<User> GetUserAsync(string userId);
         Task<bool> EditUserAsync(User user);
+
+        Task<AuthResult> UpdateAvatarAsync(string id, IFormFile file);
     }
 }

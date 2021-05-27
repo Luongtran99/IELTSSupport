@@ -30,7 +30,7 @@ namespace SupportingIELTSWriting.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/Dictionary/5
+        // GET: api/Dictionary/{word}
         [HttpGet("{word}")]
         public async Task<ActionResult> GetMeanByWord(string word)
         {

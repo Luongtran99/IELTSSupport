@@ -9,7 +9,6 @@ namespace SupportingIELTSWriting.Models.Entities
 {
     public class UserRole : IdentityUserRole<string>
     {
-        public int UserRoleID { get; set; }
         public Roles Role { get; set; }
         public User User { get; set; }
     }

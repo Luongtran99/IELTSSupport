@@ -16,7 +16,6 @@ namespace SupportingIELTSWriting.Models.Entities
             Member,
             Customer
         }
-        public string Discriminator { get; set; }
         public IList<UserRole> Users { get; set; } = new List<UserRole>();
     }
 }

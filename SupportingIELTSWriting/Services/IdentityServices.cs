@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -22,9 +23,10 @@ namespace SupportingIELTSWriting.Services
         private readonly SignInManager<User> _signInManager;
         private readonly JwtOptions _jwtOptions;
         private readonly IConfiguration _configuration;
-        
+        private readonly HttpContext httpContext;
         public IdentityServices(UserManager<User> userManager,SignInManager<User> signInManager, JwtOptions jwtOptions, IConfiguration configuration)
         {
+            //httpContext = ct;
             _userManager = userManager;
             _signInManager = signInManager;
             _jwtOptions = jwtOptions;
@@ -64,6 +66,10 @@ namespace SupportingIELTSWriting.Services
 
         public async Task<AuthResult> LoginAsync(string email, string password, bool rememberMe = false)
         {
+
+            // check if account is login in another computer
+            
+
             var user = await _userManager.FindByEmailAsync(email);
 
             if(user == null)
@@ -73,7 +79,6 @@ namespace SupportingIELTSWriting.Services
                     Message = new[] { "user doesn't exist" }
                 };
             }
-
             //var checkPassword = await _userManager.CheckPasswordAsync(user, password);
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, password, lockoutOnFailure: false);
@@ -102,6 +107,12 @@ namespace SupportingIELTSWriting.Services
 
                 return GeneratingAuthResultForUser(user);
             }
+
+            if (result.IsLockedOut)
+            {
+
+            }
+            
 
             return new AuthResult
             {
@@ -154,5 +165,13 @@ namespace SupportingIELTSWriting.Services
         //{
         //    throw new NotImplementedException();
         //}
+        public async Task<AuthResult> ChangePassword(string pasword)
+        {
+            // change password
+            
+
+
+            return null;
+        }
     }
 }

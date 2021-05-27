@@ -352,8 +352,6 @@ namespace SupportingIELTSWriting.Data.Migrations
 
                     b.Property<string>("UserId1");
 
-                    b.Property<int>("UserRoleID");
-
                     b.HasIndex("RoleId1");
 
                     b.HasIndex("UserId1");

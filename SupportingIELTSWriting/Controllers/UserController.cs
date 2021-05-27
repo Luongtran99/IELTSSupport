@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SupportingIELTSWriting.Infrastructure;
@@ -13,6 +15,7 @@ namespace SupportingIELTSWriting.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize(Roles = "Member")]
     public class UserController : ControllerBase
     {
         private readonly IUserServices _userServices;
@@ -22,30 +25,13 @@ namespace SupportingIELTSWriting.Controllers
             _userServices = userServices;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> Get()
-        {
-            var x = await _userServices.GetUserAsync(HttpContext.GetUserId());
-
-            if (x == null)
-            {
-                return NotFound(new AuthResult
-                {
-                    isSuccess = false,
-                    Message = new string[] { "User is not existed" }
-                });
-            }
-
-            return Ok(x);
-        }
-
         // get info of the other user
         [HttpGet("{userId}")]
-        public async Task<ActionResult> Get(string userId)
+        public async Task<ActionResult> GetInforByIdAsync(string userId)
         {
-            var x = await _userServices.GetUserAsync(userId);
+            var getUserInfo = await _userServices.GetUserAsync(userId);
 
-            if (x == null)
+            if (getUserInfo == null)
             {
                 return NotFound(new AuthResult
                 {
@@ -54,12 +40,16 @@ namespace SupportingIELTSWriting.Controllers
                 });
             }
 
-            return Ok(x);
+            return Ok(getUserInfo);
         }
 
         [HttpPost("edit")]
-        public async Task<ActionResult> Update([FromBody] User user)
+        public async Task<ActionResult> UpdateAsync([FromBody] User user)
         {
+            // check user is correct type
+            //HttpContext a = new HttpContext();
+            
+
             var _user = new User
             {
                 Id = HttpContext.GetUserId(),
@@ -67,20 +57,44 @@ namespace SupportingIELTSWriting.Controllers
                 LastName = user.LastName,
                 Age = user.Age,
                 Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                
+                PhoneNumber = user.PhoneNumber
             };
-
-            var updated = await _userServices.EditUserAsync(_user);
-
-            if (updated)
+            try
             {
-                return Ok(_user);
-            }
+                var updated = await _userServices.EditUserAsync(_user);
 
-            return NotFound();
+                if (updated)
+                {
+                    return Ok(_user);
+                }
+
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
+        [HttpPost("edit_avatar")]
+        public async Task<AuthResult> UpdateAvatarAsync()
+        {
 
+            try
+            {
+                var file = Request.Form.Files[0];
+                var id = HttpContext.GetUserId();
+                var getResult = await _userServices.UpdateAvatarAsync(id, file);
+                return  getResult;
+            }
+            catch(Exception ex)
+            {
+                return new AuthResult
+                {
+                    isSuccess = false,
+                    Message = new string[] { $"Internal server error: {ex}" }
+                };
+            }
+        }
     }
 }

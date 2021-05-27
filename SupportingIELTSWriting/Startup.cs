@@ -30,6 +30,7 @@ using SupportingIELTSWriting.Infrastructure.Parser;
 using Microsoft.AspNetCore.Http;
 using SupportingIELTSWriting.Middlewares;
 using SupportingIELTSWriting.Models.SeedDatas;
+using SupportingIELTSWriting.Infrastructure;
 
 namespace SupportingIELTSWriting
 {

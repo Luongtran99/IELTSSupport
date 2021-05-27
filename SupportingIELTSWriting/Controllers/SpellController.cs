@@ -128,29 +128,5 @@ namespace SupportingIELTSWriting.Controllers
 
 
         }
-
-
-        // POST api/spell
-        [HttpPost]
-        [Consumes("application/json")]
-        public ActionResult Post([FromBody]Word word)
-        {
-
-
-
-            return null;
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

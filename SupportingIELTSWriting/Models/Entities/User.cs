@@ -18,7 +18,9 @@ namespace SupportingIELTSWriting.Models.Entities
         public bool isDeleted { get; set; } = false;
 
         public string ProfileImage { get; set; } = null; 
+
         public ICollection<Essay> Essays { get; set; } = new List<Essay>();
+
         public ICollection<History> Histories { get; set; } = new List<History>();
 
         public IList<UserRole> Roles { get; set; } = new List<UserRole>();
