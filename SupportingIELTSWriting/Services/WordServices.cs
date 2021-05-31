@@ -128,6 +128,7 @@ namespace SupportingIELTSWriting.Services
                                     definitions = (from j in context.Meanings
                                                    join k in context.Definitions on j.meaningId equals k.meaningId
                                                    where j.wordId == ep.wordId
+                                                   where k.meaningId == e.meaningId
                                                    select new Definition
                                                    {
                                                        definition = k.definition,

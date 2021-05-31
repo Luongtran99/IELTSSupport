@@ -2,7 +2,8 @@ import React from 'react'
 
 function Writing() {
     return (
-        <div>
+        <div style={{height:"auto", minHeight:"650px"}}>
+            <div></div>
             
         </div>
     )

@@ -32,7 +32,7 @@ function HeroSection() {
         // </div>
         <div className="hero-container">
             <video src=""></video>
-            <h1>IMPROVE IELTS EVERY DAY</h1>
+            <h1 style={{color:"#fff"}}><strong>IMPROVE IELTS EVERY DAY</strong></h1>
             <p>Make your words meaningful</p>
             <div className='hero-btns'>
                 <Button

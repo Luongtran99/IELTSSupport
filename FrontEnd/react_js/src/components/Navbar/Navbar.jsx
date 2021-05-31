@@ -8,8 +8,19 @@ import { rgbToHex } from '@material-ui/core'
 import logo from '../../assets/images/logo.png'
 import Dictionary from '../../components/pages/Translate/Dictionary'
 
-function Navbar() {
-    
+function Navbar (){
+
+    const setColor = (name) => {
+        if(name == "dictionary")
+        {        
+            document.getElementById("main").style.backgroundColor = "#fff";
+        }
+        else{
+            document.getElementById("main").style.backgroundColor = "hsl(210, 36%, 96%)";
+        }
+    }
+
+
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
     const [clickAcc, setClickAcc] = useState(false);
@@ -36,7 +47,10 @@ function Navbar() {
             setClick(!click)
         }
     }
-    const closeMobileMenu = () => setClick(false);
+    const closeMobileMenu = () => {
+        
+        setClick(false);
+    }
 
     const ShowButton = () =>{
         if(window.innerWidth <= 960){
@@ -52,10 +66,10 @@ function Navbar() {
     }, [])
 
     return (
-        <>
+        <div>
             <nav className="navbar">
                 <div className="navbar-container">
-                    <Link to='/' className="navbar-logo" >
+                    <Link to='/'className="navbar-logo" >
                         <h3>
                             <p className="prefix"></p>
                             <div className="suffix">
@@ -91,7 +105,7 @@ function Navbar() {
                             </Link>
                         </li>
                         <li className="nav-item" onMouseLeave={hideMenu} onMouseOver={displayMenu}>
-                            <Link to="/dictionary"  className="nav-links" onClick={closeMobileMenu} >
+                            <Link to="/dictionary" className="nav-links" onClick={closeMobileMenu} >
                                 Features
                             </Link>
                             <Menu isVisible={visible}/>
@@ -118,7 +132,7 @@ function Navbar() {
                     
                 </div>
             </nav>
-        </>
+        </div>
     )
 }
 

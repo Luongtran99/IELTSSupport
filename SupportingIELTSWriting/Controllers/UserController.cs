@@ -26,9 +26,12 @@ namespace SupportingIELTSWriting.Controllers
         }
 
         // get info of the other user
-        [HttpGet("{userId}")]
-        public async Task<ActionResult> GetInforByIdAsync(string userId)
+        [HttpGet()]
+        public async Task<ActionResult> GetInforByIdAsync()
         {
+
+            var userId = HttpContext.GetUserId();
+
             var getUserInfo = await _userServices.GetUserAsync(userId);
 
             if (getUserInfo == null)

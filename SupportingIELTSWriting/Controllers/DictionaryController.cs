@@ -23,13 +23,6 @@ namespace SupportingIELTSWriting.Controllers
             this.ternary = ternary;
         }
 
-        // GET: api/Dictionary
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET: api/Dictionary/{word}
         [HttpGet("{word}")]
         public async Task<ActionResult> GetMeanByWord(string word)
@@ -67,7 +60,6 @@ namespace SupportingIELTSWriting.Controllers
 
         // POST: api/Dictionary
         [HttpPost]
-        
         public string Post([FromBody] string value)
         {
             return "Hello";

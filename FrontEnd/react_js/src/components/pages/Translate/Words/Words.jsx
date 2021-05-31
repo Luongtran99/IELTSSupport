@@ -1,24 +1,20 @@
 import React from 'react'
 import PropTypes from "prop-types"
-
+import './Words.css';
 //var url = "http://localhost:44391/api/dictionary/";
 
 const Words = ({word, meanings, phonetics}) => {
 
-    const Definition = ({definition, example, synonyms}) =>{
-        return <div>
-            <div>
-                Definition: {definition}
+    const Definition = ({definition, example, synonyms}) => {
+        return <div style={{lineHeight:"30px"}}>
+            <div >
+                <span style={{fontWeight:"600", fontSize:"1.15rem"}}>{definition}</span>
             </div>
             <div>
-                Example: {example}
+                <span>{example ? "Example: " + example : "Example: "  }</span>
             </div>
-            <div>
-                Synonyms: {synonyms.map((synonym) => {
-                    return <div>
-                            {synonym}
-                        </div>
-                })}
+            <div style={{display:"flex"}}>
+                <span>{synonyms ? "Synonyms: " + synonyms : null}</span>
             </div>
         </div>
     }
@@ -26,11 +22,26 @@ const Words = ({word, meanings, phonetics}) => {
     const Meaning = 
         ({partOfSpeech, definitions}) => {
             return <div>
-                <div >
-                    PartOfSpeech: {partOfSpeech}
+                <div className={"row_bar"}></div>
+                <h2 style={{marginBottom:"0px", marginTop:"5px"}}>{word}</h2>
+                <div>
+                    <span style={{fontWeight:"700", fontSize:"14px", fontStyle:"italic"}}>{partOfSpeech}</span>
                 </div>
-                {definitions.map((defi) => {
-                    return <Definition {...defi}>
+                <div style={{display:"flex"}}>
+                    {phonetics.map((phonetic) => {
+                        return <div style={{display:"flex"}}>
+                            <div onClick={convertTo}>
+                                <i class="fa fa-play-circle" aria-hidden="true"></i>
+                            </div>
+                            <div style={{marginLeft:"4px"}}>
+                                {phonetic.text}
+                            </div>
+                        </div>
+                    })}                
+                </div>
+                <div className={"row_bar"}></div>
+                {definitions.map((defi, id) => {
+                    return <Definition key={id++} {...defi}>
                         
                     </Definition>
                 })}
@@ -43,21 +54,27 @@ const Words = ({word, meanings, phonetics}) => {
 
     const convertTo = (event) =>{
         event.preventDefault();
-        var newaudio = new Audio('data:audio/ogg;base64,'+phonetics[0].audio);
+        var newaudio = new Audio('data:audio/ogg;base64,'+ phonetics[0].audio);
         newaudio.play();
     }
 
     return (
-        <>
-            <div>
-                {word}
+        <section class="words_details">
+            <div style={{width:"40rem"}}>
+                <div>
+                    Meaning of <b>{word}</b> in English
+                </div>
+                
+                
                 {meanings.map((meaning, id) => {
-                    return <Meaning key={id++} {...meaning}>
-                    </Meaning>
+                    return <section>
+                        <Meaning key={id++} {...meaning}>
+                        </Meaning>
+                    </section>
                 })}
-                <button type="button" onClick={convertTo}>Play</button>
+                <div className={"row_bar"}></div>
             </div>
-        </>
+        </section>
     )
 }
 

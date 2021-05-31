@@ -70,6 +70,7 @@ namespace SupportingIELTSWriting.Controllers
             return Ok(essay);
         }
 
+        
 
         [HttpPost]
         public async Task<ActionResult> CreateEssayAsync([FromBody]CreateEssayRequest essayRequest)

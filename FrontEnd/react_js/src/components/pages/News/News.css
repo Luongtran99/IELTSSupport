@@ -1,0 +1,139 @@
+
+@primary: rgba(23, 190, 187, 1);
+@secondary: rgba(240, 166, 202, 1);
+
+@active: rgba(23, 190, 187, 0.8);
+@busy: rgba(252, 100, 113, 0.8);
+@away: rgba(255, 253, 130, 0.8);
+
+
+@mixin triangle($color, $size, $direction) {
+  width: 0;
+  height: 0;
+  @if $direction == "up" {
+    border-right: ($size + px) solid transparent;
+    border-left: ($size + px) solid transparent;
+    border-bottom: ($size + px) solid $color;
+  }
+  @if $direction == "down" {
+    border-right: ($size + px) solid transparent;
+    border-left: ($size + px) solid transparent;
+    border-top: ($size + px) solid $color;
+  } 
+  @if $direction == "right" {
+    border-top: ($size + px) solid transparent;
+    border-bottom: ($size + px) solid transparent;
+    border-left: ($size + px) solid $color;
+  }
+  @if $direction == "left" {
+    border-top: ($size + px) solid transparent;
+    border-bottom: ($size + px) solid transparent;
+    border-right: ($size + px) solid $color;
+    }
+}
+
+textarea{
+    overflow: hidden;
+    overflow-wrap: break-word;
+    height: 24px;background: 0 0;
+    direction: ltr;resize: none;outline: 0;
+    width: 100%;margin-top: 5px;padding: 0;font-size: 15px;
+    line-height: 24px;height: 20px;border: 0 none;    margin: 0;
+    font-family: inherit;text-rendering: auto;
+    color: -internal-light-dark(black, white);letter-spacing: normal;
+    word-spacing: normal;text-transform: none;text-indent: 0px;
+    text-shadow: none;
+}
+
+span{
+    font-family: 'SegoeUI';
+    padding-left:20px;
+   
+}
+
+.postDetails{
+    background: rgb(255, 255, 255);
+    padding: 1em 0;
+    height: auto;
+    width: 65%;
+    border-radius: 5px;
+    margin-top: 2em;
+    margin-left:8em;
+    overflow: auto;
+    box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.1);
+}
+
+.make_center{
+    width:100%;display:flex;justify-content:center;font-family:"SegoeUI sans";position: relative;margin-top:20px
+}
+
+.make_center .large{
+    width: 80%;
+}
+
+.news{
+    display: block;
+}
+
+.make_center div{
+    width: 50%;
+}
+
+.newItem{
+    margin-bottom: 16px;
+    width: 100%;
+    color: #333;
+    transition: all .1s;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.article-title{
+    font-family: Arial;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 100%;
+    color: #464646;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.article-date{
+    font-family: Arial;
+    font-style: normal;
+    font-weight: 400;
+    font-size: .75rem;
+    margin-bottom: 0;
+    letter-spacing: .01em;
+    color: #a59c94;
+    margin-top: 0;
+}
+
+.items{
+    background: #fff;
+    box-shadow: 0 5px 25px 5px rgb(0 0 0 / 10%);
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    padding: 16px 32px;
+}
+
+.items:hover{
+    box-shadow: 0 5px 25px 5px rgb(220 11 33 / 10%) ;
+}
+
+.article-title:hover{
+    color:red;
+}
+
+@media screen and (max-width:850px) {
+    .make_center{
+        display: block;
+    }
+
+    .make_center div{
+        width: 100%;
+    }
+}

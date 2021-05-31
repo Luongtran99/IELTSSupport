@@ -20,16 +20,16 @@ function Dictionary(props) {
     const submitButton = (e) =>{
         e.preventDefault();
         url = url + word;
-
         //const k = await data.json();
-        console.log(data);
+        //console.log(data);
         setResult(data);
+        
         setValue(!value);
     }
 
     return (
         <div>
-            <div className="container top-container" >
+            <div className="container top-container" style={{marginTop:"40px",marginBottom:"40px",borderRadius:"20px"}}>
                 <h1>Search Words</h1>
                 <div className="main-wrap">
                     <main>
@@ -44,7 +44,7 @@ function Dictionary(props) {
                     </main>
                 </div>
             </div>
-            <article>
+            <article style={{height:"auto", minHeight:"300px"}}>
                 {value && <Words {...data.obj}></Words>}
             </article>
         </div>

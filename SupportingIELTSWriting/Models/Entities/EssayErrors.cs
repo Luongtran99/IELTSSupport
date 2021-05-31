@@ -24,7 +24,8 @@ namespace SupportingIELTSWriting.Models.Entities
         {
             Replacements = new List<string>();
 
-            string[] array = result.Split('|');
+            // improve performance
+            string[] array = result.Split(new char[] {'|'});
 
             From = Convert.ToInt32(array[0]);
             To = Convert.ToInt32(array[1]);

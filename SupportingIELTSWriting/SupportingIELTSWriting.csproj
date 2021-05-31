@@ -10,8 +10,6 @@
   <ItemGroup>
     <Folder Include="Area\Admin\Controllers\" />
     <Folder Include="Components\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Infrastructure\Advanced\" />
     <Folder Include="Infrastructure\Recommend\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="wwwroot\images\" />
