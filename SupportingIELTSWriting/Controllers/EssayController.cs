@@ -31,6 +31,15 @@ namespace SupportingIELTSWriting.Controllers
             _logger = logger;
         }
 
+        [HttpGet("essays")]
+        public IActionResult GetEssayPopular(int page = 1)
+        {
+
+
+
+            return null;
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAllEssays()
         {

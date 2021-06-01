@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ <title>Displaying list items in a circle demo</title>
+  <style type="text/css">
+  li{
+   position:absolute;
+   list-style:none;
+   width:20%;
+   text-align:center;
+  }
+ </style>
+</head>
+<body>
+<ul>
+  <li>3</li>
+  <li>4</li>
+  <li>5</li>
+  <li>6</li>
+  <li>7</li>
+  <li>8</li>
+  <li>9</li>
+  <li>10</li>
+  <li>11</li>
+  <li>12</li>
+  <li>1</li>
+  <li>2</li>
+ </ul>
+ <script type="text/javascript">
+  var listElements = document.getElementsByTagName("li");
+  var step = (2*Math.PI)/listElements.length;
+  var angle=0; 
+  var circleCenterX = 100;
+  var circleCenterY = 100;
+  var radius = 90;
+  for(var i = 0; i<listElements.length; i++)
+  { 
+    var element = listElements[i];
+    var left=Math.round(circleCenterX+radius*Math.cos(angle));
+    var top=Math.round(circleCenterY+radius*Math.sin(angle));
+    element.style.left = left+"px";
+    element.style.top = top+"px";
+    angle+=step;   
+  }
+ 
+ </script>
+</body>
+</html>

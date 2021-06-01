@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using SupportingIELTSWriting.Data;
 using SupportingIELTSWriting.Infrastructure.TernarySearchTree;
 using SupportingIELTSWriting.Models;
 using SupportingIELTSWriting.Services;
-using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Identity;
 using SupportingIELTSWriting.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -27,10 +20,7 @@ using Microsoft.OpenApi.Models;
 using SupportingIELTSWriting.Models.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using SupportingIELTSWriting.Infrastructure.Parser;
-using Microsoft.AspNetCore.Http;
 using SupportingIELTSWriting.Middlewares;
-using SupportingIELTSWriting.Models.SeedDatas;
-using SupportingIELTSWriting.Infrastructure;
 
 namespace SupportingIELTSWriting
 {

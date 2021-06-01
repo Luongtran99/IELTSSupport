@@ -20,6 +20,17 @@ namespace SupportingIELTSWriting.Services
             services = sv;
         }
 
+        public Task<List<Essay>> getAllEssays(int essayPage)
+        {
+            int pageSize = 10;
+
+            var x = context.Essays.OrderBy(p => p.Id).Skip((essayPage - 1) * pageSize).Take(pageSize);
+
+
+
+            return null;
+        }
+
         public async Task<bool> CreateEssayAsync(Essay essay)
         {
             await context.Essays.AddAsync(essay);
@@ -104,5 +115,7 @@ namespace SupportingIELTSWriting.Services
 
             return true;    
         }
+
+        
     }
 }
