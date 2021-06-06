@@ -55,11 +55,12 @@ function Writing() {
                     </li>
                     <li style={{padding:"10px"}}>
                         <a href="#" >
-                            <div className={"ali"} onClick={() => {
+                            <div className={"ali"} onClick={(e) => {
+                                e.preventDefault();
                                 var p = document.getElementById("writing_area").innerHTML;
                                 var a = p.substring(1, 4);
                                 p = p.replace(a, "<span style=\"text-decoration:underline;text-decoration-color:yellow;padding-left:0\">"+a+"</span>");
-
+                                
                                 document.getElementById("writing_area").innerHTML = p ;
                                 console.log(document.getElementById("writing_area").innerHTML.search("hello").length);
                                 console.log(document.getElementById("writing_area").textContent.length)

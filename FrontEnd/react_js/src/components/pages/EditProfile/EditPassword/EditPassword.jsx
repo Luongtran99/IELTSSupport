@@ -52,7 +52,55 @@ function EditPassword() {
                             <h1 className="kHYQv" title="locery">Locery</h1>
                             <button className="sqdOP" type="button">Change Profile Photo</button>
                         </div>
+
                     </div>
+                    <hr style={{margin:"20px 0px"}}></hr>
+                    <form className="kWXsT" style={{marginTop:"20px",marginBottom:"20px"}} id="form-change-password">
+                        <div className="eE-OA">
+                            <aside className="sxIVS">
+                                <label className="pepName">Old Password</label>
+                            </aside>
+                            <div className="ada5V">
+                                <div className="_4EzTm" style={{width:"100%", maxWidth:"355px"}}>
+                                    <input aria-required="false" id="cppOldPassword" placeholder="" type="text" style={{height:"40px"}} class="JLJ-B"></input>
+                                    {/* <div style={{fontSize:"12px",paddingLeft:"5px"}}><p>Help people discover your account by using the name you're known by: either your full name, nickname, or business name.</p><p>You can only change your name twice within 14 days.</p></div> */}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="eE-OA" style={{margin:"10px 0px"}}>
+                            <aside className="sxIVS">
+                                <label className="pepName">New Password</label>
+                            </aside>
+                            <div className="ada5V">
+                                <div className="_4EzTm" style={{width:"100%", maxWidth:"355px"}}>
+                                    <input aria-required="false" id="cppNewPassword" placeholder="" type="text" style={{height:"40px"}} class="JLJ-B"></input>
+                                    {/* <div style={{fontSize:"12px",paddingLeft:"5px"}}><p>Help people discover your account by using the name you're known by: either your full name, nickname, or business name.</p><p>You can only change your name twice within 14 days.</p></div> */}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="eE-OA" style={{margin:"10px 0px"}}>
+                            <aside className="sxIVS">
+                                <label className="pepName">Confirm</label>
+                            </aside>
+                            <div className="ada5V">
+                                <div className="_4EzTm" style={{width:"100%", maxWidth:"355px"}}>
+                                    <input aria-required="false" id="cppConfirmNP" placeholder="" type="text" style={{height:"40px"}} class="JLJ-B"></input>
+                                    {/* <div style={{fontSize:"12px",paddingLeft:"5px"}}><p>Help people discover your account by using the name you're known by: either your full name, nickname, or business name.</p><p>You can only change your name twice within 14 days.</p></div> */}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="eE-OA" >
+                            <aside className="sxIVS">
+                                <label className="pepName"></label>
+                            </aside>
+                            <div className="ada5V">
+                                <div className="_4EzTm" style={{width:"100%", maxWidth:"355px"}}>
+                                    <input aria-required="false" id="cppConfirmNP" placeholder="" type="button" class="btn" value="Change Password"></input>
+                                    {/* <div style={{fontSize:"12px",paddingLeft:"5px"}}><p>Help people discover your account by using the name you're known by: either your full name, nickname, or business name.</p><p>You can only change your name twice within 14 days.</p></div> */}
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </article>
             </div>
         </main>

@@ -89,11 +89,20 @@ function ProfileUser() {
                 <div style={{width:"100%", height:"1px", backgroundColor:"red"}}></div>
                 <main style={{width:"100%", height:"auto"}}>
                     {isEssays && <ul style={{display:"grid", gridTemplateColumns:"1fr 1fr 1fr", listStyleType:"none"}}>
+                        <li class="overf" style={{borderStyle:"ridge", marginBottom: "16px", width: "100%",maxWidth:"300px",overflow:"hidden", border:"5px", margin:"15px" }}>
+                            <Link to="/writing" style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
+                                {/* <div className={"items"} style={{ width: "100%" }}>
+                                    <p className={"article-title overs"} style={{overflow:"hidden"}}></p>
+                                    <p className={"article-date"}></p>
+                                    <p className={"article-date"}>New Essays</p>
+                                </div> */}
+                                <button className="btn" style={{}}>New Essays</button>
+                            </Link>
+                        </li>
                         {data.essays.map((essay) => {
 
                             var hrf = "/essay/"+essay.id;
                             return <li class="overf" style={{borderStyle:"ridge", marginBottom: "16px", width: "100%",maxWidth:"300px",overflow:"hidden", border:"5px", margin:"15px" }} keys={essay.id}>
-
                                 <Link to={hrf} >
                                 <div className={"items"} style={{ width: "100%" }}>
                                     <p className={"article-title overs"} style={{overflow:"hidden"}}>{essay.topic}</p>

@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom'
+import './Essays.css'
+
 function Essays() {
     const { id } = useParams();
+
+    const [showSetting, setShowSetting] = useState(false);
+    const [edit, setEdit] = useState(false);
     return (
         <>
             <div style={{ height: "100%", minHeight: "650px", width: "100%", backgroundColor: "#fff" }}>
                 <div style={{ display: "flex", padding: "50px 150px", minHeight: "650px" }}>
                     {/* {id} */}
-                    <div style={{ width: "60%", padding: "20px", border:"2px", boxSizing:"border-box", borderStyle:"ridge" }}>
-                        <section style={{ backgroundColor: "#fff", fontSize:"20px" }}>
+                    <div style={{ width: "60%", padding: "20px", border: "2px", boxSizing: "border-box", borderStyle: "ridge" }}>
+                        <section style={{ backgroundColor: "#fff", fontSize: "20px" }}>
                             <span>There has been an increasing tendency of providing online courses in addition to
                             formal ones by universities around the world. Concerning the effects of such a
                             trend, I firmly believe that the availability of computer-based courses should be
@@ -43,27 +48,82 @@ function Essays() {
                                 modern world.</span>
                         </section>
                     </div>
-                    <div style={{padding:"20px", width:"40%",border:"2px", boxSizing:"border-box", borderStyle:"ridge"  }}>
-                        <div style={{display:"flex", width:"100%"}}>
-                            <Link to="/profile" style={{display:"flex"}}>
-                                <img style={{height:"50px",width:"50px", borderRadius:"50%",borderColor:"#383838",borderStyle:"ridge",border:"2px", backgroundColor:"#fff"}} src={"https://www.oxfordlearnersdictionaries.com/external/images/product/OALD_producthometop.png?version=2.1.29"}></img>
-                                <span style={{fontSize:"20px", marginTop:"7px"}}>Luong.td</span>
+                    <div style={{ padding: "20px", width: "40%", border: "2px", boxSizing: "border-box", borderStyle: "ridge" }}>
+                        <div style={{ display: "flex", width: "100%" }}>
+                            <Link to="/profile" style={{ display: "flex" }}>
+                                <img style={{ height: "50px", width: "50px", borderRadius: "50%", borderColor: "#383838", borderStyle: "ridge", border: "2px", backgroundColor: "#fff" }} src={"https://www.oxfordlearnersdictionaries.com/external/images/product/OALD_producthometop.png?version=2.1.29"}></img>
+                                <span style={{ fontSize: "20px", marginTop: "7px" }}>Luong.td</span>
                             </Link>
-                            <div style={{width:"60%"}}></div>
-                            <div style={{right:"0"}}>
-                                <button style={{fontSize:"20px", marginTop:"7px", background:"none", border:"none"}}>☰</button>
+                            <div style={{ width: "60%" }}></div>
+                            <div style={{ right: "0" }}>
+                                <button onClick={() => setShowSetting(!showSetting)} style={{ fontSize: "20px", marginTop: "7px", background: "none", border: "none" }}>☰</button>
+                                {showSetting && <div id="side-bar"
+                                    style={{ right: "150px", border: "1px", borderStyle: "solid", minHeight: "200px",height:"auto", width: "150px", position: "absolute", backgroundColor: "white"}}>
+                                    <ul style={{ margin: "2px", paddingLeft: "5px", textAlign: "center", paddingTop: "20px" }}>
+                                        <li style={{ padding: "10px", }}>
+                                            <a href="#" >
+                                                <div className={"ali"} style={{ width: "100%", height: "30px" }}>
+                                                    Edit
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li style={{ padding: "10px" }}>
+                                            <a href="#" >
+                                                <div className={"ali"} style={{ width: "100%", height: "30px" }}>
+                                                    Delete
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li style={{ padding: "10px" }}>
+                                            <a href="#" >
+                                                {/* <div className={"ali"} onClick={(e) => {
+                                                    e.preventDefault();
+                                                    var p = document.getElementById("writing_area").innerHTML;
+                                                    var a = p.substring(1, 4);
+                                                    p = p.replace(a, "<span style=\"text-decoration:underline;text-decoration-color:yellow;padding-left:0\">" + a + "</span>");
+
+                                                    document.getElementById("writing_area").innerHTML = p;
+                                                    console.log(document.getElementById("writing_area").innerHTML.search("hello").length);
+                                                    console.log(document.getElementById("writing_area").textContent.length)
+                                                }} style={{ width: "100%", height: "30px" }}> */}
+                                                <div className="ali">
+                                                    Delete All
+                                                </div>
+                                            </a>
+                                        </li>
+                                        {edit && <li style={{ padding: "10px" }}>
+                                            <a href="#"><div className={"ali"}>Save</div></a>
+                                        </li>}
+                                    </ul>
+                                </div>}
                             </div>
                         </div>
-                        
 
-                        <hr style={{margin:"20px 0px"}}></hr>
+
+                        <hr style={{ margin: "20px 0px" }}></hr>
                         <div >
                             <h3>Topic:</h3>
                             <p>Some universities offer online courses as an alternative to classes delivered on campus. Do you think this is a positive or negative development?</p>
                         </div>
-                        <hr style={{margin:"20px 0px"}}></hr>
+                        <hr style={{ margin: "20px 0px" }}></hr>
                         <div>
-
+                            {/* <b>HIGHEST STAR</b>
+                            <p style={{ marginBottom: "0px" }}>Author: Locery</p> */}
+                            <p style={{ marginBottom: "0px" }}>Total stars: 120 <i class="fa fa-star" aria-hidden="true"></i> </p>
+                            <Link to="/"></Link>
+                            <button className="btn">Rate</button>
+                            <div class="rate">
+                                <input type="radio" id="star5" name="rate" value="5" />
+                                <label for="star5" title="5 stars">5 stars</label>
+                                <input type="radio" id="star4" name="rate" value="4" />
+                                <label for="star4" title="4 stars">4 stars</label>
+                                <input type="radio" id="star3" name="rate" value="3" />
+                                <label for="star3" title="3 stars">3 stars</label>
+                                <input type="radio" id="star2" name="rate" value="2" />
+                                <label for="star2" title="2 stars">2 stars</label>
+                                <input type="radio" id="star1" name="rate" value="1" />
+                                <label for="star1" title="1 star">1 star</label>
+                            </div>
                         </div>
                     </div>
                 </div>

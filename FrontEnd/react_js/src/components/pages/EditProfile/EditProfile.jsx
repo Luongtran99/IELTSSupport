@@ -48,22 +48,22 @@ function EditProfile() {
                     <div className="C_9MP">
                         <div className="LqNQc">
                             <div className="M-jxE">
-                                <button class="Ia1UJ" title="Change your phoe">
+                                <button class="Ia1UJ" title="Change your phone" onClick={() => document.getElementById("image-file").click()}>
                                     <img alt="Change your profile image" class="be6sR" src={"https://www.oxfordlearnersdictionaries.com/external/images/product/OALD_producthometop.png?version=2.1.29"}></img>
                                 </button>
                                 <div >
                                     <form enctype="multipart/form-data" method="POST" role="presentation">
-                                        <input accept="image/jpeg,image/png" class="tb_sK" type="file"/>
+                                        <input accept="image/jpeg,image/png" id="image-file" class="tb_sK" type="file"/>
                                     </form>
                                 </div>
                             </div>
                         </div>
                         <div className="XX1Wc" style={{display:"block"}}>
                             <h1 className="kHYQv" title="locery">Locery</h1>
-                            <button className="sqdOP" type="button">Change Profile Photo</button>
+                            <button className="sqdOP" type="button" onClick={() => document.getElementById("image-file").click()}>Change Profile Photo</button>
                         </div>
                     </div>
-                    <form className="kWXsT" style={{marginTop:"20px"}}>
+                    <form className="kWXsT" style={{marginTop:"20px",marginBottom:"20px"}}>
                         <div className="eE-OA">
                             <aside className="sxIVS">
                                 <label className="pepName">Name</label>
