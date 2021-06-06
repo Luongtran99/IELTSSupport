@@ -3,6 +3,8 @@ import {data} from './data';
 import './Forum.css';
 import Essay from './Essays/Essay'
 import Pagination from './Pagination/Pagination';
+import {ReactSearchAutocomplete} from 'react-search-autocomplete'
+import { Link } from 'react-router-dom';
 
 const url = "https://localhost:44391/api/essay/essays";
 
@@ -11,7 +13,6 @@ const Forum = () =>{
     const [guest, setGuest] = useState(true);
     const [essays,setEssays] = useState([]);
     const [loading, setLoading] = useState(false);
-    
 
     useEffect(() => {
         const fetchEssays = async () =>{
@@ -38,7 +39,25 @@ const Forum = () =>{
         page = page - 1;
     }
 
-     const paginate = (pageNumber) =>{
+    const [query, setQuery] = useState('');
+    const [filteredData, setFilteredData] = useState([]);
+    const [buf, setBuf] = useState([]);
+    
+    const handleInputChange = (e, ) =>{
+        const query = e;
+        setBuf(data.essays.filter((val) => {
+            if(query == ""){
+                return val
+            }
+            else if(val.topic.toLowerCase().includes(e.toLowerCase())){
+                return val
+            }
+        }))
+        setFilteredData(buf);
+    }
+
+
+    const paginate = (pageNumber) =>{
         setCurrentPage(pageNumber);
     }
 
@@ -72,9 +91,35 @@ const Forum = () =>{
                             </li>
                             <li style={{margin:"5px 0px"}}>
                                 <a href="#" >Your old essays...</a>
-                                
                             </li>
                         </ul>
+                    </div>
+                    <div style={{textAlign:"start", marginLeft:"4rem", boxSizing:"border-box"}}>
+                        <div>
+                            <span style={{color:"#000", fontSize:"2rem"}}>Search:</span>
+                        </div>
+                        <div className="searchForm">
+                            <div style={{display:"flex", justifyContent:"center"}}>
+                                <i class="fa fa-search fa-2x" style={{display:"flex", justifyContent:"center", alignItems:"center", outline:"none"}}aria-hidden="true"></i>
+                                <form>
+                                    <input style={{height:"40px", width:"200px", marginLeft:"5px",paddingLeft:"5px", borderRadius:"20px"}}
+                                        placeholder="Search for..."
+                                        onChange={(event) => {
+                                            setQuery(event.target.value);
+                                            handleInputChange(event.target.value);
+                                        }}
+                                        onMouseOut={() => setFilteredData(buf)}
+                                    />
+                                </form>
+                            </div>
+                            <div style={{display:"flex", alignItems:"center", justifyContent:"center", flexDirection:"column"}}>{filteredData.map(i => { 
+                                var hrf = '/essay/' + i.id; 
+                                return <div>
+                                    <Link to={hrf}>
+                                        {i.topic}
+                                    </Link>
+                                </div> })}</div>
+                        </div>
                     </div>
                 </div>
                 
