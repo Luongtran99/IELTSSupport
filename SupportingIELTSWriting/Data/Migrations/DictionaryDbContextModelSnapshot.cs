@@ -179,6 +179,8 @@ namespace SupportingIELTSWriting.Data.Migrations
 
                     b.Property<bool>("isDeleted");
 
+                    b.Property<bool>("isPublish");
+
                     b.Property<DateTime>("theLastFixingTime");
 
                     b.Property<string>("userId");
@@ -214,6 +216,27 @@ namespace SupportingIELTSWriting.Data.Migrations
                     b.HasIndex("userId");
 
                     b.ToTable("Histories");
+                });
+
+            modelBuilder.Entity("SupportingIELTSWriting.Models.Entities.Notes", b =>
+                {
+                    b.Property<int>("NotesId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("CreatedDate");
+
+                    b.Property<string>("EssayId");
+
+                    b.Property<string>("Mean");
+
+                    b.Property<string>("Sentence");
+
+                    b.HasKey("NotesId");
+
+                    b.HasIndex("EssayId");
+
+                    b.ToTable("Notes");
                 });
 
             modelBuilder.Entity("SupportingIELTSWriting.Models.Entities.User", b =>
@@ -429,6 +452,13 @@ namespace SupportingIELTSWriting.Data.Migrations
                     b.HasOne("SupportingIELTSWriting.Models.Entities.User", "User")
                         .WithMany("Histories")
                         .HasForeignKey("userId");
+                });
+
+            modelBuilder.Entity("SupportingIELTSWriting.Models.Entities.Notes", b =>
+                {
+                    b.HasOne("SupportingIELTSWriting.Models.Entities.Essay", "Essay")
+                        .WithMany("Notes")
+                        .HasForeignKey("EssayId");
                 });
 
             modelBuilder.Entity("SupportingIELTSWriting.Models.Meaning", b =>

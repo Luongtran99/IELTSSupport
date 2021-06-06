@@ -7,46 +7,97 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SupportingIELTSWriting.Data;
 using SupportingIELTSWriting.Infrastructure;
 using SupportingIELTSWriting.Models;
 using SupportingIELTSWriting.Models.Entities;
 using SupportingIELTSWriting.Models.RequestModel;
+using SupportingIELTSWriting.Models.ResponseModel;
 using SupportingIELTSWriting.Services;
+using Result = SupportingIELTSWriting.Models.ResponseModel.Result;
 
 namespace SupportingIELTSWriting.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     //[Authorize(Roles = "Member")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class EssayController : ControllerBase
     {
         private readonly IEssayServices _essayServices;
         private readonly IHistoryServices _historyServices;
+        private readonly DictionaryDbContext context;
         private readonly ILogger<EssayController> _logger;
-        public EssayController(IEssayServices es, IHistoryServices historyServices, ILogger<EssayController> logger)
+
+
+        public EssayController(IEssayServices es, IHistoryServices historyServices, ILogger<EssayController> logger, DictionaryDbContext ct)
         {
             _essayServices = es;
             _historyServices = historyServices;
             _logger = logger;
+            context = ct;
         }
 
-        [HttpGet("essays")]
-        public IActionResult GetEssayPopular(int page = 1)
+        //[Route("[action]/{pageNumber}")]
+        [HttpGet("essays/{pageNumber}")]
+        public async Task<IActionResult> GetEssayPopular([FromRoute]int pageNumber)
         {
+            int setPage = Convert.ToInt32(pageNumber);
+
+            List<Essay> getListEssay = new List<Essay>();
+            try
+            {
+                getListEssay = await _essayServices.getAllEssays(pageNumber);
+
+                List<Result> result = new List<Result>();
+                foreach(var p in getListEssay)
+                {
+                    Result a = new Result();
+                    a.id = p.Id;
+                    a.topic = p.Topic;
+                    a.content = p.Text;
+                    a.date = p.Date.Date;
+                    a.username = context.Users.First(c => c.Id == p.userId || p.userId == null).LastName;
+                    result.Add(a);
+                }
 
 
 
-            return null;
+                if (getListEssay == null)
+                {
+                    return NotFound(new ResponseGetAllEssayList
+                    {
+                        currentPage = setPage,
+                        nextPage = setPage + 1,
+                        essays = null,
+                        noOfEssays = 0
+                    });
+                }
+
+                return Ok(new ResponseGetAllEssayList
+                {
+                    currentPage = setPage,
+                    nextPage = setPage + 1,
+                    noOfEssays = getListEssay.Count(),
+                    essays = result
+                });
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            //return null;
         }
 
         [HttpGet]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetAllEssays()
         {
             return Ok(await _essayServices.GetEssaysAsync(HttpContext.GetUserId()));
         }
 
         [HttpGet("history/{essayId}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetEssayHistoryAsync([FromRoute] string essayId)
         {
             try
@@ -67,6 +118,7 @@ namespace SupportingIELTSWriting.Controllers
         }
 
         [HttpGet("{essayId}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult> GetEssayByIdAsync([FromRoute] string essayId)
         {
             var essay = await _essayServices.GetEssayByIdAsync(essayId);
@@ -82,6 +134,7 @@ namespace SupportingIELTSWriting.Controllers
         
 
         [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult> CreateEssayAsync([FromBody]CreateEssayRequest essayRequest)
         {
             var essay = new Essay
@@ -89,7 +142,9 @@ namespace SupportingIELTSWriting.Controllers
                 userId = HttpContext.GetUserId(),
                 Topic = essayRequest.Topic,
                 Text = essayRequest.Text,
-                Date = DateTime.Now
+                Date = DateTime.Now,
+                theLastFixingTime = DateTime.Now,
+                isPublish = true
             };
             try
             {
@@ -109,6 +164,7 @@ namespace SupportingIELTSWriting.Controllers
         }
 
         [HttpPut("{essayId}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> EditEssayAsync([FromRoute]string essayId,[FromBody]UpdateEssayRequest updateEssay)
         {
 
@@ -150,6 +206,7 @@ namespace SupportingIELTSWriting.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> DeleteEssayAsync([FromRoute]string id)
         {
             var deleted = await _essayServices.DeleteEssayByIdAsync(id);

@@ -63,7 +63,7 @@ namespace SupportingIELTSWriting.Infrastructure.Parser
                 
                 
 
-                string[] rowResultList = result.Split('\n');
+                string[] rowResultList = result.Split(new char[] { '\n' });
 
                 int numRowResult = Convert.ToInt32(rowResultList[0]);
 

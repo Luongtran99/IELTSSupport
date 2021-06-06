@@ -16,3 +16,227 @@
     transition: none;
     
 }
+
+.responsive_row{
+    clear:both;
+    margin-bottom: 18px;
+    margin-left:0px;
+    margin-right:0px;
+    margin:0px;
+    border:0;
+    font-size:16px;
+    vertical-align: baseline;
+    color: #333333;
+    display: block;
+}
+
+.responsive_row::before, .responsive_row::after {
+    display: table;
+    content: "";
+    line-height: 0;
+}
+
+.responsive_row::after {
+    clear: both;
+}
+
+.responsive_row::before, .responsive_row::after {
+    display: table;
+    content: "";
+    line-height: 0;
+}
+
+
+.product_paid.english, .product_top_background.english {
+    background-color: #c0e3f599;
+    display: block !important;
+}
+
+.product_top_background {
+    background-color: #c0e3f599;
+}
+
+.white_background {
+    background-color: #ffffff;
+}
+.responsive_container {
+    clear: both;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media screen and (min-width: 928px)
+{
+    .product{
+        padding-top: 60px;
+        padding-bottom: 60px;
+        padding-right: 10px;
+        margin-bottom: 0px;  
+    }
+}
+
+@media screen and (min-width: 1200px){
+    .responsive_container {
+        width: 1170px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+.row {
+    display: flex;
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+.responsive_container::before, .responsive_container::after {
+    display: table;
+    content: "";
+    line-height: 0;
+}
+.responsive_container::after {
+    clear: both;
+}
+
+.responsive_container::before, .responsive_container::after {
+    display: table;
+    content: "";
+    line-height: 0;
+}
+
+.dic_top_copy {
+    padding-left: 10px;
+    padding-right: 40px;
+}
+
+
+element.style {
+}
+.product_top_copy {
+    padding-left: 10px;
+    padding-right: 40px;
+}
+.vrtcl_cntrd {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    padding-right: 80px;
+    padding-left: 80px;
+}
+
+.box-image{
+    height: 300px;
+    border-radius: 0px 0px 0px 0px;
+    max-width: 100%;
+    margin: 0;
+    font-size: 16px;
+    vertical-align: baseline;
+    border:0;
+    box-sizing: border-box;
+}
+
+.buy_book{
+    background-color: #ffffff;
+    color: #4776ae;
+    border-radius: 5px;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 5px 25px;
+    cursor: pointer;
+    margin: 5px 10px;
+    position: relative;
+    border: 1px solid #4776ae;
+    min-height: 30px;
+    line-height: 28px;
+    -webkit-box-align: center;
+
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    max-width: 100%;
+    min-width: 40px;
+
+    width: max-content;
+    fill: #fff;
+
+    transition: background-color .1s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.product_top_svg_clip{
+    bottom: -10px;
+    position: relative;
+    width: 100%;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+
+.major_usp{
+    clear: both;
+    margin-left: auto;
+    margin-right: auto;padding-top: 60px;
+    padding-bottom: 60px;width: 1170px;
+    padding-left: 10px;
+    padding-right: 10px;    display: flex;margin-bottom: 18px;    margin: 0;    border: 0;
+    font: inherit;font-size: 16px;
+    vertical-align: baseline;box-sizing:border-box;color: #333333;-webkit-text-size-adjust: none;
+}
+
+.vrtc1_cntrd{
+    display: flex;
+    -webkit-box-pack: center;    box-sizing: border-box;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    padding-right: 80px;
+    padding-left: 80px;
+    font-size: 16px;
+    vertical-align: baseline;
+    margin: 0;
+    border: 0;
+    font: inherit;color: #333333;
+}
+
+.secondaryButton{
+    margin-left: 0px;
+    background-color: #ffffff;
+    color: #4776ae;
+    border-radius: 5px;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 8px 25px;
+    cursor: pointer;
+    margin: 5px 10px;
+    position: relative;
+    border: 1px solid #4776ae;
+    min-height: 30px;
+    line-height: 22px;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    max-width: 100%;
+    min-width: 40px;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    fill: #fff;
+    transition: background-color .1s;
+    text-decoration: none;
+    display: inline-block;font-size: 16px;
+    vertical-align: baseline;
+}
+
+.majorUSPImg{
+    order: -1;
+    width: 50%;
+    max-width: 50%;
+    max-height: 50%;
+    flex-basis: 50%;
+}

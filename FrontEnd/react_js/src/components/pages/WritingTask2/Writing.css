@@ -99,3 +99,10 @@
 	 filter: grayscale(0);
 }
  
+.scroll{
+       
+        overflow-x: hidden;
+        overflow-y: auto;
+        text-align: start;
+		padding-left: 10px;
+}

@@ -20,6 +20,18 @@ function Navbar (){
         }
     }
 
+    const [login, setLogin] = useState(true);
+
+    useEffect(() =>{
+        if(window.localStorage.getItem("token") != null){
+            setLogin(!login);
+        }
+        
+    }, []);
+    const logout = () =>{
+        localStorage.removeItem("token");
+        setLogin(!login);
+    }
 
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
@@ -122,13 +134,20 @@ function Navbar (){
                         </li>
                         
                     </ul>
-                    <div className={clickAcc ? "nav-menu active":"nav-menu"}>
+                    {login && <div className={clickAcc ? "nav-menu active":"nav-menu"}>
                         <div className="Sign">
                             <Link to="/signup" className="contact signup" onClick={closeMobileMenu}>SignUp</Link>
                             /
                             <Link to="/signin" className="contact signin" onClick={closeMobileMenu}>SignIn</Link>
                         </div>
-                    </div>
+                    </div> || <div className={clickAcc ? "nav-menu active":"nav-menu"}>
+                        <div className="Sign">
+                            <Link to="/profile" >
+                                <img style={{height:"30px",width:"30px", borderRadius:"50%", backgroundColor:"#fff"}} src={"https://www.oxfordlearnersdictionaries.com/external/images/product/OALD_producthometop.png?version=2.1.29"}></img>
+                            </Link>
+                            <Link to="/" className="contact signup" style={{marginTop:"-8px",marginLeft:"10px"}} onClick={logout}>Logout</Link>
+                        </div>
+                    </div>}
                     
                 </div>
             </nav>

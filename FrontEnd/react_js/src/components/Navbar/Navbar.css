@@ -181,6 +181,7 @@
       padding: 2rem;
       width: 100%;
       display: table;
+      font-family: SegoeUI;
     }
 
     .Sign{
@@ -243,4 +244,5 @@
       transition: 250ms;
     }
   }
+
   
