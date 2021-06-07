@@ -14,9 +14,11 @@ function ProfileUser() {
 
     useEffect(() => {
         if (localStorage.getItem("token") == null) {
-            window.location.replace("/");
+            window.location.replace("/signin");
         }
-
+        else{
+            
+        }
     }, [])
 
     return (

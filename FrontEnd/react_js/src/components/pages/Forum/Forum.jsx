@@ -3,7 +3,7 @@ import {data} from './data';
 import './Forum.css';
 import Essay from './Essays/Essay'
 import Pagination from './Pagination/Pagination';
-import {ReactSearchAutocomplete} from 'react-search-autocomplete'
+import axios from 'axios'
 import { Link } from 'react-router-dom';
 
 const url = "https://localhost:44391/api/essay/essays";
@@ -13,13 +13,27 @@ const Forum = () =>{
     const [guest, setGuest] = useState(true);
     const [essays,setEssays] = useState([]);
     const [loading, setLoading] = useState(false);
-
+    const [a, setA] = useState([]);
     useEffect(() => {
         const fetchEssays = async () =>{
             setLoading(true);
-            // connect url here
+            // connect url her
+            // var myHeader = new Headers();
+            // myHeader.append("Content-Type", "application/json");
+            // var requestOptions = {
+            //     method:"GET",
+            //     headers:myHeader,
+            //     redirect:"follow"
+            // };
+            // await fetch("https://localhost:44391/api/essay/essays/1", requestOptions)
+            // .then(response => response.json())
+            // .then(result => {console.log(result)})
+            // .catch(error => console.log("error"))
+            const res = await axios.get('https://localhost:44391/api/essay/essays/1');
+            setA(res.data.essays);
+            console.log(a);
             
-            setEssays(data.essays);
+            setEssays(res.data);
             setLoading(false);
         }
         fetchEssays();
@@ -45,7 +59,7 @@ const Forum = () =>{
     
     const handleInputChange = (e, ) =>{
         const query = e;
-        setBuf(data.essays.filter((val) => {
+        setBuf(a.filter((val) => {
             if(query == ""){
                 return val
             }
@@ -64,7 +78,7 @@ const Forum = () =>{
     //
     const indexOfLastEssays = currentPage * pageSize;
     const indexOfFirstEssays = indexOfLastEssays - pageSize;
-    const currentEssay = essays.slice(indexOfFirstEssays, indexOfLastEssays);
+    const currentEssay = a.slice(indexOfFirstEssays, indexOfLastEssays);
 
     return <>
         <div style={{height:"100%", minHeight:"650px", width:"100%", backgroundColor:"#fff"}}>
@@ -72,10 +86,10 @@ const Forum = () =>{
 
                 <div style={{width:"30%", textAlign:"center"}}>
                     <div style={{height:"60px", fontSize:"2rem", fontFamily:"SegoeUI, sans"}}>
-                        Total Essays Found: <span style={{color:"red"}}>{data.essays.length}</span>
+                        Total Essays Found: <span style={{color:"red"}}>{a.length}</span>
                     </div>
                     <div style={{height:"60px", fontSize:"1.5rem", fontFamily:"SegoeUI, sans"}}>
-                        Online User: <span style={{color:"red"}}>{data.essays.length}</span>
+                        Online User: <span style={{color:"red"}}>{a.length}</span>
                     </div>
                     
                     <div style={{textAlign:"start", marginLeft:"4rem", boxSizing:"border-box"}}>
@@ -134,7 +148,7 @@ const Forum = () =>{
                         </ul> */}
                         <Essay essays={currentEssay} loading={loading}></Essay>
                     </div>
-                    <Pagination pageSize={10} totalEssays={data.noOfEssays} paginate={paginate}></Pagination>
+                    <Pagination pageSize={10} totalEssays={essays.noOfEssays} paginate={paginate}></Pagination>
                 </div>
                 
             </div>

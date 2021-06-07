@@ -67,6 +67,36 @@ function SignIn(props) {
             return;
         }
 
+        // fetch to login
+        var myHeader = new Headers();
+        myHeader.append("Content-Type", "application/json");
+
+
+        var raw = JSON.stringify({
+            username:username,
+            password:password
+        });
+
+        var requestOptions = {
+            method:"POST",
+            headers:myHeader,
+            body:raw,
+            redirect:"follow"
+        };
+
+        fetch("https://localhost:44391/api/account/login", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            if(result.isSuccess){
+                localStorage.setItem("token", result.token);
+                window.location.replace("/profile");
+            }
+            else{
+                document.getElementById("error_signin").innerHTML = result.message[0];
+            }
+        })
+        .catch(error => console.log("error", error));
+
         // save all in localStorage
         localStorage.setItem("token","2020202");
         
@@ -102,6 +132,9 @@ function SignIn(props) {
                                 <button type="button" onClick={submitForm} style={{width:"70%"}} className="btn ">SIGN IN</button>
                             </div>
                         </form>
+                        <div>
+                            <span className="error-message" id="error_signin"></span>
+                        </div>
                     </section>
                     <br></br>
                     <div style={{display:"flex", justifyContent:"center"}}>

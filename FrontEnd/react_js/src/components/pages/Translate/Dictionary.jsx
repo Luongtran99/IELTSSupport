@@ -1,4 +1,4 @@
-import {React, useState, useCallback} from 'react'
+import {React, useState, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import './Dictionary.css'
 import Words from './Words/Words'
@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 function Dictionary(props) {
 
-    var url = "http://localhost:44391/api/dictionary/";
+    var url = "https://localhost:44391/api/dictionary/";
 
     
     const [word, setWord] = useState('');
@@ -21,12 +21,25 @@ function Dictionary(props) {
         setWord(k);
     }
 
-    const submitButton = (e) =>{
+    const submitButton = async (e) =>{
         e.preventDefault();
         url = url + word;
+        console.log(url);
+        var myHeader = new Headers();
+        myHeader.append("Content-Type","application/json");
+        var requestOptions = {
+            method:"GET",
+            headers:myHeader,
+            redirect:'follow'
+        }
+        // get data from fetch api
+        await fetch(url, requestOptions)
+        .then(response => response.json())
+        .then(_result => setResult(_result))
+        .catch(error => console.log("error", error));
         //const k = await data.json();
         //console.log(data);
-        setResult(data);
+        //setResult(data);
         
         setValue(!value);
         setTopShow(false);
@@ -81,7 +94,7 @@ function Dictionary(props) {
                 </div>
             </div>}
             <article style={{height:"auto"}}>
-                {value && <Words {...data.obj}></Words>}
+                {value && <Words {...result.obj}></Words>}
             </article>
         </div>
     )

@@ -29,8 +29,29 @@ function Navbar (){
         
     }, []);
     const logout = () =>{
-        localStorage.removeItem("token");
-        setLogin(!login);
+        
+        var myHeader = new Headers();
+        myHeader.append("Authorization", "Bearer"+localStorage.getItem("token"));
+
+        var requestOptions = {
+            method:"POST",
+            headers:myHeader,
+            redirect:"follow"
+        }
+
+        // calAPI Logout
+        fetch("https://localhost:44391/api/account/logout",requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            if(result.isSuccess == true){
+                localStorage.removeItem("token");
+                setLogin(!login)
+            }
+            else{
+                return null;
+            }
+        })
+        .catch(error => console.log(error));
     }
 
     const [click, setClick] = useState(false);
