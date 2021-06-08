@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import './ProfileUser.css'
+import axios from 'axios'
 import Essay from '../Forum/Essays/Essay'
 import {data} from './data'
 
@@ -9,15 +10,41 @@ const url = "https://localhost:44391/api/user";
 
 function ProfileUser() {
 
-    const [name, setName] = useState('');
+    const [infor, setUserInfo] = useState([]);
     const [isEssays, setIsEssays] = useState(true);
-
+    const [essays, settEssays] = useState([]);
     useEffect(() => {
         if (localStorage.getItem("token") == null) {
             window.location.replace("/signin");
         }
         else{
-            
+            // fetch data
+            var myHeader = new Headers();
+            myHeader.append("Content-Type", "application/json");
+            myHeader.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsdW9uZ25ld0BnbWFpbC5jb20iLCJqdGkiOiIwMzI5YmY3Yy0wZDljLTRhNzktODEwMC0zNDM4ODZiNGRiYTYiLCJlbWFpbCI6Imx1b25nbmV3QGdtYWlsLmNvbSIsImlkIjoiMDZjZDY4ZjItZDg0ZC00ZmZhLWIwMGYtM2M5Mzc1OWMwYjAzIiwibmJmIjoxNjIzMTEzNjE4LCJleHAiOjE2MjMxMjA4MTgsImlhdCI6MTYyMzExMzYxOH0.JxEBuTcwTZw8XrJ8O0Vca_zkoytnnd6iPC-ohO_7MY0");
+
+            var requestOptions={
+                method:"GET",
+                headers:myHeader,
+                redirect:"follow"
+            }
+            // git essays
+            fetch("https://localhost:44391/api/essay", requestOptions)
+            .then(response => response.json())
+            .then(result =>{
+                settEssays(result);
+                console.log(essays);
+            })
+            .catch(error => console.log(error));
+
+            // get info
+            fetch("https://localhost:44391/api/essay", requestOptions)
+            .then(response => response.json())
+            .then(result =>{
+                settEssays(result);
+                console.log(essays);
+            })
+            .catch(error => console.log(error));
         }
     }, [])
 
@@ -101,7 +128,7 @@ function ProfileUser() {
                                 <button className="btn" style={{}}>New Essays</button>
                             </Link>
                         </li>
-                        {data.essays.map((essay) => {
+                        {essays.map((essay) => {
 
                             var hrf = "/essay/"+essay.id;
                             return <li class="overf" style={{borderStyle:"ridge", marginBottom: "16px", width: "100%",maxWidth:"300px",overflow:"hidden", border:"5px", margin:"15px" }} keys={essay.id}>
@@ -115,7 +142,7 @@ function ProfileUser() {
                         </li>
                         })}
                     </ul> || <ul style={{display:"grid", gridTemplateColumns:"1fr 1fr 1fr", listStyleType:"none"}}>
-                        {data.essays.map((essay) => {
+                        {essays.map((essay) => {
                             return <li class="overf" style={{borderStyle:"ridge", marginBottom: "16px", width: "100%",maxWidth:"300px",overflow:"hidden", border:"5px", margin:"15px" }} keys={essay.id}>
                                 <a href="#" >
                                 <div className={"items"} style={{ width: "100%" }}>

@@ -38,14 +38,14 @@ function Navbar (){
             headers:myHeader,
             redirect:"follow"
         }
-
+        setLogin(!login)
         // calAPI Logout
         fetch("https://localhost:44391/api/account/logout",requestOptions)
         .then(response => response.json())
         .then(result => {
             if(result.isSuccess == true){
                 localStorage.removeItem("token");
-                setLogin(!login)
+                
             }
             else{
                 return null;
@@ -155,7 +155,7 @@ function Navbar (){
                         </li>
                         
                     </ul>
-                    {login && <div className={clickAcc ? "nav-menu active":"nav-menu"}>
+                    {!login && <div className={clickAcc ? "nav-menu active":"nav-menu"}>
                         <div className="Sign">
                             <Link to="/signup" className="contact signup" onClick={closeMobileMenu}>SignUp</Link>
                             /

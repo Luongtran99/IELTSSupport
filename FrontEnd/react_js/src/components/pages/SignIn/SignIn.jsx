@@ -84,18 +84,20 @@ function SignIn(props) {
             redirect:"follow"
         };
 
-        fetch("https://localhost:44391/api/account/login", requestOptions)
-        .then(response => response.json())
-        .then(result => {
-            if(result.isSuccess){
-                localStorage.setItem("token", result.token);
-                window.location.replace("/profile");
-            }
-            else{
-                document.getElementById("error_signin").innerHTML = result.message[0];
-            }
-        })
-        .catch(error => console.log("error", error));
+        // fetch("https://localhost:44391/api/account/login", requestOptions)
+        // .then(response => response.json())
+        // .then(result => {
+        //     if(result.isSuccess){
+        //         localStorage.setItem("token", result.token);
+        //         window.location.replace("/profile");
+        //         return;
+        //     }
+        //     else{
+        //         document.getElementById("error_signin").innerHTML = result.message[0];
+        //         return;
+        //     }
+        // })
+        // .catch(error => console.log("error", error));
 
         // save all in localStorage
         localStorage.setItem("token","2020202");

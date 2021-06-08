@@ -16,7 +16,7 @@ namespace SupportingIELTSWriting.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    []
+    
     public class AccountController : ControllerBase
     {
         private IIdentityServices _services;
@@ -31,7 +31,7 @@ namespace SupportingIELTSWriting.Controllers
         {
             try
             {
-                var authResponse = await _services.LoginAsync(request.Username, request.Password, request.RememberMe);
+                var authResponse = await _services.LoginAsync(request.Email, request.Password, request.RememberMe);
 
                 if (!authResponse.isSuccess)
                 {

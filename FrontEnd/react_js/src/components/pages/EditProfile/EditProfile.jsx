@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link, Route,Switch } from 'react-router-dom'
 import './EditProfile.css'
 // import mainEditProfile from './mainEditProfile/mainEditProfile'
@@ -11,6 +11,25 @@ import './EditProfile.css'
 // import manageContacts from './manageContacts/manageContact'
 
 function EditProfile() {
+    const [userDetail, setUserDetail] = useState([]);
+    var myHeader = new Headers();
+    myHeader.append("Content-Type","application/json");
+    myHeader.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsdW9uZ25ld0BnbWFpbC5jb20iLCJqdGkiOiIwMzI5YmY3Yy0wZDljLTRhNzktODEwMC0zNDM4ODZiNGRiYTYiLCJlbWFpbCI6Imx1b25nbmV3QGdtYWlsLmNvbSIsImlkIjoiMDZjZDY4ZjItZDg0ZC00ZmZhLWIwMGYtM2M5Mzc1OWMwYjAzIiwibmJmIjoxNjIzMTEzNjE4LCJleHAiOjE2MjMxMjA4MTgsImlhdCI6MTYyMzExMzYxOH0.JxEBuTcwTZw8XrJ8O0Vca_zkoytnnd6iPC-ohO_7MY0")
+
+    useEffect(()=>{
+        fetch("https://localhost:44391/api/user", {
+            method:"GET",
+            headers:myHeader,
+            redirect:"follow"
+        })
+        .then(response => response.json())
+        .then(result =>{
+            
+            setUserDetail(result);console.log(userDetail);
+        })
+        .catch(error => console.log(error));
+    }, [])
+
     return (
         <main style={{width:"100%",minHeight:"650px", height:"auto", backgroundColor:"#fff",color:"#383838",marginTop:"-30px", display:"flex",justifyContent:"center",alignItems:"center"}} role="main">
             <div className="BvMHM" style={{height:"auto",marginTop:"4rem", marginBottom:"2rem"}} >

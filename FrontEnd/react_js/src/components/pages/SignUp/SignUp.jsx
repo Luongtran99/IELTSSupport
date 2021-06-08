@@ -1,13 +1,62 @@
-import React from 'react'
+import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import './SignUp.css'
 import { Link } from 'react-router-dom'
 
-function SignUp(props) {
+function SignUp() {
+
+
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const signup = (e) =>{
+        e.preventDefault();
+        if(username == ''){
+            document.getElementById("error-email").innerHTML = "username can not be null";
+            return;
+        }
+        if(password !== document.getElementById("secured_password").value){
+            //alert("rewrite your password");            
+            document.getElementById("error_duplicated-password").innerHTML = "they are not the same";
+            return;
+        }
+
+        var myHeader = new Headers();
+        myHeader.append("Content-Type", "application/json")
+
+        var raw = JSON.stringify({
+            Email:username,
+            Password:password,
+        })
+
+        var requestOptions = {
+            method:"POST",
+            body:raw,
+            headers:myHeader,
+            redirect:"follow"
+        };
+
+
+        fetch("https://localhost:44391/api/account/register", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            if(result.isSuccess){
+                localStorage.setItem("token", result.token);
+                window.location.replace("/editprofile");
+                return;
+            }
+            else{
+                alert(result.message[0]);
+                return;
+            }
+        })
+        .catch(error => console.log(error));
+    }
+
     return (
         <>
             <div className={"center_page"}>
-                <article style={{width:"400px", height:"600px",marginTop:"15px", background:"#fff",borderStyle:"solid"}}>
+                <article style={{width:"400px", minHeight:"600px",marginBottom:"20px",marginTop:"15px", background:"#fff",borderStyle:"solid"}}>
                     <section style={{width:"100%", height:"20%"}}>
                         <div style={{width:"100%", bottom:"0px", marginTop:"20px", marginBottom:"-20px"}}>
                             <span style={{fontSize:"60px", color:"red", fontFamily:"Lobster", paddingLeft:"0px"}}>
@@ -20,21 +69,27 @@ function SignUp(props) {
                         <form style={{display:"flex", flexDirection:"column"}}>
                             <div className="input_value">
                                 <label></label>
-                                <input type="text" placeholder="Your email" ></input>
+                                <input type="text" placeholder="Your email" onChange={(e) => {
+                                    const k = e.target.value;
+                                    setUsername(k);
+                                }} ></input>
                             </div>
-                            <span className="error-message" id="error-email"></span>
+                            <span className="error-message" style={{color:"red"}} id="error-email"></span>
                             <div className="input_value">
                                 <label></label>
-                                <input type="password" placeholder="Password"></input>
+                                <input type="password" placeholder="Password" onChange={(e) =>{
+                                    const k = e.target.value;
+                                    setPassword(k);
+                                }}></input>
                             </div>
                             <span className="error-message" id="error-password"></span>
                             <div className="input_value">
                                 <label></label>
-                                <input type="password" placeholder="Secured Password"></input>
+                                <input type="password" placeholder="Secured Password" id="secured_password"></input>
                             </div>
                             <span className="error-message" id="error_duplicated-password"></span>
                             <div style={{width:"100%"}}>
-                                <button type="submit" style={{width:"70%"}} className="btn ">SIGN UP</button>
+                                <button type="submit" style={{width:"70%"}} className="btn " onClick={(e)=>signup(e)}>SIGN UP</button>
                             </div>
                         </form>
                     </section>
