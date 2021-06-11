@@ -2,6 +2,9 @@ import React, {useState} from 'react'
 import { Link, Route,Switch } from 'react-router-dom'
 import '../EditProfile.css'
 function EditPassword() {
+
+    
+
     return (
         <main style={{width:"100%",minHeight:"650px", height:"auto", backgroundColor:"#fff",color:"#383838",marginTop:"-45px", display:"flex",justifyContent:"center",alignItems:"center"}} role="main">
             <div className="BvMHM" >

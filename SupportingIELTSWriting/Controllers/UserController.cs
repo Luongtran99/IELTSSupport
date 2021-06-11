@@ -59,11 +59,12 @@ namespace SupportingIELTSWriting.Controllers
             var _user = new User
             {
                 Id = HttpContext.GetUserId(),
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Age = user.Age,
+                UserName = user.UserName,
                 Email = user.Email,
-                PhoneNumber = user.PhoneNumber
+                PhoneNumber = user.PhoneNumber,
+                Bio = user.Bio,
+                WebSite = user.WebSite,
+                Gender = user.Gender
             };
             try
             {

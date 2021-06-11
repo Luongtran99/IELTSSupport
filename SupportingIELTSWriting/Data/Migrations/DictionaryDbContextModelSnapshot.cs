@@ -246,7 +246,9 @@ namespace SupportingIELTSWriting.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<int>("Age");
+                    b.Property<int?>("Age");
+
+                    b.Property<string>("Bio");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -258,6 +260,8 @@ namespace SupportingIELTSWriting.Data.Migrations
 
                     b.Property<string>("FirstName")
                         .HasMaxLength(50);
+
+                    b.Property<int>("Gender");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(50);
@@ -286,6 +290,8 @@ namespace SupportingIELTSWriting.Data.Migrations
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
+
+                    b.Property<string>("WebSite");
 
                     b.Property<bool>("isDeleted");
 

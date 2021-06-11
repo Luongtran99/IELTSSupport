@@ -10,10 +10,10 @@ const url = "https://localhost:44391/api/user";
 
 function ProfileUser() {
 
-    const [infor, setUserInfo] = useState([]);
+    const [infor, setUserInfo] = useState('');
     const [isEssays, setIsEssays] = useState(true);
     const [essays, settEssays] = useState([]);
-    useEffect(() => {
+    useEffect(async () => {
         if (localStorage.getItem("token") == null) {
             window.location.replace("/signin");
         }
@@ -21,7 +21,7 @@ function ProfileUser() {
             // fetch data
             var myHeader = new Headers();
             myHeader.append("Content-Type", "application/json");
-            myHeader.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsdW9uZ25ld0BnbWFpbC5jb20iLCJqdGkiOiIwMzI5YmY3Yy0wZDljLTRhNzktODEwMC0zNDM4ODZiNGRiYTYiLCJlbWFpbCI6Imx1b25nbmV3QGdtYWlsLmNvbSIsImlkIjoiMDZjZDY4ZjItZDg0ZC00ZmZhLWIwMGYtM2M5Mzc1OWMwYjAzIiwibmJmIjoxNjIzMTEzNjE4LCJleHAiOjE2MjMxMjA4MTgsImlhdCI6MTYyMzExMzYxOH0.JxEBuTcwTZw8XrJ8O0Vca_zkoytnnd6iPC-ohO_7MY0");
+            myHeader.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsdW9uZ0BnbWFpbC5jb20iLCJqdGkiOiI5ZjI0ZDQ4Zi05NjJkLTRjZjAtOWZlOC0yODVkOGQ1YjQ3OTEiLCJlbWFpbCI6Imx1b25nQGdtYWlsLmNvbSIsImlkIjoiZGRmZmRiMzItZTFhZS00ZWE5LTliNDktYTlkNjg4N2Q5YThhIiwibmJmIjoxNjIzMTMzNzMyLCJleHAiOjE2MjMxNDA5MzIsImlhdCI6MTYyMzEzMzczMn0.7LdW3adlYuB2XKAqcaRxIp-czcIiO_GMsXtFW68Ju6g");
 
             var requestOptions={
                 method:"GET",
@@ -29,7 +29,7 @@ function ProfileUser() {
                 redirect:"follow"
             }
             // git essays
-            fetch("https://localhost:44391/api/essay", requestOptions)
+            await fetch("https://localhost:44391/api/essay", requestOptions)
             .then(response => response.json())
             .then(result =>{
                 settEssays(result);
@@ -38,11 +38,11 @@ function ProfileUser() {
             .catch(error => console.log(error));
 
             // get info
-            fetch("https://localhost:44391/api/essay", requestOptions)
+            await fetch("https://localhost:44391/api/user", requestOptions)
             .then(response => response.json())
             .then(result =>{
-                settEssays(result);
-                console.log(essays);
+                setUserInfo(result);
+                console.log(infor);
             })
             .catch(error => console.log(error));
         }
@@ -68,7 +68,7 @@ function ProfileUser() {
                     </div>
                     <section className="zwlfE">
                         <div className="nZSzR">
-                            <h2 className="_7UhW9">NAME</h2>
+                            <h2 className="_7UhW9">{infor.userName}</h2>
                             <div className="QzzMF" style={{marginLeft:"20px"}}>
                                 <Link to="/editprofile" className="sqdOP" >Edit your profile</Link>
                             </div>

@@ -14,7 +14,7 @@ function EditProfile() {
     const [userDetail, setUserDetail] = useState([]);
     var myHeader = new Headers();
     myHeader.append("Content-Type","application/json");
-    myHeader.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsdW9uZ25ld0BnbWFpbC5jb20iLCJqdGkiOiIwMzI5YmY3Yy0wZDljLTRhNzktODEwMC0zNDM4ODZiNGRiYTYiLCJlbWFpbCI6Imx1b25nbmV3QGdtYWlsLmNvbSIsImlkIjoiMDZjZDY4ZjItZDg0ZC00ZmZhLWIwMGYtM2M5Mzc1OWMwYjAzIiwibmJmIjoxNjIzMTEzNjE4LCJleHAiOjE2MjMxMjA4MTgsImlhdCI6MTYyMzExMzYxOH0.JxEBuTcwTZw8XrJ8O0Vca_zkoytnnd6iPC-ohO_7MY0")
+    myHeader.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsdW9uZ0BnbWFpbC5jb20iLCJqdGkiOiI5ZjI0ZDQ4Zi05NjJkLTRjZjAtOWZlOC0yODVkOGQ1YjQ3OTEiLCJlbWFpbCI6Imx1b25nQGdtYWlsLmNvbSIsImlkIjoiZGRmZmRiMzItZTFhZS00ZWE5LTliNDktYTlkNjg4N2Q5YThhIiwibmJmIjoxNjIzMTMzNzMyLCJleHAiOjE2MjMxNDA5MzIsImlhdCI6MTYyMzEzMzczMn0.7LdW3adlYuB2XKAqcaRxIp-czcIiO_GMsXtFW68Ju6g")
 
     useEffect(()=>{
         fetch("https://localhost:44391/api/user", {
@@ -29,6 +29,10 @@ function EditProfile() {
         })
         .catch(error => console.log(error));
     }, [])
+
+    const EditUserInfo = () =>{
+        
+    }
 
     return (
         <main style={{width:"100%",minHeight:"650px", height:"auto", backgroundColor:"#fff",color:"#383838",marginTop:"-30px", display:"flex",justifyContent:"center",alignItems:"center"}} role="main">
@@ -78,7 +82,7 @@ function EditProfile() {
                             </div>
                         </div>
                         <div className="XX1Wc" style={{display:"block"}}>
-                            <h1 className="kHYQv" title="locery">Locery</h1>
+                            <h1 className="kHYQv" title="locery">{userDetail.userName}</h1>
                             <button className="sqdOP" type="button" onClick={() => document.getElementById("image-file").click()}>Change Profile Photo</button>
                         </div>
                     </div>
@@ -89,7 +93,7 @@ function EditProfile() {
                             </aside>
                             <div className="ada5V">
                                 <div className="_4EzTm" style={{width:"100%", maxWidth:"355px"}}>
-                                    <input aria-required="false" id="pepName" placeholder="Name" type="text" class="JLJ-B"></input>
+                                    <input aria-required="false" id="pepName" placeholder="Name" type="text" class="JLJ-B" value={userDetail.firstName}></input>
                                     <div style={{fontSize:"12px",paddingLeft:"5px"}}><p>Help people discover your account by using the name you're known by: either your full name, nickname, or business name.</p><p>You can only change your name twice within 14 days.</p></div>
                                 </div>
                             </div>
@@ -100,7 +104,7 @@ function EditProfile() {
                             </aside>
                             <div className="ada5V">
                                 <div className="_4EzTm" style={{width:"100%", maxWidth:"355px"}}>
-                                    <input aria-required="false" id="pepUsername" placeholder="Name" type="text" class="JLJ-B" value="luong.td"></input>
+                                    <input aria-required="false" id="pepUsername" placeholder="Name" type="text" class="JLJ-B" value={userDetail.userName}></input>
                                     <div style={{fontSize:"12px",paddingLeft:"5px"}}><p>In most cases, you'll be able to change your username back to luong.dt for another 14 days. Learn More</p></div>
                                 </div>
                             </div>
@@ -111,7 +115,7 @@ function EditProfile() {
                             </aside>
                             <div className="ada5V">
                                 <div className="_4EzTm" style={{width:"100%", maxWidth:"355px"}}>
-                                    <input aria-required="false" id="pepWebsite" placeholder="Website" type="text" class="JLJ-B" value=""></input>
+                                    <input aria-required="false" id="pepWebsite" placeholder="Website" type="text" class="JLJ-B" value={userDetail.email}></input>
                                     {/* <div style={{fontSize:"12px",paddingLeft:"5px"}}><p>In most cases, you'll be able to change your username back to luong.dt for another 14 days. Learn More</p></div> */}
                                 </div>
                             </div>
@@ -136,7 +140,7 @@ function EditProfile() {
                             </aside>
                             <div className="ada5V">
                                 <div className="_4EzTm" style={{width:"100%", maxWidth:"355px"}}>
-                                    <input aria-required="false" id="pepEmail" placeholder="@gmail.com" type="text" class="JLJ-B" value=""></input>
+                                    <input aria-required="false" id="pepEmail" placeholder="@gmail.com" type="text" class="JLJ-B" value={userDetail.email}></input>
                                     {/* <div style={{fontSize:"12px",paddingLeft:"5px"}}><p>In most cases, you'll be able to change your username back to luong.dt for another 14 days. Learn More</p></div> */}
                                 </div>
                             </div>
@@ -147,7 +151,7 @@ function EditProfile() {
                             </aside>
                             <div className="ada5V">
                                 <div className="_4EzTm" style={{width:"100%", maxWidth:"355px"}}>
-                                    <input aria-required="false" id="pepPhoneNumber" placeholder="Phone Number" type="text" class="JLJ-B" value=""></input>
+                                    <input aria-required="false" id="pepPhoneNumber" placeholder="Phone Number" type="text" class="JLJ-B" value={userDetail.phoneNumber}></input>
                                     {/* <div style={{fontSize:"12px",paddingLeft:"5px"}}><p>In most cases, you'll be able to change your username back to luong.dt for another 14 days. Learn More</p></div> */}
                                 </div>
                             </div>
@@ -169,7 +173,7 @@ function EditProfile() {
                             </aside>
                             <div className="ada5V">
                                 <div className="fi8zo">
-                                    <button type="submit" class="btn ">Submit</button>
+                                    <button type="submit" class="btn " onClick={EditUserInfo}>Submit</button>
                                 </div>
                             </div>
                         </div>

@@ -12,7 +12,7 @@ function SignUp() {
     const signup = (e) =>{
         e.preventDefault();
         if(username == ''){
-            document.getElementById("error-email").innerHTML = "username can not be null";
+            document.getElementById("error-email").innerHTML = "email can not be null";
             return;
         }
         if(password !== document.getElementById("secured_password").value){

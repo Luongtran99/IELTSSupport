@@ -30,9 +30,9 @@ function SignIn(props) {
         var regex = /[!-),@]/g;
         // check special character
 
-        if(password.length < 6 || regex.test(password)){
-            setCsm('Mật khẩu phải dài hơn 6 ký tự và không chứa các ký tự đặc biệt');
-            return 'Mật khẩu phải dài hơn 6 ký tự và không chứa các ký tự đặc biệt';
+        if(password.length > 6){
+            setCsm('Mật khẩu phải dài hơn 6 ký tự ');
+            return 'Mật khẩu phải dài hơn 6 ký tự ';
         }
         else{
             return undefined;
@@ -61,7 +61,7 @@ function SignIn(props) {
         var regex = /[!-),@]/g;
             // check special character
 
-        if(password.length < 6 || regex.test(password)){
+        if(password.length < 6 ){
             document.getElementById("error-password").innerHTML = 'Mật khẩu phải dài hơn 6 ký tự và không chứa các ký tự đặc biệt';
             document.getElementById("error-password").style.color = "red";
             return;

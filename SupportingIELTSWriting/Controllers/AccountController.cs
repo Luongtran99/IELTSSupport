@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SupportingIELTSWriting.Infrastructure;
 using SupportingIELTSWriting.Models;
 using SupportingIELTSWriting.Models.RequestModel;
 using SupportingIELTSWriting.Services;
@@ -119,7 +120,12 @@ namespace SupportingIELTSWriting.Controllers
         public IActionResult ChangePassword([FromRoute] string newPassword)
         {
             // get current user 
+            string userId = HttpContext.GetUserId();
+
+            // call from context
             
+
+
             return null;
         }
     }

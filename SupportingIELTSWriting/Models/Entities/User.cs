@@ -14,8 +14,11 @@ namespace SupportingIELTSWriting.Models.Entities
         [MaxLength(50)]
         public string LastName { get; set; }
 
-        public int Age { get; set; }
+        public int? Age { get; set; }
         public bool isDeleted { get; set; } = false;
+        public string Bio { get; set; }
+        public string WebSite { get; set; }
+        public int Gender { get; set; }
 
         public string ProfileImage { get; set; } = null; 
 
