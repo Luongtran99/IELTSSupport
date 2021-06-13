@@ -64,7 +64,8 @@ namespace SupportingIELTSWriting.Controllers
                 PhoneNumber = user.PhoneNumber,
                 Bio = user.Bio,
                 WebSite = user.WebSite,
-                Gender = user.Gender
+                Gender = user.Gender,
+                SecurityStamp = Guid.NewGuid().ToString()
             };
             try
             {

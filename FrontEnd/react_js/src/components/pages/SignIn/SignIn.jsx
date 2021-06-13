@@ -53,7 +53,8 @@ function SignIn(props) {
 
     const submitForm = () =>{
         // url
-        
+        //console.log(username);
+        //console.log()
         if(username == ''){
             document.getElementById("error-email").innerHTML = "Vui long nhap sdt";
             return;
@@ -73,8 +74,8 @@ function SignIn(props) {
 
 
         var raw = JSON.stringify({
-            username:username,
-            password:password
+            email:document.getElementById("email").value,
+            password:document.getElementById("password").value
         });
 
         var requestOptions = {
@@ -84,26 +85,28 @@ function SignIn(props) {
             redirect:"follow"
         };
 
-        // fetch("https://localhost:44391/api/account/login", requestOptions)
-        // .then(response => response.json())
-        // .then(result => {
-        //     if(result.isSuccess){
-        //         localStorage.setItem("token", result.token);
-        //         window.location.replace("/profile");
-        //         return;
-        //     }
-        //     else{
-        //         document.getElementById("error_signin").innerHTML = result.message[0];
-        //         return;
-        //     }
-        // })
-        // .catch(error => console.log("error", error));
+        fetch("https://localhost:44391/api/account/login", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            if(result.isSuccess){
+                sessionStorage.setItem("token", result.token);
+                //sessionStorage.setItem("userId", result.Id);
+                //sessionStorage.setItem("username", result.userName);
+                window.location.replace("/profile");
+                return;
+            }
+            else{
+                document.getElementById("error_signin").innerHTML = result.message[0];
+                return;
+            }
+        })
+        .catch(error => console.log("error", error));
 
         // save all in localStorage
-        localStorage.setItem("token","2020202");
+        //sessionStorage.setItem("token","2020202");
         
         // redirect to /profile
-        window.location.replace("/profile");
+        //window.location.replace("/profile");
     }
 
     return (

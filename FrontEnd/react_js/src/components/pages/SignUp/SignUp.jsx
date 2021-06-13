@@ -41,7 +41,8 @@ function SignUp() {
         .then(response => response.json())
         .then(result => {
             if(result.isSuccess){
-                localStorage.setItem("token", result.token);
+                sessionStorage.setItem("token", result.token);
+                sessionStorage.setItem("isNewAccount", true);
                 window.location.replace("/editprofile");
                 return;
             }

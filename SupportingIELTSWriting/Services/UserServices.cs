@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using SupportingIELTSWriting.Data;
 using SupportingIELTSWriting.Infrastructure;
 using SupportingIELTSWriting.Models;
 using SupportingIELTSWriting.Models.Entities;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SupportingIELTSWriting.Services
 {
@@ -16,15 +18,30 @@ namespace SupportingIELTSWriting.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly IHostingEnvironment hostingEnvironment;
-        public UserServices(UserManager<User> userManager, IHostingEnvironment env)
+        private readonly DictionaryDbContext _context;
+        public UserServices(UserManager<User> userManager, IHostingEnvironment env, DictionaryDbContext ct)
         {
             _userManager = userManager;
             hostingEnvironment = env;
+            _context = ct;
         }
 
         public async Task<bool> EditUserAsync(User user)
         {
-            var exist = await _userManager.UpdateAsync(user);
+            // check user info
+
+
+            var _user = await _userManager.FindByIdAsync(user.Id);
+            _user.UserName = user.UserName;
+            //_user.Email = user.Email;
+            _user.Bio = user.Bio;
+            _user.Gender = user.Gender;
+            _user.PhoneNumber = user.PhoneNumber;
+            _user.WebSite = user.WebSite;
+
+            var exist = await _userManager.UpdateAsync(_user);
+            //_userManager.Update
+            //_context.Database.ExecuteSqlRaw
             if (exist.Succeeded)
             {
                 return true;
@@ -38,8 +55,10 @@ namespace SupportingIELTSWriting.Services
         public async Task<User> GetUserAsync(string userId)
         {
             var exit = await _userManager.FindByIdAsync(userId);
-
-            if(exit == null)
+            string imgpath = $"{Directory.GetCurrentDirectory()}{@"\wwwroot\images\"}{exit.ProfileImage}";
+            byte[] data = File.ReadAllBytes(imgpath);
+            exit.ProfileImage = Convert.ToBase64String(data);
+            if (exit == null)
             {
                 return null;
             }

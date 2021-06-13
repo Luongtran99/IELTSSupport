@@ -199,13 +199,42 @@ namespace SupportingIELTSWriting.Services
         //{
         //    throw new NotImplementedException();
         //}
-        public async Task<AuthResult> ChangePassword(string pasword)
+        public async Task<AuthResult> ChangePassword(string userId, string currentPassword, string pasword)
         {
-            // change password
+            var user = await _userManager.FindByIdAsync(userId);
+
             
+            
+            if (user == null)
+            {
+                return new AuthResult
+                {
+                    Message = new[] { "user doesn't exist" }
+                };
+            }
 
+            // change password
+            var result = await _userManager.ChangePasswordAsync(user,currentPassword, pasword) ;
 
-            return null;
+            if (result.Succeeded)
+            {
+                return new AuthResult
+                {
+                    isSuccess = true,
+                    Message = new string[]
+                    {
+                        "Change password completely"
+                    }
+                };
+            }
+            else
+            {
+                return new AuthResult
+                {
+                    isSuccess = false,
+                    Message = new string[] { result.Errors.ToString() }
+                };
+            }
         }
     }
 }

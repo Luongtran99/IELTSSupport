@@ -1,9 +1,27 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link, Route,Switch } from 'react-router-dom'
 import '../EditProfile.css'
 function EditPassword() {
 
+    const [userDetail, setUserDetail] = useState([]);
+    var myHeader = new Headers();
+    myHeader.append("Content-Type","application/json");
+    myHeader.append("Authorization", "Bearer "+ sessionStorage.getItem("token"));
     
+    useEffect(()=>{
+        
+        fetch("https://localhost:44391/api/user", {
+            method:"GET",
+            headers:myHeader,
+            redirect:"follow"
+        })
+        .then(response => response.json())
+        .then(result =>{
+            //console.log(result);
+            setUserDetail(result);
+        })
+        .catch(error => console.log(error));
+    }, [])
 
     return (
         <main style={{width:"100%",minHeight:"650px", height:"auto", backgroundColor:"#fff",color:"#383838",marginTop:"-45px", display:"flex",justifyContent:"center",alignItems:"center"}} role="main">
@@ -42,7 +60,7 @@ function EditPassword() {
                         <div className="LqNQc">
                             <div className="M-jxE">
                                 <button class="Ia1UJ" title="Change your phoe">
-                                        <img alt="Change your profile image" class="be6sR" src={"https://www.oxfordlearnersdictionaries.com/external/images/product/OALD_producthometop.png?version=2.1.29"}></img>
+                                        <img alt="Change your profile image" class="be6sR" src={`data:image/jpeg;base64,${userDetail.profileImage}`}></img>
                                 </button>
                                 <div >
                                     <form enctype="multipart/form-data" method="POST" role="presentation">
@@ -52,7 +70,7 @@ function EditPassword() {
                             </div>
                         </div>
                         <div className="XX1Wc" style={{display:"block"}}>
-                            <h1 className="kHYQv" title="locery">Locery</h1>
+                            <h1 className="kHYQv" title="locery">{userDetail.userName}</h1>
                             <button className="sqdOP" type="button">Change Profile Photo</button>
                         </div>
 

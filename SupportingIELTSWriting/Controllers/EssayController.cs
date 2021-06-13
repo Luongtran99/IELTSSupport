@@ -89,6 +89,10 @@ namespace SupportingIELTSWriting.Controllers
             //return null;
         }
 
+        /// <summary>
+        /// Get all esays owned indiviually
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetAllEssays()
@@ -96,6 +100,11 @@ namespace SupportingIELTSWriting.Controllers
             return Ok(await _essayServices.GetEssaysAsync(HttpContext.GetUserId()));
         }
 
+        /// <summary>
+        /// Get list history of essay changed
+        /// </summary>
+        /// <param name="essayId"></param>
+        /// <returns></returns>
         [HttpGet("history/{essayId}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetEssayHistoryAsync([FromRoute] string essayId)
@@ -117,8 +126,12 @@ namespace SupportingIELTSWriting.Controllers
             }
         }
 
+        /// <summary>
+        /// Get essay info
+        /// </summary>
+        /// <param name="essayId"></param>
+        /// <returns></returns>
         [HttpGet("{essayId}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult> GetEssayByIdAsync([FromRoute] string essayId)
         {
             var essay = await _essayServices.GetEssayByIdAsync(essayId);
@@ -127,12 +140,14 @@ namespace SupportingIELTSWriting.Controllers
             {
                 return NotFound();
             }
-
             return Ok(essay);
         }
 
-        
-
+        /// <summary>
+        /// Create new essay
+        /// </summary>
+        /// <param name="essayRequest"></param>
+        /// <returns></returns>
         [HttpPost]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult> CreateEssayAsync([FromBody]CreateEssayRequest essayRequest)
@@ -163,6 +178,12 @@ namespace SupportingIELTSWriting.Controllers
             }
         }
 
+        /// <summary>
+        /// Edit essay
+        /// </summary>
+        /// <param name="essayId"></param>
+        /// <param name="updateEssay"></param>
+        /// <returns></returns>
         [HttpPut("{essayId}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> EditEssayAsync([FromRoute]string essayId,[FromBody]UpdateEssayRequest updateEssay)
@@ -184,7 +205,6 @@ namespace SupportingIELTSWriting.Controllers
                 Date = updateEssay.Date,
                 Topic = updateEssay.Topic,
                 userId = HttpContext.GetUserId(),
-                
             };
 
             var updated = await _essayServices.EditEssayAsync(essay);
@@ -196,7 +216,8 @@ namespace SupportingIELTSWriting.Controllers
                     essayId = essayId,
                     userId = HttpContext.GetUserId(),
                     oldEssay = updateEssay.oldText,
-                    newEssay = updateEssay.Text
+                    newEssay = updateEssay.Text,
+                    DateTime = DateTime.Now
                 }))
                 return Ok(essay);
             }
@@ -205,6 +226,11 @@ namespace SupportingIELTSWriting.Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// Delete essay
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> DeleteEssayAsync([FromRoute]string id)

@@ -21,17 +21,19 @@ function Navbar (){
     }
 
     const [login, setLogin] = useState(true);
-
+    const [userName, setUserName] = useState('');
     useEffect(() =>{
-        if(window.localStorage.getItem("token") != null){
-            setLogin(!login);
+        setUserName(sessionStorage.getItem("username"));
+        if(sessionStorage.getItem("token") != null){
+            setLogin(false);
         }
         
     }, []);
     const logout = () =>{
-        
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("username");
         var myHeader = new Headers();
-        myHeader.append("Authorization", "Bearer"+localStorage.getItem("token"));
+        myHeader.append("Authorization", "Bearer"+sessionStorage.getItem("token"));
 
         var requestOptions = {
             method:"POST",
@@ -44,14 +46,13 @@ function Navbar (){
         .then(response => response.json())
         .then(result => {
             if(result.isSuccess == true){
-                localStorage.removeItem("token");
-                
+                setLogin(false)
             }
             else{
                 return null;
             }
         })
-        .catch(error => console.log(error));
+        .catch(error => window.location.replace("/signin"));
     }
 
     const [click, setClick] = useState(false);
@@ -155,7 +156,7 @@ function Navbar (){
                         </li>
                         
                     </ul>
-                    {!login && <div className={clickAcc ? "nav-menu active":"nav-menu"}>
+                    {login && <div className={clickAcc ? "nav-menu active":"nav-menu"}>
                         <div className="Sign">
                             <Link to="/signup" className="contact signup" onClick={closeMobileMenu}>SignUp</Link>
                             /
@@ -163,10 +164,10 @@ function Navbar (){
                         </div>
                     </div> || <div className={clickAcc ? "nav-menu active":"nav-menu"}>
                         <div className="Sign">
-                            <Link to="/profile" >
-                                <img style={{height:"30px",width:"30px", borderRadius:"50%", backgroundColor:"#fff"}} src={"https://www.oxfordlearnersdictionaries.com/external/images/product/OALD_producthometop.png?version=2.1.29"}></img>
+                            <Link to="/profile" className="contact signup" style={{marginLeft:"10px"}} >
+                                {sessionStorage.getItem("username")}
                             </Link>
-                            <Link to="/" className="contact signup" style={{marginTop:"-8px",marginLeft:"10px"}} onClick={logout}>Logout</Link>
+                            <Link to="/" className="contact signup" style={{marginLeft:"10px"}} onClick={logout}>Logout</Link>
                         </div>
                     </div>}
                     

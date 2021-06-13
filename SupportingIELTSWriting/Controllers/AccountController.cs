@@ -116,17 +116,17 @@ namespace SupportingIELTSWriting.Controllers
             });
         }
 
-        [HttpPost("changepassword")]
-        public IActionResult ChangePassword([FromRoute] string newPassword)
+        [HttpPut]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<AuthResult> ChangePassword([FromBody]ChangePasswordRequest request)
         {
             // get current user 
             string userId = HttpContext.GetUserId();
 
             // call from context
-            
+            var result = await _services.ChangePassword(userId, request.currentPassword, request.newPassword);
 
-
-            return null;
+            return result;
         }
     }
 }

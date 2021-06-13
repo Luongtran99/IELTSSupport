@@ -13,16 +13,19 @@ function ProfileUser() {
     const [infor, setUserInfo] = useState('');
     const [isEssays, setIsEssays] = useState(true);
     const [essays, settEssays] = useState([]);
+    const [guest, setGuest] = useState(false);
+    
     useEffect(async () => {
-        if (localStorage.getItem("token") == null) {
+
+        if (sessionStorage.getItem("token") == null) {
             window.location.replace("/signin");
         }
         else{
             // fetch data
             var myHeader = new Headers();
             myHeader.append("Content-Type", "application/json");
-            myHeader.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsdW9uZ0BnbWFpbC5jb20iLCJqdGkiOiI5ZjI0ZDQ4Zi05NjJkLTRjZjAtOWZlOC0yODVkOGQ1YjQ3OTEiLCJlbWFpbCI6Imx1b25nQGdtYWlsLmNvbSIsImlkIjoiZGRmZmRiMzItZTFhZS00ZWE5LTliNDktYTlkNjg4N2Q5YThhIiwibmJmIjoxNjIzMTMzNzMyLCJleHAiOjE2MjMxNDA5MzIsImlhdCI6MTYyMzEzMzczMn0.7LdW3adlYuB2XKAqcaRxIp-czcIiO_GMsXtFW68Ju6g");
-
+            myHeader.append("Authorization", "Bearer " + sessionStorage.getItem("token"));
+            //myHeader.append("Access-Control-Allow-Origin", "*");
             var requestOptions={
                 method:"GET",
                 headers:myHeader,
@@ -33,7 +36,7 @@ function ProfileUser() {
             .then(response => response.json())
             .then(result =>{
                 settEssays(result);
-                console.log(essays);
+                //console.log(essays);
             })
             .catch(error => console.log(error));
 
@@ -41,6 +44,15 @@ function ProfileUser() {
             await fetch("https://localhost:44391/api/user", requestOptions)
             .then(response => response.json())
             .then(result =>{
+                // if(sessionStorage.getItem("isNewAccount")){
+                //     setUserInfo(result);
+                // }
+                // else{
+
+                // }
+                sessionStorage.setItem("username", result.userName);
+                sessionStorage.setItem("userId", result.Id);
+
                 setUserInfo(result);
                 console.log(infor);
             })
@@ -56,7 +68,7 @@ function ProfileUser() {
                         <div className="_4dMfM">
                             <div className="M-jxE">
                                 <button className="Ia1UJ" title="Change your profile images">
-                                    <img alt="Change your profile image" class="be6sR" src={"https://www.oxfordlearnersdictionaries.com/external/images/product/OALD_producthometop.png?version=2.1.29"}></img>
+                                    <img alt="Change your profile image" class="be6sR" src={`data:image/jpeg;base64,${infor.profileImage}`}></img>
                                 </button>
                                 <div>
                                     <form method="POST" role="presentation">
@@ -82,6 +94,21 @@ function ProfileUser() {
                         <ul class="k9GMp ">
                             <li class="Y8-fY ">
                                 <span class="-nal3 ">
+                                    <span class="g47SY ">{essays.length}</span> bài viết</span>
+                            </li>
+                            <li class="Y8-fY ">
+                                <a class="-nal3 " href="#" tabindex="0">
+                                    <span class="g47SY " title="7">0</span> người theo dõi
+                                    </a>
+                            </li>
+                            <li class="Y8-fY " style={{marginLeft:"20px"}}>
+                                <a class="-nal3 " href="#" tabindex="0">Đang theo dõi 
+                                <span class="g47SY ">0</span> người dùng</a>
+                            </li>
+                        </ul>
+                        {guest && <ul class="k9GMp ">
+                            <li class="Y8-fY ">
+                                <span class="-nal3 ">
                                     <span class="g47SY ">0</span> bài viết</span>
                             </li>
                             <li class="Y8-fY ">
@@ -93,7 +120,7 @@ function ProfileUser() {
                                 <a class="-nal3 " href="/luong.dt/following/" tabindex="0">Đang theo dõi 
                                 <span class="g47SY ">35</span> người dùng</a>
                             </li>
-                        </ul>
+                        </ul>}
                         <div class="-vDIg">
                             <h1 class="rhpdm">Trần Lương</h1>
                             <br></br>

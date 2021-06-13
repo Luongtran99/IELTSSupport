@@ -33,10 +33,10 @@ function Writing() {
     const saveEssays = () => {
         var myHeader = new Headers();
         myHeader.append("Content-Type", "application/json");
-        myHeader.append("Authorization","Bearer "+localStorage.getItem("token"));
+        myHeader.append("Authorization","Bearer "+ sessionStorage.getItem("token"));
         var _body = JSON.stringify({
-            "text": writing,
-            "topic": document.getElementById("topic_area").textContent
+            "Text": document.getElementById("writing_area").value,
+            "Topic": document.getElementById("topic_area").value
         });
 
         var requestOptions = {
@@ -49,12 +49,14 @@ function Writing() {
         fetch("https://localhost:44391/api/essay", requestOptions)
             .then(response => response.json())
             .then(result => {
+                console.log(result);
                 if (result == null) {
                     alert("opps! Something wrong!");
                 }
                 else {
                     alert("Saved Essay Completely");
                 }
+                setShowSideBar(false);
             })
             .catch(error => console.log(error));
     }
@@ -182,7 +184,7 @@ function Writing() {
                     <li style={{padding:"10px", }}>
                         <a href="#" >
                             <div className={"ali"} style={{width:"100%", height:"30px"}} onClick={()=>{
-                                if(localStorage.getItem("token")==null){
+                                if(sessionStorage.getItem("token")==null){
                                     sessionStorage.setItem("content_buf", writing);
                                     sessionStorage.setItem("topic_buf", document.getElementById("topic_area").innerHTML);
                                     sessionStorage.setItem("save_waiting", true);
