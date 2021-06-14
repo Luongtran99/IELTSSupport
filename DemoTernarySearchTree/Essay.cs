@@ -18,6 +18,7 @@ namespace DemoTernarySearchTree
         public Essay()
         {
             this.Histories = new HashSet<History>();
+            this.Notes = new HashSet<Note>();
         }
     
         public string Id { get; set; }
@@ -28,9 +29,12 @@ namespace DemoTernarySearchTree
         public bool isDeleted { get; set; }
         public string userId { get; set; }
         public string historyId { get; set; }
+        public bool isPublish { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<History> Histories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Note> Notes { get; set; }
     }
 }

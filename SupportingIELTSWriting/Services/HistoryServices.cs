@@ -29,11 +29,18 @@ namespace SupportingIELTSWriting.Services
 
         public async Task<bool> Create(History history)
         {
-            await dbContext.Histories.AddAsync(history);
+            try
+            {
+                await dbContext.Histories.AddAsync(history);
 
-            var x = await dbContext.SaveChangesAsync();
+                var x = await dbContext.SaveChangesAsync();
 
-            return x > 0;
+                return x > 0;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<bool> Delete(string historyId)

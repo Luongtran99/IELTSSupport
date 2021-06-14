@@ -22,18 +22,19 @@ namespace SupportingIELTSWriting.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserServices _userServices;
-        
+        //private readonly string _userId;
         public UserController(IUserServices userServices)
         {
             _userServices = userServices;
+            //_userId = HttpContext.GetUserId();
         }
 
         // get info of the other user
         [HttpGet()]
         public async Task<ActionResult> GetInforByIdAsync()
         {
-
             var userId = HttpContext.GetUserId();
+
 
             var getUserInfo = await _userServices.GetUserAsync(userId);
 
@@ -48,6 +49,39 @@ namespace SupportingIELTSWriting.Controllers
 
             return Ok(getUserInfo);
         }
+
+        [HttpGet("{userID}")]
+        public async Task<ActionResult> GetInforByIdAsync([FromRoute] string userID = "")
+        {
+
+            if(userID == "")
+            {
+                return NotFound(new AuthResult
+                {
+                    isSuccess = false,
+                    Message = new string[]
+                    {
+                        "User is not existed"
+                    }
+                });
+            }
+
+            string userId = userID;
+
+            var getUserInfo = await _userServices.GetUserAsync(userId);
+
+            if (getUserInfo == null)
+            {
+                return NotFound(new AuthResult
+                {
+                    isSuccess = false,
+                    Message = new string[] { "User is not existed" }
+                });
+            }
+
+            return Ok(getUserInfo);
+        }
+
 
         [HttpPost("edit")]
         public async Task<ActionResult> UpdateAsync([FromBody] User user)

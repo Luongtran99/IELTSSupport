@@ -213,6 +213,11 @@ namespace SupportingIELTSWriting.Services
                 };
             }
 
+            var x = await _userManager.CheckPasswordAsync(user, currentPassword);
+
+
+
+
             // change password
             var result = await _userManager.ChangePasswordAsync(user,currentPassword, pasword) ;
 

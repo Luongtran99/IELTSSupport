@@ -196,19 +196,20 @@ namespace SupportingIELTSWriting.Controllers
                 return BadRequest( new { error = "You do not own this essay" });
             }
 
-            
-
             var essay = new Essay
             {
                 Id = essayId,
                 Text = updateEssay.Text,
                 Date = updateEssay.Date,
                 Topic = updateEssay.Topic,
-                userId = HttpContext.GetUserId(),
+                //userId = HttpContext.GetUserId(),
             };
 
             var updated = await _essayServices.EditEssayAsync(essay);
+            try
+            {
 
+            
             if (updated)
             {
                 if(await _historyServices.Create(new History
@@ -220,8 +221,11 @@ namespace SupportingIELTSWriting.Controllers
                     DateTime = DateTime.Now
                 }))
                 return Ok(essay);
+            }}
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
-
             // edi
             return NotFound();
         }

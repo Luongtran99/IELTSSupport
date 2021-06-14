@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="704524174ae14fc19966f844e4e84cf3" Name="Diagram1">
+        <EntityTypeShape EntityType="DictionaryDbModel1.C__EFMigrationsHistory" Width="1.5" PointX="1.125" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DictionaryDbModel1.AspNetRoleClaim" Width="1.5" PointX="6" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DictionaryDbModel1.AspNetRole" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DictionaryDbModel1.AspNetUserClaim" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DictionaryDbModel1.AspNetUserLogin" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DictionaryDbModel1.AspNetUserRole" Width="1.5" PointX="6" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="DictionaryDbModel1.AspNetUser" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="DictionaryDbModel1.AspNetUserToken" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DictionaryDbModel1.Definition" Width="1.5" PointX="10.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DictionaryDbModel1.Essay" Width="1.5" PointX="3" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DictionaryDbModel1.History" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DictionaryDbModel1.Meaning" Width="1.5" PointX="8" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DictionaryDbModel1.Note" Width="1.5" PointX="5.25" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DictionaryDbModel1.Phonetic" Width="1.5" PointX="8" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="DictionaryDbModel1.Word" Width="1.5" PointX="5.75" PointY="2.5" IsExpanded="true" />
+        <AssociationConnector Association="DictionaryDbModel1.FK_AspNetRoleClaims_AspNetRoles_RoleId" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryDbModel1.FK_AspNetUserRoles_AspNetRoles_RoleId" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryDbModel1.FK_AspNetUserRoles_AspNetRoles_RoleId1" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryDbModel1.FK_AspNetUserClaims_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryDbModel1.FK_AspNetUserLogins_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryDbModel1.FK_AspNetUserRoles_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryDbModel1.FK_AspNetUserRoles_AspNetUsers_UserId1" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryDbModel1.FK_AspNetUserTokens_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryDbModel1.FK_Essays_AspNetUsers_userId" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryDbModel1.FK_Histories_AspNetUsers_userId" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryDbModel1.FK_Definitions_Meanings_meaningId" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryDbModel1.FK_Histories_Essays_essayId" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryDbModel1.FK_Notes_Essays_EssayId" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryDbModel1.FK_Meanings_Words_wordId" ManuallyRouted="false" />
+        <AssociationConnector Association="DictionaryDbModel1.FK_Phonetics_Words_wordId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

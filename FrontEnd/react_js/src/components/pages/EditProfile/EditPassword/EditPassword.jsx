@@ -8,10 +8,13 @@ function EditPassword() {
     myHeader.append("Content-Type","application/json");
     myHeader.append("Authorization", "Bearer "+ sessionStorage.getItem("token"));
     
+    var raw = JSON.stringify({
+        currentPassword:document.getElementById()
+    })
     useEffect(()=>{
         
         fetch("https://localhost:44391/api/user", {
-            method:"GET",
+            method:"PUT",
             headers:myHeader,
             redirect:"follow"
         })

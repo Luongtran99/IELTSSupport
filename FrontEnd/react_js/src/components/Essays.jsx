@@ -10,8 +10,10 @@ function Essays() {
     const [essayDetail, setEssayDetail] = useState([]);
     const [context, setContent] = useState('');
     const [username, setUsername] = useState('');
-    useEffect(async () => {
-        await fetch("https://localhost:44391/api/essay/"+id, {
+    const [_userId, setUserId] = useState('');
+
+    useEffect(() => {
+        fetch("https://localhost:44391/api/essay/"+id, {
             method:"GET",
             redirect:"follow"
         })
@@ -19,6 +21,8 @@ function Essays() {
         .then(result => {
             //console.log(result);
             setEssayDetail(result);
+            setUserId(essayDetail.userId);
+            //console.log()
             setContent(result.text);
         })
         .catch(error=> console.log(error))
@@ -33,11 +37,13 @@ function Essays() {
             redirect:"follow"
         }
         // 
-        await fetch("https://localhost:44391/api/user", requestOptions)
+        fetch("https://localhost:44391/api/user/"+_userId, requestOptions)
             .then(response => response.json())
             .then(result =>{
+                console.log(_userId);
+                console.log(result);
                 setUsername(result.userName);
-                //console.log(infor);
+                console.log(username);
             })
             .catch(error => console.log(error));
     }, [])
@@ -89,7 +95,7 @@ function Essays() {
                                 </span>
                             })}
                         </section>
-                        || <div style={{ backgroundColor: "#fff", fontSize: "20px",outline:"none"}} contentEditable="true">
+                        || <div style={{ backgroundColor: "#fff", fontSize: "20px",outline:"none"}} id="edit_area" contentEditable="true">
                             {context.split('\n').map((par) =>{
                                 return <span>
                                     {par}
@@ -114,7 +120,6 @@ function Essays() {
                                             <a href="#" >
                                                 <div className={"ali"} style={{ width: "100%", height: "30px" }} onClick={() =>{
                                                     setEdit(true);
-                                                    
                                                 }}>
                                                     Edit
                                                 </div>
@@ -146,7 +151,31 @@ function Essays() {
                                         </li>
                                         {edit && <li style={{ padding: "10px" }} >
                                             <a href="#">
-                                                <div className={"ali"} style={{ width: "100%", height: "30px" }}>Save</div>
+                                                <div className={"ali"} onClick={() => {
+
+                                                    var myHeaders = new Headers();
+                                                    myHeaders.append("Authorization", "Bearer "+sessionStorage.getItem("token"));
+                                                    myHeaders.append("Content-Type", "application/json");
+                                                    //myHeaders.append("Cookie", ".AspNetCore.Identity.Application=CfDJ8Oz-3WPzo5xGrQPZqgLp7qWb11pHAPPE0r71Fw_ylSORNTAC2VUiKzeh1ByAKAbH70yM-D8Y006DH9RnCvSrLHmYtALk4MYPSnwL8jTTg5b82f2IsQtf-0caSeXD9M-HbjRn5Vq6aktDHaIhcaCvX5lQ7f6x9fsmWd_7neVZ__RCqBb_Yv5smCMrOulGzRBvPIiNspjTPudA-ijZGXbOGuJPMTFrRikAkiLs0T1b0p7T2l4GqolZ4DPIE-T1rkBZYc49kUTEXXByVmQJf9HeCF2VjIJa_pv7MWnJPCg7Vzy89nfzP1GU9LKWIV2aGyenE1S9SsPe7PHppzWg-5Qo2OAmdH1PWkPtzdQMhlNuq4lG3MBRw1tkx2fQ7E4ZTEja8muC_89ZCjP7Ow1KTXAr1S35-EKGM_IorhK0vnXEWtNV8kdktOQewoVxCush2rzOGsyFlAQg79m4FznCnTfI5ONqFNstGzHQrQLeqyiDo0JkjFRLZ3G8u_x5mQtJLCtIk5SVGuHgveY3mJswRXLCs4lEPd7DngoH1GYIPI8yrfUmrL9P_08r2M-_UBzwvle1kP2cJ9-DvwLdcFfxPXa7GQKHlkj_tAJCGuGa3OikF0Lkn5QJAVW6KQusQyGO6gLl1Q");
+                                                    
+                                                    var raw = JSON.stringify(
+                                                        {
+                                                            "text":document.getElementById("edit_area").textContent,
+                                                            "topic":document.getElementById("topic").textContent
+                                                        });
+                                                    
+                                                    var requestOptions = {
+                                                      method: 'PUT',
+                                                      headers: myHeaders,
+                                                      body: raw,
+                                                      redirect: 'follow'
+                                                    };
+                                                    
+                                                    fetch("https://localhost:44391/api/essay/07f7bcdf-3d91-48f2-a95b-d7ffc9acea35", requestOptions)
+                                                      .then(response => response.text())
+                                                      .then(result => console.log(result))
+                                                      .catch(error => console.log('error', error));
+                                                }} style={{ width: "100%", height: "30px" }}>Save</div>
                                             </a>
                                         </li>}
                                     </ul>
@@ -158,7 +187,7 @@ function Essays() {
                         <hr style={{ margin: "20px 0px" }}></hr>
                         <div >
                             <h3>Topic:</h3>
-                            <p>{essayDetail.topic}</p>
+                            <p id="topic">{essayDetail.topic}</p>
                         </div>
                         <hr style={{ margin: "20px 0px" }}></hr>
                         <div>

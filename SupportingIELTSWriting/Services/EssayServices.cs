@@ -116,8 +116,9 @@ namespace SupportingIELTSWriting.Services
             return x;
         }
 
-        public async Task<bool> UserOwnEssayAsync(string essayId, string v)
+        public async Task<bool> UserOwnEssayAsync(string essayId, string currentUser)
         {
+
             var essay = await context.Essays.AsNoTracking().SingleOrDefaultAsync(p => p.Id == essayId);
 
             if(essay == null)
@@ -125,7 +126,12 @@ namespace SupportingIELTSWriting.Services
                 return false;
             }
 
-            if(essay.userId != v)
+            if(essay.userId == null)
+            {
+                return true;
+            }
+
+            if(essay.userId != currentUser)
             {
                 return false;
             }
