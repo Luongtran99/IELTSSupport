@@ -49,7 +49,7 @@ function HeroSection() {
                     buttonSize='btn--large'
                     
                 >
-                    WATCH SUPPORT <i className='far fa-play-circle' />
+                    SIGN IN <i class="fas fa-sign-in" aria-hidden="true"></i>
                 </Button>
             </div>
         </div>
