@@ -55,6 +55,21 @@ namespace SupportingIELTSWriting.Services
 
         public async Task<bool> DeleteEssayByIdAsync(string id)
         {
+
+            // check 
+            var history = new History { essayId = id };
+
+            List<History> x = context.Histories.Where(p => p.essayId == id).ToList();
+
+            foreach( var i in x)
+            {
+                context.Histories.Remove(i);
+                context.SaveChanges();
+            }
+
+            // remove in history
+            //context.Histories.RemoveRange(history);
+            //context.SaveChanges();
             var essay = await GetEssayByIdAsync(id);
 
             if (essay == null)

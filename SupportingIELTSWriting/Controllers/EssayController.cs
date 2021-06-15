@@ -239,11 +239,25 @@ namespace SupportingIELTSWriting.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> DeleteEssayAsync([FromRoute]string id)
         {
+            var userId = HttpContext.GetUserId();
+            var userOwnEssay = await _essayServices.UserOwnEssayAsync(id, HttpContext.GetUserId());
+            if (!userOwnEssay)
+            {
+                return BadRequest(new { error = "You do not own this essay" });
+            }
+
             var deleted = await _essayServices.DeleteEssayByIdAsync(id);
 
             if (deleted)
             {
-                return NoContent();
+                return Ok(new AuthResult
+                {
+                    isSuccess = true,
+                    Message = new string[]
+                    {
+                        "Deleted completely"
+                    }
+                });
             }
             return NotFound();
         }

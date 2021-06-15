@@ -48,6 +48,23 @@ function Essays() {
             .catch(error => console.log(error));
     }, [])
 
+    const Delete = () => {
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer " + sessionStorage.getItem("token"));
+
+        var requestOptions = {
+            method: 'DELETE',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch("https://localhost:44391/api/essay/" + id, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                alert(result.message)
+                })
+            .catch(error => console.log('error', error));
+    }
 
     return (
         <>
@@ -127,7 +144,7 @@ function Essays() {
                                         </li>
                                         <li style={{ padding: "10px" }}>
                                             <a href="#" >
-                                                <div className={"ali"} style={{ width: "100%", height: "30px" }}>
+                                                <div className={"ali"} onCick={Delete} style={{ width: "100%", height: "30px" }}>
                                                     Delete
                                                 </div>
                                             </a>
