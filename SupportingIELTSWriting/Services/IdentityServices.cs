@@ -6,7 +6,10 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using SupportingIELTSWriting.Models;
 using SupportingIELTSWriting.Models.Entities;
@@ -18,14 +21,21 @@ namespace SupportingIELTSWriting.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly RoleManager<Roles> _roleManager;
         private readonly JwtOptions _jwtOptions;
-        public IdentityServices(UserManager<User> userManager,SignInManager<User> signInManager, JwtOptions jwtOptions)
+        private readonly IConfiguration _configuration;
+
+        public IdentityServices(UserManager<User> userManager,SignInManager<User> signInManager, RoleManager<Roles> roleManager ,JwtOptions jwtOptions,  IConfiguration configuration)
         {
+            //httpContext = ct;
+            _roleManager = roleManager;
             _userManager = userManager;
             _signInManager = signInManager;
             _jwtOptions = jwtOptions;
+            _configuration = configuration;
         }
 
+        // generate token for user
         private AuthResult GeneratingAuthResultForUser(User user)
         {
             JwtSecurityTokenHandler TokenHandler = new JwtSecurityTokenHandler();
@@ -56,9 +66,13 @@ namespace SupportingIELTSWriting.Services
             };
         }
 
-        public async Task<AuthResult> LoginAsync(string username, string password)
+        public async Task<AuthResult> LoginAsync(string email, string password, bool rememberMe = false)
         {
-            var user = await _userManager.FindByEmailAsync(username);
+
+            // check if account is login in another computer
+            
+
+            var user = await _userManager.FindByEmailAsync(email);
 
             if(user == null)
             {
@@ -67,15 +81,40 @@ namespace SupportingIELTSWriting.Services
                     Message = new[] { "user doesn't exist" }
                 };
             }
-
             //var checkPassword = await _userManager.CheckPasswordAsync(user, password);
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, password, lockoutOnFailure: false);
 
+
             if (result.Succeeded)
             {
+                // set time duration
+                var tokenLifeTime = _configuration.GetValue("TokenLifeTimeMinutes", 120);
+                var props = new AuthenticationProperties
+                {
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(tokenLifeTime),
+                    AllowRefresh = true,
+                    RedirectUri = "/login"
+                };
+
+                // check if it is remember me
+                if (rememberMe)
+                {
+                    var permanentTokenLifeTime = _configuration.GetValue("PermanentTokenLifeTime", 365);
+                    props.ExpiresUtc = DateTimeOffset.UtcNow.AddDays(permanentTokenLifeTime);
+                    props.IsPersistent = true;
+                }
+
+                await _signInManager.SignInAsync(user, props);
+
                 return GeneratingAuthResultForUser(user);
             }
+
+            if (result.IsLockedOut)
+            {
+
+            }
+            
 
             return new AuthResult
             {
@@ -85,43 +124,122 @@ namespace SupportingIELTSWriting.Services
 
         public async Task<AuthResult> RegisterAsync(string email, string password)
         {
-            var exits = await _userManager.FindByEmailAsync(email); //?????/
-
-            if (exits != null)
-            {
-                return new AuthResult
-                {
-                    Message = new[] { "email has been used" }
-                };
-            }
-
             var newUser = new User
             {
                 Email = email,
-                UserName = email
+                UserName = email,
+                EmailConfirmed = true
             };
 
-            var createUser = await _userManager.CreateAsync(newUser, password); // microsoft password was hashed
+            //var createUser = await _userManager.CreateAsync(newUser, password); // microsoft password was hashed
 
-            
-            if (!createUser.Succeeded)
+            if(_userManager.Users.All(p => p.Id != newUser.Id))
+            {
+                var user = await _userManager.FindByEmailAsync(newUser.Email);
+                if(user == null)
+                {
+                    var createUser = await _userManager.CreateAsync(newUser, password);
+                    await _userManager.AddToRolesAsync(newUser, new string[] 
+                    {
+                        Roles.Role.Member.ToString(),
+                        Roles.Role.Customer.ToString()
+                    });
+
+                    if (!createUser.Succeeded)
+                    {
+                        return new AuthResult
+                        {
+                            isSuccess = false,
+                            Message = createUser.Errors.Select(p => p.Description)
+                        };
+                    }
+                    else
+                    {
+                        await _signInManager.SignInAsync(newUser, isPersistent: false);
+
+                        return GeneratingAuthResultForUser(newUser);
+                    }
+
+
+                }
+                else
+                {
+                    // update it later
+                    return new AuthResult
+                    {
+                        code = "9993",
+                        isSuccess = false,
+                        Message = new string[]
+                        {
+                            "email has been used. Please try "
+                        }
+                    };
+                }
+            }
+            else
             {
                 return new AuthResult
                 {
-                    Message = createUser.Errors.Select(p => p.Description)
+                    isSuccess = false,
+                    Message = new string[]
+                    {
+                        ""
+                    }
                 };
             }
-
-            await _signInManager.SignInAsync(newUser, isPersistent: false);
-
-            return GeneratingAuthResultForUser(newUser);
-
         }
 
         public async Task<bool> LogoutAsync()
         {
             await _signInManager.SignOutAsync();
             return true;
+        }
+
+        //public Task<AuthResult> LoginAsync(string username, string password)
+        //{
+        //    throw new NotImplementedException();
+        //}
+        public async Task<AuthResult> ChangePassword(string userId, string currentPassword, string pasword)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            
+            
+            if (user == null)
+            {
+                return new AuthResult
+                {
+                    Message = new[] { "user doesn't exist" }
+                };
+            }
+
+            var x = await _userManager.CheckPasswordAsync(user, currentPassword);
+
+
+
+
+            // change password
+            var result = await _userManager.ChangePasswordAsync(user,currentPassword, pasword) ;
+
+            if (result.Succeeded)
+            {
+                return new AuthResult
+                {
+                    isSuccess = true,
+                    Message = new string[]
+                    {
+                        "Change password completely"
+                    }
+                };
+            }
+            else
+            {
+                return new AuthResult
+                {
+                    isSuccess = false,
+                    Message = new string[] { result.Errors.ToString() }
+                };
+            }
         }
     }
 }

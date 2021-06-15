@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2dec44a3-1f11-40b1-bcd1-53de72baa92e}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>src\corpus_reader.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId>Global|PythonCore|3.6</InterpreterId>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="DemoTernarySearchTree\obj\Debug\DemoTernarySearchTree.csproj.FileListAbsolute.txt" />
+    <Content Include="FrontEnd\about.html" />
+    <Content Include="FrontEnd\css\style.css" />
+    <Content Include="FrontEnd\docs.html" />
+    <Content Include="FrontEnd\essays.html" />
+    <Content Include="FrontEnd\images\a174_1_cover_image_1_edited.jpg" />
+    <Content Include="FrontEnd\images\ielts-are-you-ready1786872093..jpg" />
+    <Content Include="FrontEnd\images\unnamed.jpg" />
+    <Content Include="FrontEnd\index.html" />
+    <Content Include="FrontEnd\js\check_word.js" />
+    <Content Include="FrontEnd\js\include.js" />
+    <Content Include="FrontEnd\js\process.js" />
+    <Content Include="FrontEnd\login.html" />
+    <Content Include="FrontEnd\register.html" />
+    <Content Include="FrontEnd\translate.html" />
+    <Content Include="FrontEnd\usermanager.html" />
+    <Content Include="packages\EntityFramework.6.2.0\tools\about_EntityFramework.help.txt" />
+    <Content Include="packages\Microsoft.NETCore.Platforms.1.1.0\dotnet_library_license.txt" />
+    <Content Include="packages\Microsoft.NETCore.Platforms.1.1.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\Microsoft.Win32.Primitives.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\Microsoft.Win32.Primitives.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\NETStandard.Library.1.6.1\dotnet_library_license.txt" />
+    <Content Include="packages\NETStandard.Library.1.6.1\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.AppContext.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.AppContext.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Collections.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Collections.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Collections.Concurrent.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Collections.Concurrent.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.ComponentModel.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.ComponentModel.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Console.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Console.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Diagnostics.Debug.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Diagnostics.Debug.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Diagnostics.DiagnosticSource.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Diagnostics.DiagnosticSource.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Diagnostics.Tools.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Diagnostics.Tools.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Diagnostics.Tracing.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Diagnostics.Tracing.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Globalization.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Globalization.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Globalization.Calendars.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Globalization.Calendars.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.IO.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.IO.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.IO.Compression.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.IO.Compression.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.IO.Compression.ZipFile.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.IO.Compression.ZipFile.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.IO.FileSystem.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.IO.FileSystem.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.IO.FileSystem.Primitives.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.IO.FileSystem.Primitives.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Linq.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Linq.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Linq.Expressions.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Linq.Expressions.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Net.Http.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Net.Http.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Net.Primitives.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Net.Primitives.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Net.Sockets.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Net.Sockets.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.ObjectModel.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.ObjectModel.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Reflection.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Reflection.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Reflection.Extensions.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Reflection.Extensions.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Reflection.Primitives.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Reflection.Primitives.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Resources.ResourceManager.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Resources.ResourceManager.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Runtime.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Runtime.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Runtime.Extensions.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Runtime.Extensions.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Runtime.Handles.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Runtime.Handles.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Runtime.InteropServices.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Runtime.InteropServices.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Runtime.Numerics.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Runtime.Numerics.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Security.Cryptography.Algorithms.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Security.Cryptography.Algorithms.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Security.Cryptography.Encoding.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Security.Cryptography.Encoding.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Security.Cryptography.Primitives.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Security.Cryptography.Primitives.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Security.Cryptography.X509Certificates.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Security.Cryptography.X509Certificates.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Text.Encoding.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Text.Encoding.Extensions.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Text.Encoding.Extensions.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Text.RegularExpressions.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Text.RegularExpressions.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Threading.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Threading.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Threading.Tasks.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Threading.Tasks.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Threading.Timer.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Threading.Timer.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Xml.ReaderWriter.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Xml.ReaderWriter.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Xml.XDocument.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Xml.XDocument.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="packages\System.Xml.XmlSerializer.4.3.0\dotnet_library_license.txt" />
+    <Content Include="packages\System.Xml.XmlSerializer.4.3.0\ThirdPartyNotices.txt" />
+    <Content Include="SupportIELTSWritingML.Model\obj\Debug\netstandard2.0\SupportIELTSWritingML.Model.csproj.FileListAbsolute.txt" />
+    <Content Include="SupportingIELTSWriting\obj\Debug\netcoreapp2.1\SupportingIELTSWriting.csproj.FileListAbsolute.txt" />
+    <Content Include="SupportingIELTSWriting\obj\Release\netcoreapp2.1\SupportingIELTSWriting.csproj.FileListAbsolute.txt" />
+    <Content Include="SupportingIELTSWriting\wwwroot\images\API LOGIN.JPG" />
+    <Content Include="SupportingIELTSWriting\wwwroot\images\class.JPG" />
+    <Content Include="SupportingIELTSWriting\wwwroot\images\REGISTER.JPG" />
+    <Content Include="yelp_labelled.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DemoTernarySearchTree\" />
+    <Folder Include="DemoTernarySearchTree\obj\" />
+    <Folder Include="DemoTernarySearchTree\obj\Debug" />
+    <Folder Include="FrontEnd" />
+    <Folder Include="FrontEnd\css" />
+    <Folder Include="FrontEnd\images" />
+    <Folder Include="FrontEnd\js" />
+    <Folder Include="src\" />
+    <Folder Include="packages\" />
+    <Folder Include="packages\EntityFramework.6.2.0\" />
+    <Folder Include="packages\EntityFramework.6.2.0\tools" />
+    <Folder Include="packages\Microsoft.NETCore.Platforms.1.1.0" />
+    <Folder Include="packages\Microsoft.Win32.Primitives.4.3.0" />
+    <Folder Include="packages\NETStandard.Library.1.6.1" />
+    <Folder Include="packages\System.AppContext.4.3.0" />
+    <Folder Include="packages\System.Collections.4.3.0" />
+    <Folder Include="packages\System.Collections.Concurrent.4.3.0" />
+    <Folder Include="packages\System.ComponentModel.4.3.0" />
+    <Folder Include="packages\System.Console.4.3.0" />
+    <Folder Include="packages\System.Diagnostics.Debug.4.3.0" />
+    <Folder Include="packages\System.Diagnostics.DiagnosticSource.4.3.0" />
+    <Folder Include="packages\System.Diagnostics.Tools.4.3.0" />
+    <Folder Include="packages\System.Diagnostics.Tracing.4.3.0" />
+    <Folder Include="packages\System.Globalization.4.3.0" />
+    <Folder Include="packages\System.Globalization.Calendars.4.3.0" />
+    <Folder Include="packages\System.IO.4.3.0" />
+    <Folder Include="packages\System.IO.Compression.4.3.0" />
+    <Folder Include="packages\System.IO.Compression.ZipFile.4.3.0" />
+    <Folder Include="packages\System.IO.FileSystem.4.3.0" />
+    <Folder Include="packages\System.IO.FileSystem.Primitives.4.3.0" />
+    <Folder Include="packages\System.Linq.4.3.0" />
+    <Folder Include="packages\System.Linq.Expressions.4.3.0" />
+    <Folder Include="packages\System.Net.Http.4.3.0" />
+    <Folder Include="packages\System.Net.Primitives.4.3.0" />
+    <Folder Include="packages\System.Net.Sockets.4.3.0" />
+    <Folder Include="packages\System.ObjectModel.4.3.0" />
+    <Folder Include="packages\System.Reflection.4.3.0" />
+    <Folder Include="packages\System.Reflection.Extensions.4.3.0" />
+    <Folder Include="packages\System.Reflection.Primitives.4.3.0" />
+    <Folder Include="packages\System.Resources.ResourceManager.4.3.0" />
+    <Folder Include="packages\System.Runtime.4.3.0" />
+    <Folder Include="packages\System.Runtime.CompilerServices.Unsafe.4.3.0" />
+    <Folder Include="packages\System.Runtime.Extensions.4.3.0" />
+    <Folder Include="packages\System.Runtime.Handles.4.3.0" />
+    <Folder Include="packages\System.Runtime.InteropServices.4.3.0" />
+    <Folder Include="packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0" />
+    <Folder Include="packages\System.Runtime.Numerics.4.3.0" />
+    <Folder Include="packages\System.Security.Cryptography.Algorithms.4.3.0" />
+    <Folder Include="packages\System.Security.Cryptography.Encoding.4.3.0" />
+    <Folder Include="packages\System.Security.Cryptography.Primitives.4.3.0" />
+    <Folder Include="packages\System.Security.Cryptography.X509Certificates.4.3.0" />
+    <Folder Include="packages\System.Text.Encoding.4.3.0" />
+    <Folder Include="packages\System.Text.Encoding.Extensions.4.3.0" />
+    <Folder Include="packages\System.Text.RegularExpressions.4.3.0" />
+    <Folder Include="packages\System.Threading.4.3.0" />
+    <Folder Include="packages\System.Threading.Tasks.4.3.0" />
+    <Folder Include="packages\System.Threading.Timer.4.3.0" />
+    <Folder Include="packages\System.Xml.ReaderWriter.4.3.0" />
+    <Folder Include="packages\System.Xml.XDocument.4.3.0" />
+    <Folder Include="packages\System.Xml.XmlSerializer.4.3.0" />
+    <Folder Include="SupportIELTSWritingML.Model\" />
+    <Folder Include="SupportIELTSWritingML.Model\obj\" />
+    <Folder Include="SupportIELTSWritingML.Model\obj\Debug\" />
+    <Folder Include="SupportIELTSWritingML.Model\obj\Debug\netstandard2.0" />
+    <Folder Include="SupportingIELTSWriting\" />
+    <Folder Include="SupportingIELTSWriting\obj\" />
+    <Folder Include="SupportingIELTSWriting\obj\Debug\" />
+    <Folder Include="SupportingIELTSWriting\obj\Debug\netcoreapp2.1" />
+    <Folder Include="SupportingIELTSWriting\obj\Release\" />
+    <Folder Include="SupportingIELTSWriting\obj\Release\netcoreapp2.1" />
+    <Folder Include="SupportingIELTSWriting\wwwroot\" />
+    <Folder Include="SupportingIELTSWriting\wwwroot\images" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|PythonCore|3.6" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\corpus_reader.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\main.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\__init___.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>

@@ -78,13 +78,12 @@ namespace SupportingIELTSWriting.Services
                      select new Phonetic
                      {
                          audio =q.audio,
-                         text = q.text,
-                         
-                     });
+                         text = q.text
+                     }).ToList();
             //var x = context.Words.Where(p => p.word == word);
             // var x = context.Words.
             //var result = context.Words.Where(p => p.word == word).Join(context.Meanings.Where(p => p.wordId));
-            if (x != null)
+            if (x.Count != 0)
             {
                 return true;
             }
@@ -129,6 +128,7 @@ namespace SupportingIELTSWriting.Services
                                     definitions = (from j in context.Meanings
                                                    join k in context.Definitions on j.meaningId equals k.meaningId
                                                    where j.wordId == ep.wordId
+                                                   where k.meaningId == e.meaningId
                                                    select new Definition
                                                    {
                                                        definition = k.definition,

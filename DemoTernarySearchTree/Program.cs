@@ -15,6 +15,8 @@ using System.Net;
 using static System.Net.Mime.MediaTypeNames;
 using System.Text.RegularExpressions;
 
+
+
 namespace DemoTernarySearchTree
 {
     class Program
@@ -701,7 +703,6 @@ namespace DemoTernarySearchTree
             {
                 if(eachWrd == "halh")
                 {
-
                     break;
                 }
             }
@@ -711,6 +712,12 @@ namespace DemoTernarySearchTree
 
             return supportWordList;
         }
+
+        /*private static string filePythonExePath = Properties.Settings.Default.FilePythonExePath;
+        private static string folderImagePath = Properties.Settings.Default.FolderImagePath;
+        private static string filePythonNamePath = Properties.Settings.Default.FilePythonNamePath;
+        private static string filePythonParameterName = Properties.Settings.Default.FilePythonParameterName;*/
+
 
         //public static async Task RunAsync()
         //{
@@ -731,8 +738,8 @@ namespace DemoTernarySearchTree
         {
             // The code provided will print ‘Hello World’ to the console.
             // Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
-            char cRoot = 't';
-            TSTNode root = new TSTNode(cRoot);
+            //char cRoot = 't';
+            //TSTNode root = new TSTNode(cRoot);
 
             //AddNode(root, "tham", 0, null);
             //AddNode(root, "thì", 0, null);
@@ -842,7 +849,7 @@ namespace DemoTernarySearchTree
             myWebClient.DownloadFile(myStringWebResource, fileName);
             Console.WriteLine("Successfully Downloaded File \"{0}\" from \"{1}\"", fileName, myStringWebResource);*/
             //Console.WriteLine(Damerau_Levenshtein_OSA("cat", "what"));
-            RunAsync();
+            //RunAsync();
 
 
 
@@ -889,6 +896,19 @@ namespace DemoTernarySearchTree
             //Console.WriteLine(Levenshtein(s2, f1));
             ////Console.WriteLine(Distance_OSA(s2, f1));
             //Console.WriteLine(Damerau_Levenshtein_OSA(s2, f1));
+
+
+            // setup grammar checker 
+
+
+
+
+
+
+
+
+
+
 
             Console.ReadLine();
             // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 

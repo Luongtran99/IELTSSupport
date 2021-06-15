@@ -188,7 +188,7 @@ namespace SupportingIELTSWriting.Infrastructure.TernarySearchTree
 
             if (wrd == "")
             {
-                message = "Tu nhap vao khong the trong";
+                message = "Input can not be null";
                 return false;
 
             }

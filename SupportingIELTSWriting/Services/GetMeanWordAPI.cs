@@ -15,6 +15,8 @@ namespace SupportingIELTSWriting.Services
         public static async Task<Word> ValueAsync(string word, string popularCount)
         {
 
+
+
             HttpClient client = new HttpClient();
 
             //HttpWebRequest request = WebRequest.Create("https://api.dictionaryapi.dev/api/v2/entries/en/" + word) as HttpWebRequest;

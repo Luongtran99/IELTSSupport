@@ -27,6 +27,9 @@ namespace SupportingIELTSWriting.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("Name")
                         .HasMaxLength(256);
 
@@ -41,6 +44,8 @@ namespace SupportingIELTSWriting.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -109,11 +114,16 @@ namespace SupportingIELTSWriting.Data.Migrations
 
                     b.Property<string>("RoleId");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUserRole<string>");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -169,6 +179,8 @@ namespace SupportingIELTSWriting.Data.Migrations
 
                     b.Property<bool>("isDeleted");
 
+                    b.Property<bool>("isPublish");
+
                     b.Property<DateTime>("theLastFixingTime");
 
                     b.Property<string>("userId");
@@ -206,6 +218,27 @@ namespace SupportingIELTSWriting.Data.Migrations
                     b.ToTable("Histories");
                 });
 
+            modelBuilder.Entity("SupportingIELTSWriting.Models.Entities.Notes", b =>
+                {
+                    b.Property<int>("NotesId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("CreatedDate");
+
+                    b.Property<string>("EssayId");
+
+                    b.Property<string>("Mean");
+
+                    b.Property<string>("Sentence");
+
+                    b.HasKey("NotesId");
+
+                    b.HasIndex("EssayId");
+
+                    b.ToTable("Notes");
+                });
+
             modelBuilder.Entity("SupportingIELTSWriting.Models.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -213,7 +246,9 @@ namespace SupportingIELTSWriting.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<int>("Age");
+                    b.Property<int?>("Age");
+
+                    b.Property<string>("Bio");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -225,6 +260,8 @@ namespace SupportingIELTSWriting.Data.Migrations
 
                     b.Property<string>("FirstName")
                         .HasMaxLength(50);
+
+                    b.Property<int>("Gender");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(50);
@@ -253,6 +290,8 @@ namespace SupportingIELTSWriting.Data.Migrations
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
+
+                    b.Property<string>("WebSite");
 
                     b.Property<bool>("isDeleted");
 
@@ -322,6 +361,33 @@ namespace SupportingIELTSWriting.Data.Migrations
                         .HasName("PRIMARY_KEY_WORD");
 
                     b.ToTable("Words");
+                });
+
+            modelBuilder.Entity("SupportingIELTSWriting.Models.Entities.Roles", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
+
+
+                    b.ToTable("Roles");
+
+                    b.HasDiscriminator().HasValue("Roles");
+                });
+
+            modelBuilder.Entity("SupportingIELTSWriting.Models.Entities.UserRole", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUserRole<string>");
+
+                    b.Property<string>("RoleId1");
+
+                    b.Property<string>("UserId1");
+
+                    b.HasIndex("RoleId1");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("UserRole");
+
+                    b.HasDiscriminator().HasValue("UserRole");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -394,6 +460,13 @@ namespace SupportingIELTSWriting.Data.Migrations
                         .HasForeignKey("userId");
                 });
 
+            modelBuilder.Entity("SupportingIELTSWriting.Models.Entities.Notes", b =>
+                {
+                    b.HasOne("SupportingIELTSWriting.Models.Entities.Essay", "Essay")
+                        .WithMany("Notes")
+                        .HasForeignKey("EssayId");
+                });
+
             modelBuilder.Entity("SupportingIELTSWriting.Models.Meaning", b =>
                 {
                     b.HasOne("SupportingIELTSWriting.Models.Word", "Word")
@@ -406,6 +479,17 @@ namespace SupportingIELTSWriting.Data.Migrations
                     b.HasOne("SupportingIELTSWriting.Models.Word", "Word")
                         .WithMany("phonetics")
                         .HasForeignKey("wordId");
+                });
+
+            modelBuilder.Entity("SupportingIELTSWriting.Models.Entities.UserRole", b =>
+                {
+                    b.HasOne("SupportingIELTSWriting.Models.Entities.Roles", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId1");
+
+                    b.HasOne("SupportingIELTSWriting.Models.Entities.User", "User")
+                        .WithMany("Roles")
+                        .HasForeignKey("UserId1");
                 });
 #pragma warning restore 612, 618
         }

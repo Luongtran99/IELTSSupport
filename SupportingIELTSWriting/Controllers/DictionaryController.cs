@@ -16,19 +16,14 @@ namespace SupportingIELTSWriting.Controllers
     public class DictionaryController : ControllerBase
     {
         private IWordServices context;
-        public DictionaryController(IWordServices ct)
+        private ITernarySearchTreeRepository ternary;
+        public DictionaryController(IWordServices ct, ITernarySearchTreeRepository ternary)
         {
             this.context = ct;
+            this.ternary = ternary;
         }
 
-        // GET: api/Dictionary
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/Dictionary/5
+        // GET: api/Dictionary/{word}
         [HttpGet("{word}")]
         public async Task<ActionResult> GetMeanByWord(string word)
         {
@@ -41,12 +36,19 @@ namespace SupportingIELTSWriting.Controllers
 
             if(_word == null)
             {
-                var x = await GetMeanWordAPI.ValueAsync(word, null);
+                try
+                {
+                    var x = await GetMeanWordAPI.ValueAsync(word, ternary.getPopularity(word));
 
-                // add to database 
-                await context.AddWordAsync(x);
+                    // add to database 
+                    await context.AddWordAsync(x);
                
-                return Ok(new Result(200, "Found", context.GetWord(word)));
+                    return Ok(new Result(200, "Found", context.GetWord(word)));
+                }
+                catch(Exception ex)
+                {
+                    return NotFound("no value");
+                }
             }
             else
             {

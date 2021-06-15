@@ -10,6 +10,7 @@ namespace SupportingIELTSWriting.Infrastructure
     {
         public static string GetUserId(this HttpContext http)
         {
+            
             if(http.User == null)
             {
                 return string.Empty;

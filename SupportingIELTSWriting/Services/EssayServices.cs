@@ -14,10 +14,36 @@ namespace SupportingIELTSWriting.Services
     {
         private DictionaryDbContext context;
         private IHistoryServices services;
+        int noOfPage = 0;
         public EssayServices(DictionaryDbContext ct, IHistoryServices sv)
         {
             context = ct;
             services = sv;
+            noOfPage = (int)context.Essays.Count() / 10 + 1;
+        }
+
+        public async Task<List<Essay>> getAllEssays(int essayPage)
+        {
+            int pageSize = 10;
+
+            if(essayPage < 0  || essayPage > noOfPage)
+            {
+                return null;
+            }
+
+            List<Essay> x = new List<Essay>();
+
+
+            x = await context.Essays.OrderBy(p => p.Id).ToListAsync();
+
+
+            if (x == null)
+            {
+                return null;
+            }
+
+            return x;
+
         }
 
         public async Task<bool> CreateEssayAsync(Essay essay)
@@ -63,6 +89,8 @@ namespace SupportingIELTSWriting.Services
             return essay;
         }
 
+        // user get their essays
+
         public async Task<List<Essay>> GetEssaysAsync(string userId)
         {
             var essayList = await context.Essays.Where(p => p.userId == userId || p.userId == null).ToListAsync();
@@ -88,8 +116,9 @@ namespace SupportingIELTSWriting.Services
             return x;
         }
 
-        public async Task<bool> UserOwnEssayAsync(string essayId, string v)
+        public async Task<bool> UserOwnEssayAsync(string essayId, string currentUser)
         {
+
             var essay = await context.Essays.AsNoTracking().SingleOrDefaultAsync(p => p.Id == essayId);
 
             if(essay == null)
@@ -97,7 +126,12 @@ namespace SupportingIELTSWriting.Services
                 return false;
             }
 
-            if(essay.userId != v)
+            if(essay.userId == null)
+            {
+                return true;
+            }
+
+            if(essay.userId != currentUser)
             {
                 return false;
             }

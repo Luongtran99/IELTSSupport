@@ -149,38 +149,52 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AspNetRole.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>UpdatedDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetRoleClaim.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>UpdatedDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetUser.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>UpdatedDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetUserClaim.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>UpdatedDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetUserLogin.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>UpdatedDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserRole.cs">
+      <DependentUpon>UpdatedDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="AspNetUserToken.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>UpdatedDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="brand.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="category.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="customer.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="C__EFMigrationsHistory.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>UpdatedDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Definition.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>UpdatedDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Essay.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>UpdatedDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="History.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>UpdatedDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="IMLSharpPython.cs" />
     <Compile Include="Meaning.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>UpdatedDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="MLSharpPython.cs" />
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -196,13 +210,64 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model2.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model2.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model2.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Note.cs">
+      <DependentUpon>UpdatedDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="order.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="order_items.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
     <Compile Include="Phonetic.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>UpdatedDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="product.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="staff.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="stock.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="store.cs">
+      <DependentUpon>Model2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UpdatedDatabase.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdatedDatabase.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UpdatedDatabase.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdatedDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UpdatedDatabase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdatedDatabase.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Word.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>UpdatedDatabase.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -214,7 +279,21 @@
     <None Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </None>
+    <EntityDeploy Include="Model2.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model2.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model2.edmx.diagram">
+      <DependentUpon>Model2.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
+    <EntityDeploy Include="UpdatedDatabase.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UpdatedDatabase.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="UpdatedDatabase.edmx.diagram">
+      <DependentUpon>UpdatedDatabase.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model1.Context.tt">
@@ -226,6 +305,26 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model2.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model2.edmx</DependentUpon>
+      <LastGenOutput>Model2.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model2.edmx</DependentUpon>
+      <LastGenOutput>Model2.cs</LastGenOutput>
+    </Content>
+    <Content Include="UpdatedDatabase.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UpdatedDatabase.edmx</DependentUpon>
+      <LastGenOutput>UpdatedDatabase.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="UpdatedDatabase.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UpdatedDatabase.edmx</DependentUpon>
+      <LastGenOutput>UpdatedDatabase.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

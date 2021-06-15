@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SupportingIELTSWriting.Infrastructure;
 using SupportingIELTSWriting.Models;
 using SupportingIELTSWriting.Models.RequestModel;
 using SupportingIELTSWriting.Services;
@@ -13,9 +17,9 @@ namespace SupportingIELTSWriting.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class AccountController : ControllerBase
     {
-
         private IIdentityServices _services;
         
         public AccountController(IIdentityServices services)
@@ -23,75 +27,106 @@ namespace SupportingIELTSWriting.Controllers
             _services = services;
         }
 
-
-       [HttpPost("register")]
-       public async Task<IActionResult> Register([FromBody]UserRegistrationRequestModel request)
-       {
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(new AuthResult
-                {
-                    Message = ModelState.Values.SelectMany(p => p.Errors.Select(x => x.ErrorMessage))
-                });
-            }
-
-            var authResponse = await _services.RegisterAsync(request.Email, request.Password);
-
-            if (!authResponse.isSuccess)
-            {
-                return BadRequest(new AuthResult
-                {
-                    Message = authResponse.Message
-                });
-
-            }
-
-            return Ok(new AuthResult
-            {
-                Token = authResponse.Token,
-                isSuccess = true,
-                Message = new string[] { "Got token completely!" }
-            });
-       }
-
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]UserLoginRequestModel request)
         {
-            var authResponse = await _services.LoginAsync(request.Username, request.Password);
+            try
+            {
+                var authResponse = await _services.LoginAsync(request.Email, request.Password, request.RememberMe);
 
-            if (!authResponse.isSuccess)
+                if (!authResponse.isSuccess)
+                {
+                    return BadRequest(new AuthResult
+                    {
+                        Message = authResponse.Message
+                    });
+
+                }
+
+                return Ok(new AuthResult
+                {
+                    Token = authResponse.Token,
+                    isSuccess = true,
+                    Message = new string[] { "Login completely" }
+                });
+            }
+            catch(Exception ex)
+            {
+                return NotFound(new AuthResult
+                {
+                    isSuccess = false,
+                    Message = new string[] { ex.Message }
+                });
+            }
+        }
+
+        // Handle postback from username/password register
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody]UserRegistrationRequestModel request)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(new AuthResult
+                    {
+                        Message = ModelState.Values.SelectMany(p => p.Errors.Select(x => x.ErrorMessage))
+                    });
+                }
+
+                var authResponse = await _services.RegisterAsync(request.Email, request.Password);
+
+                if (!authResponse.isSuccess)
+                {
+                    return BadRequest(new AuthResult
+                    {
+                        Message = authResponse.Message
+                    });
+
+                }
+
+                return Ok(new AuthResult
+                {
+                    Token = authResponse.Token,
+                    isSuccess = true,
+                    Message = new string[] { "Got token completely!" }
+                });
+            }
+            catch(Exception ex)
             {
                 return BadRequest(new AuthResult
                 {
-                    Message = authResponse.Message
+                    isSuccess = false,
+                    Message = new string[] { ex.Message }
                 });
-
             }
-
-            return Ok(new AuthResult
-            {
-                Token = authResponse.Token,
-
-                isSuccess = true,
-                Message = new string[] { "Login completely" }
-            });
+            
         }
 
         [HttpPost("logout")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Logout()
         {
             var x = await _services.LogoutAsync();
             return Ok(new AuthResult
             {
+                Token = null,
+                isSuccess = true,
                 Message = new string[] { "Logout completely" }
             });
         }
 
-        [HttpPost("changepassword")]
-        public async Task<IActionResult> ChangePassword([FromRoute] string newPassword)
+        [HttpPut]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<AuthResult> ChangePassword([FromBody]ChangePasswordRequest request)
         {
-            return null;
+            // get current user 
+            string userId = HttpContext.GetUserId();
+
+            // call from context
+            var result = await _services.ChangePassword(userId, request.currentPassword, request.newPassword);
+
+            return result;
         }
     }
 }

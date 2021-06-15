@@ -1,0 +1,22 @@
+.form2{
+  background: var(--clr-white);
+  max-width: var(--fixed-width);
+  margin: 0 auto;
+  border-radius: var(--radius);
+  margin-left:3%;
+  
+}
+
+.form2 input{
+  background: var(--clr-white);
+  border-color: transparent;
+  border-radius: var(--radius);
+  padding: 0.25rem 0.5rem;
+  width: 250px;
+}
+
+@media screen and (max-width: 960px) {
+  .form2{
+    display: none;
+  }
+}

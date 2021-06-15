@@ -1,23 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using SupportingIELTSWriting.Data;
 using SupportingIELTSWriting.Infrastructure.TernarySearchTree;
 using SupportingIELTSWriting.Models;
 using SupportingIELTSWriting.Services;
-using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Identity;
 using SupportingIELTSWriting.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -25,6 +18,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using SupportingIELTSWriting.Models.Entities;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using SupportingIELTSWriting.Infrastructure.Parser;
+using SupportingIELTSWriting.Middlewares;
 
 namespace SupportingIELTSWriting
 {
@@ -40,7 +36,10 @@ namespace SupportingIELTSWriting
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
+            // register grammar checker services
+            services.AddScoped<IGrammarChecker, GrammarChecker>();
+
             services.AddScoped<ITernarySearchTreeRepository, TernarySearchTree>(); // Register Ternary Search Tree
 
             services.AddScoped<IConvertorServices, ConvertorServices>();
@@ -60,8 +59,34 @@ namespace SupportingIELTSWriting
                 options.UseSqlServer(Configuration["Data:Dictionary:ConnectionString"]);
             });
 
+
+            // configure password, lockout, user , ....
+            services.Configure<IdentityOptions>(options =>
+            {
+                
+            });
+
+
             services.AddDefaultIdentity<User>()
+                .AddRoles<Roles>()
                 .AddEntityFrameworkStores<DictionaryDbContext>();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                    .SetIsOriginAllowed((host) => true)
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/AccountController/SignInAsync";
+                
+            });
 
             var jwtOptions = new JwtOptions();
 
@@ -87,10 +112,11 @@ namespace SupportingIELTSWriting
                         ValidateIssuer = false,
                         ValidateAudience = false,
                         RequireExpirationTime = false,
-                        ValidateLifetime = true
+                        ValidateLifetime = true 
 
                     };
-                });
+                })
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, x => Configuration.Bind("CookieSettings",x));
 
 
             //services.AddAuthentication(options =>
@@ -98,7 +124,7 @@ namespace SupportingIELTSWriting
             //    options.DefaultAuthenticateScheme = "JwtBearer";
             //    options.DefaultChallengeScheme = "JwtBearer";
             //});
-
+            
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddMvcOptions(options => 
             {
@@ -107,6 +133,8 @@ namespace SupportingIELTSWriting
 
             services.AddSwaggerGen(setup =>
             {
+                setup.DescribeAllEnumsAsStrings();
+
                 setup.SwaggerDoc(
                     "v1",
                     new OpenApiInfo
@@ -147,11 +175,16 @@ namespace SupportingIELTSWriting
                     }
                 });
             });
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddConsole();
+
+            app.UseMiddleware<GCMiddleware>();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -160,12 +193,13 @@ namespace SupportingIELTSWriting
             {
                 app.UseHsts();
             }
-
+            
             
 
             app.UseHttpsRedirection();
-
-            app.UseAuthentication();
+            app.UseStaticFiles();
+            
+            
 
             var swaggerOptions = new SwaggerOptions();
             Configuration.GetSection(nameof(swaggerOptions)).Bind(swaggerOptions);
@@ -177,11 +211,21 @@ namespace SupportingIELTSWriting
                 x.SwaggerEndpoint(swaggerOptions.UIEndpoint, swaggerOptions.Description);
 
             });
+            app.UseCors("CorsPolicy");
+            app.UseCookiePolicy();
 
-            app.UseMvc();
+            app.UseAuthentication();
 
-            // seed data
+            app.UseMvc( p => {
+                p.MapRoute
+                (
+                    name:null,
+                    template:"{controller}/{action}/{id}"
+                );
+            });
+            // seed data at first run
             // SeedData.EnsurePopulatedAsync(app);
+            // SupportingIELTSWriting.Models.SeedDatas.SeedData.EnsurePopulatedAsync(app);
         }
     }
 }

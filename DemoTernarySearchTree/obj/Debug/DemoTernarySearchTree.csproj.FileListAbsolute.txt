@@ -51,3 +51,7 @@ E:\Lớp học\Project II\SourceCode\SupportIELTSWriting\DemoTernarySearchTree\b
 E:\Lớp học\Project II\SourceCode\SupportIELTSWriting\DemoTernarySearchTree\bin\Debug\System.Diagnostics.DiagnosticSource.xml
 E:\Lớp học\Project II\SourceCode\SupportIELTSWriting\DemoTernarySearchTree\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 E:\Lớp học\Project II\SourceCode\SupportIELTSWriting\DemoTernarySearchTree\obj\Debug\DemoTernarySearchTree.csproj.CopyComplete
+E:\Lớp học\Project II\SourceCode\SupportIELTSWriting\DemoTernarySearchTree\bin\Debug\EntityFramework.dll
+E:\Lớp học\Project II\SourceCode\SupportIELTSWriting\DemoTernarySearchTree\bin\Debug\EntityFramework.SqlServer.dll
+E:\Lớp học\Project II\SourceCode\SupportIELTSWriting\DemoTernarySearchTree\bin\Debug\EntityFramework.xml
+E:\Lớp học\Project II\SourceCode\SupportIELTSWriting\DemoTernarySearchTree\bin\Debug\EntityFramework.SqlServer.xml

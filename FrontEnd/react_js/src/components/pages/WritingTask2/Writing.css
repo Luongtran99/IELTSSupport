@@ -1,0 +1,112 @@
+.edit_area{
+    height: 30rem;
+    width: 100%;
+    min-width: 500px;
+    margin-left: 5px;
+    margin-top:1.2em;
+    background-color: white;
+    padding:10px;
+    line-height: 1.6;
+    box-shadow: 1px 1px 12px rgba(224, 130, 130, 0.514);
+}
+
+.font_select{
+    font-family:"SegoeUI sans";
+    font-size: 20px;
+    text-align: start;
+    
+}
+
+.topic_area{
+    background: rgb(255, 255, 255);
+    padding:5px;
+    padding-left: 20px;
+    height: auto;
+    min-height: 80px;
+    line-height: 1.1;
+    width: 30rem;
+    border-radius: 5px;
+    margin-top: 0.6em;
+    overflow: auto;
+    box-shadow: 1px 1px 12px rgba(90, 179, 174, 0.753);
+    overflow-y: auto;
+
+}
+
+.edit_margin{
+    
+}
+
+.ali:hover{
+    transition: all 0.3s ease-out;
+    background: rgb(221, 120, 120);
+    color: #242424;
+    transition: 250ms;
+}
+
+ .circle-container {
+	 position: absolute;
+	 width: 10em;
+	 height: 10em;
+	 border-radius: 50%;
+	 padding: 0;
+	 list-style: none;
+	 margin: 5em auto 0;
+	 border: solid 5px tomato;
+}
+ .circle-container > * {
+	 display: block;
+	 position: absolute;
+	 top: 50%;
+	 left: 50%;
+	 margin: -3em;
+	 width: 6em;
+	 height: 6em;
+}
+ .circle-container > *:nth-of-type(1) {
+	 transform: rotate(0deg) translate(10em) rotate(0deg);
+}
+ .circle-container > *:nth-of-type(2) {
+	 transform: rotate(45deg) translate(10em) rotate(-45deg);
+}
+ .circle-container > *:nth-of-type(3) {
+	 transform: rotate(90deg) translate(10em) rotate(-90deg);
+}
+ .circle-container > *:nth-of-type(4) {
+	 transform: rotate(135deg) translate(10em) rotate(-135deg);
+}
+ .circle-container > *:nth-of-type(5) {
+	 transform: rotate(180deg) translate(10em) rotate(-180deg);
+}
+ .circle-container > *:nth-of-type(6) {
+	 transform: rotate(225deg) translate(10em) rotate(-225deg);
+}
+ .circle-container > *:nth-of-type(7) {
+	 transform: rotate(270deg) translate(10em) rotate(-270deg);
+}
+ .circle-container > *:nth-of-type(8) {
+	 transform: rotate(315deg) translate(10em) rotate(-315deg);
+}
+ .circle-container img {
+	 display: block;
+	 max-width: 100%;
+	 border-radius: 50%;
+	 filter: grayscale(100%);
+	 border: solid 5px tomato;
+	 transition: 0.15s;
+}
+ .circle-container img:hover {
+	 filter: grayscale(0);
+}
+ 
+.scroll{
+       
+        overflow-x: hidden;
+        overflow-y: auto;
+        text-align: start;
+		padding-left: 10px;
+}
+
+.msghover:hover{
+    
+}

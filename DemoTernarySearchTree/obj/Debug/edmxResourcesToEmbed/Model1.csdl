@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DictionaryDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__EFMigrationsHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoleClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetRole" Relationship="Self.FK_AspNetRoleClaims_AspNetRoles_RoleId" FromRole="AspNetRoleClaims" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="NormalizedName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="ConcurrencyStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetRoleClaims" Relationship="Self.FK_AspNetRoleClaims_AspNetRoles_RoleId" FromRole="AspNetRoles" ToRole="AspNetRoleClaims" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_AspNetUserClaims_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderDisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_AspNetUserLogins_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="NormalizedUserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="NormalizedEmail" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ConcurrencyStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEnd" Type="DateTimeOffset" Precision="7" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Age" Type="Int32" Nullable="false" />
+    <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="ProfileImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_AspNetUserClaims_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_AspNetUserLogins_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="AspNetUserTokens" Relationship="Self.FK_AspNetUserTokens_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserTokens" />
+    <NavigationProperty Name="Essays" Relationship="Self.FK_Essays_AspNetUsers_userId" FromRole="AspNetUsers" ToRole="Essays" />
+    <NavigationProperty Name="Histories" Relationship="Self.FK_Histories_AspNetUsers_userId" FromRole="AspNetUsers" ToRole="Histories" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="AspNetUserToken">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="UserId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_AspNetUserTokens_AspNetUsers_UserId" FromRole="AspNetUserTokens" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Definition">
+    <Key>
+      <PropertyRef Name="definitionId" />
+    </Key>
+    <Property Name="definitionId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="definition1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="example" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="meaningId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+    <Property Name="synonyms" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Meaning" Relationship="Self.FK_Definitions_Meanings_meaningId" FromRole="Definitions" ToRole="Meanings" />
+  </EntityType>
+  <EntityType Name="Essay">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Topic" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="theLastFixingTime" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="userId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+    <Property Name="historyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Essays_AspNetUsers_userId" FromRole="Essays" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Histories" Relationship="Self.FK_Histories_Essays_essayId" FromRole="Essays" ToRole="Histories" />
+  </EntityType>
+  <EntityType Name="History">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="userId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+    <Property Name="essayId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+    <Property Name="oldEssay" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="newEssay" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="isDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Histories_AspNetUsers_userId" FromRole="Histories" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Essay" Relationship="Self.FK_Histories_Essays_essayId" FromRole="Histories" ToRole="Essays" />
+  </EntityType>
+  <EntityType Name="Meaning">
+    <Key>
+      <PropertyRef Name="meaningId" />
+    </Key>
+    <Property Name="meaningId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="partOfSpeech" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="wordId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Definitions" Relationship="Self.FK_Definitions_Meanings_meaningId" FromRole="Meanings" ToRole="Definitions" />
+    <NavigationProperty Name="Word" Relationship="Self.FK_Meanings_Words_wordId" FromRole="Meanings" ToRole="Words" />
+  </EntityType>
+  <EntityType Name="Phonetic">
+    <Key>
+      <PropertyRef Name="phoneticId" />
+    </Key>
+    <Property Name="phoneticId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="audio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="wordId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Word" Relationship="Self.FK_Phonetics_Words_wordId" FromRole="Phonetics" ToRole="Words" />
+  </EntityType>
+  <EntityType Name="Word">
+    <Key>
+      <PropertyRef Name="wordId" />
+    </Key>
+    <Property Name="wordId" Type="String" MaxLength="450" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="word1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="popularCount" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Meanings" Relationship="Self.FK_Meanings_Words_wordId" FromRole="Words" ToRole="Meanings" />
+    <NavigationProperty Name="Phonetics" Relationship="Self.FK_Phonetics_Words_wordId" FromRole="Words" ToRole="Phonetics" />
+  </EntityType>
+  <Association Name="FK_AspNetRoleClaims_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetRoleClaims" Type="Self.AspNetRoleClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetRoleClaims">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUserClaims_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUserLogins_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUserTokens_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserTokens" Type="Self.AspNetUserToken" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserTokens">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Essays_AspNetUsers_userId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Essays" Type="Self.Essay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Essays">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Histories_AspNetUsers_userId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Histories" Type="Self.History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Histories">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Definitions_Meanings_meaningId">
+    <End Role="Meanings" Type="Self.Meaning" Multiplicity="0..1" />
+    <End Role="Definitions" Type="Self.Definition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Meanings">
+        <PropertyRef Name="meaningId" />
+      </Principal>
+      <Dependent Role="Definitions">
+        <PropertyRef Name="meaningId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Histories_Essays_essayId">
+    <End Role="Essays" Type="Self.Essay" Multiplicity="0..1" />
+    <End Role="Histories" Type="Self.History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Essays">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Histories">
+        <PropertyRef Name="essayId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Meanings_Words_wordId">
+    <End Role="Words" Type="Self.Word" Multiplicity="0..1" />
+    <End Role="Meanings" Type="Self.Meaning" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Words">
+        <PropertyRef Name="wordId" />
+      </Principal>
+      <Dependent Role="Meanings">
+        <PropertyRef Name="wordId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Phonetics_Words_wordId">
+    <End Role="Words" Type="Self.Word" Multiplicity="0..1" />
+    <End Role="Phonetics" Type="Self.Phonetic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Words">
+        <PropertyRef Name="wordId" />
+      </Principal>
+      <Dependent Role="Phonetics">
+        <PropertyRef Name="wordId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="DictionaryDbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__EFMigrationsHistory" EntityType="Self.C__EFMigrationsHistory" />
+    <EntitySet Name="AspNetRoleClaims" EntityType="Self.AspNetRoleClaim" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+    <EntitySet Name="AspNetUserTokens" EntityType="Self.AspNetUserToken" />
+    <EntitySet Name="Definitions" EntityType="Self.Definition" />
+    <EntitySet Name="Essays" EntityType="Self.Essay" />
+    <EntitySet Name="Histories" EntityType="Self.History" />
+    <EntitySet Name="Meanings" EntityType="Self.Meaning" />
+    <EntitySet Name="Phonetics" EntityType="Self.Phonetic" />
+    <EntitySet Name="Words" EntityType="Self.Word" />
+    <AssociationSet Name="FK_AspNetRoleClaims_AspNetRoles_RoleId" Association="Self.FK_AspNetRoleClaims_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetRoleClaims" EntitySet="AspNetRoleClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUserClaims_AspNetUsers_UserId" Association="Self.FK_AspNetUserClaims_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUserLogins_AspNetUsers_UserId" Association="Self.FK_AspNetUserLogins_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUserTokens_AspNetUsers_UserId" Association="Self.FK_AspNetUserTokens_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserTokens" EntitySet="AspNetUserTokens" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Essays_AspNetUsers_userId" Association="Self.FK_Essays_AspNetUsers_userId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Essays" EntitySet="Essays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Histories_AspNetUsers_userId" Association="Self.FK_Histories_AspNetUsers_userId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Histories" EntitySet="Histories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Definitions_Meanings_meaningId" Association="Self.FK_Definitions_Meanings_meaningId">
+      <End Role="Meanings" EntitySet="Meanings" />
+      <End Role="Definitions" EntitySet="Definitions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Histories_Essays_essayId" Association="Self.FK_Histories_Essays_essayId">
+      <End Role="Essays" EntitySet="Essays" />
+      <End Role="Histories" EntitySet="Histories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Meanings_Words_wordId" Association="Self.FK_Meanings_Words_wordId">
+      <End Role="Words" EntitySet="Words" />
+      <End Role="Meanings" EntitySet="Meanings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Phonetics_Words_wordId" Association="Self.FK_Phonetics_Words_wordId">
+      <End Role="Words" EntitySet="Words" />
+      <End Role="Phonetics" EntitySet="Phonetics" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
