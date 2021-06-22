@@ -6,20 +6,20 @@ import { Slide } from '@material-ui/core';
 import {Button} from '../Navbar/Button/Button'
 
 
-import img1 from '../../assets/images/img-1.jpg'
-import img2 from '../../assets/images/img-2.jpg'
-import img3 from '../../assets/images/img-3.jpg'
-import img4 from '../../assets/images/img-4.jpg'
-import img5 from '../../assets/images/img-5.jpg'
-import { Link } from 'react-router-dom';
+// import img1 from '../../assets/images/img-1.jpg'
+// import img2 from '../../assets/images/img-2.jpg'
+// import img3 from '../../assets/images/img-3.jpg'
+// import img4 from '../../assets/images/img-4.jpg'
+// import img5 from '../../assets/images/img-5.jpg'
+// import { Link } from 'react-router-dom';
 
-const collection = [
-    { src: img1, caption: "Caption one" },
-    { src: img2, caption: "Caption two" },
-    { src: img3, caption: "Caption three" },
-    { src: img4, caption: "Caption four" },
-    { src: img5, caption: "Caption five" }
-  ];
+// const collection = [
+//     { src: img1, caption: "Caption one" },
+//     { src: img2, caption: "Caption two" },
+//     { src: img3, caption: "Caption three" },
+//     { src: img4, caption: "Caption four" },
+//     { src: img5, caption: "Caption five" }
+//   ];
 
 
 function HeroSection() {
