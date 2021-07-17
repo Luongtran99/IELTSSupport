@@ -21,6 +21,7 @@ using SupportingIELTSWriting.Models.Entities;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using SupportingIELTSWriting.Infrastructure.Parser;
 using SupportingIELTSWriting.Middlewares;
+using Newtonsoft.Json;
 
 namespace SupportingIELTSWriting
 {
@@ -191,6 +192,7 @@ namespace SupportingIELTSWriting
             }
             else
             {
+                app.UseExceptionHandler();
                 app.UseHsts();
             }
             
@@ -223,6 +225,7 @@ namespace SupportingIELTSWriting
                     template:"{controller}/{action}/{id}"
                 );
             });
+
             // seed data at first run
             // SeedData.EnsurePopulatedAsync(app);
             // SupportingIELTSWriting.Models.SeedDatas.SeedData.EnsurePopulatedAsync(app);

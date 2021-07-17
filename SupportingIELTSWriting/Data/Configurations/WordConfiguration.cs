@@ -17,6 +17,7 @@ namespace SupportingIELTSWriting.Data.Configurations
                 .WithOne(p => p.Word)
                 .HasForeignKey(p => p.wordId);
             
+            
         }
     }
 }

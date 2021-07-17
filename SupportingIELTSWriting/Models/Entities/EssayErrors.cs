@@ -13,7 +13,6 @@ namespace SupportingIELTSWriting.Models.Entities
         public int To { get; set; }
         public List<string> Replacements { get; set; }
         public int essayId { get; set; }
-        public Essay Essay { get; set; }
 
         public EssayErrors()
         {
@@ -39,7 +38,7 @@ namespace SupportingIELTSWriting.Models.Entities
         {
             string splitStr = replacementStr.Replace('\'', ' ').Replace('[', ' ').Replace(']', ' ').Replace('\"', ' ').Replace('\r', ' ');
 
-            return splitStr.Split(',').ToList();
+            return splitStr.Split(new char[] { ',' }).ToList();
         }
     }
 }

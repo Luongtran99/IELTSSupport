@@ -12,5 +12,11 @@ namespace SupportingIELTSWriting.Models
         public string userId { get; set; }
         public bool isSuccess { get; set; }
         public IEnumerable<string> Message { get; set; }
+
+        public AuthResult()
+        {
+
+        }
+
     }
 }

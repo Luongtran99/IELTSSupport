@@ -1,5 +1,7 @@
+import { Link, useHistory, useParams } from 'react-router-dom'
 import React from 'react'
-
+import SwaggerUI from 'swagger-ui-react'
+import "swagger-ui-react/swagger-ui"
 function Contact() {
     return (
         <main style={{width:"100%",minHeight:"650px", height:"auto", backgroundColor:"#fff",color:"#383838",marginTop:"-30px", display:"flex",justifyContent:"center",alignItems:"center"}} role="main">
@@ -34,7 +36,7 @@ function Contact() {
                     </li>
                 </ul>
                 <article>
-                    
+                    <SwaggerUI url="https://localhost:44391/swagger/index.html"></SwaggerUI>
                 </article>
             </div>
         </main>

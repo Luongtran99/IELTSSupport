@@ -30,7 +30,10 @@ namespace SupportingIELTSWriting.Controllers
         }
 
         // get info of the other user
+        
         [HttpGet()]
+        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult> GetInforByIdAsync()
         {
             var userId = HttpContext.GetUserId();

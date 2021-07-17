@@ -15,7 +15,7 @@ import Profile from './components/pages/profile/ProfileUser'
 import EditProfile from './components/pages/EditProfile/EditProfile'
 import EditPassword from './components/pages/EditProfile/EditPassword/EditPassword'
 import Essays from './components/Essays';
-
+import Contact from './components/pages/EditProfile/Contact/Contact'
 function App() {
 
   const [color, setColor] = useState("#f1f5f8");
@@ -39,6 +39,7 @@ function App() {
           <Route path="/editprofile" component={EditProfile}></Route>
           <Route path="/account/editpassword" component={EditPassword}></Route>
           <Route path="/editprofile" component={EditProfile}></Route>
+          <Route path="/contact" component={Contact}></Route>
           <Route path="/essay/:id">
             <Essays></Essays>
           </Route>

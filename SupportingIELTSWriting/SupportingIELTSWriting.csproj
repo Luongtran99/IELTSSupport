@@ -11,6 +11,7 @@
     <Folder Include="Area\Admin\Controllers\" />
     <Folder Include="Components\" />
     <Folder Include="Infrastructure\Recommend\" />
+    <Folder Include="Exceptions\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\audios\" />

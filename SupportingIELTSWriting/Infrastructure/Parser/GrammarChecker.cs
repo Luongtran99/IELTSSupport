@@ -13,7 +13,7 @@ namespace SupportingIELTSWriting.Infrastructure.Parser
     {
         public ILogger<GrammarChecker> _logger;
 
-        private string pythonExecutionFile = @"c:\program files (x86)\microsoft visual studio\shared\python36_64\python.exe";
+        private string pythonExecutionFile = @"c:\program files (x86)\microsoft visual studio\shared\python36_64\python.exe"; // change
 
         private string pythonScriptFile = Path.Combine(Environment.CurrentDirectory, "Python", "grammar_checker.py");
 
@@ -99,19 +99,23 @@ namespace SupportingIELTSWriting.Infrastructure.Parser
             catch(Exception ex)
             {
                 _logger.LogWarning(ex.Message);
+                throw new Exception(ex.Message);
             }
-
-            return null;
-
         }
 
-        // improve sentence support
-
-
-
+        /// <summary>
+        /// Correct Grammar function and param is sentence
+        /// </summary>
+        /// <param name="sentence">
+        /// </param>
+        /// 
         public void correctGrammar(string sentence)
         {
             // work later
+            // use free-grammar 
+
+
+
 
         }
 
